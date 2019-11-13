@@ -1,0 +1,48 @@
+#mainContent {
+  overflow-y: scroll;
+}
+
+#createCounterBtn {
+  position: fixed;
+  bottom: 11vh;
+  right: 4vw;
+  font-size: 3vh;
+  text-align: center;
+  /* TODO Figure out how to animate button presses when using a custom `background-color`. */
+  background-color: blue;
+  color: white;
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
+}
+
+.counterText {
+  margin: 0px;
+}
+
+.counterDecrement {
+  position: absolute;
+  left: 2%;
+  width: 15%;
+  font-size: 2vh !important;
+  height: 9vh;
+}
+
+.counterDisplay {
+  position: relative;
+  width: 65%;
+  left: 17%;
+  font-size: 2vh !important;
+}
+
+.tableCell {
+  padding: 0.5em !important;
+}
+
+.counterIncrement {
+  position: absolute;
+  width: 15%;
+  right: 2%;
+  font-size: 2vh !important;
+  height: 9vh;
+}

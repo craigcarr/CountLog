@@ -1,0 +1,15 @@
+#createContent {
+    overflow-y: scroll;
+}
+
+#saveCounterBtn {
+    position: absolute;
+    bottom: 1vh;
+    right: 2vw;
+    font-size: 3vh;
+    text-align: center;
+
+    /* TODO Figure out how to animate button presses when using a custom `background-color`. */
+    /* background-color: blue; */
+    /* color: white; */
+}

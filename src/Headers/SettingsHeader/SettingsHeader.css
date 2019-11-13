@@ -1,0 +1,22 @@
+#homeBtn {
+  position: absolute;
+  font-size: 3vh;
+  top: 1vh;
+  left: 2vw;
+}
+
+#aboutBtn {
+  position: absolute;
+  font-size: 3vh;
+  top: 1vh;
+  left: 20vw;
+}
+
+#settingsHeaderText {
+  position: absolute;
+  font-size: 4vh;
+  font-weight: 900;
+  color: white;
+  top: 2vh;
+  right: 3vw;
+}

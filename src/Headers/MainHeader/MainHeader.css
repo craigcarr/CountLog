@@ -1,0 +1,15 @@
+#settingsBtn {
+    position: absolute;
+    font-size: 3vh;
+    top: 1vh;
+    right: 2vw;
+}
+
+#mainHeaderText {
+    position: absolute;
+    font-size: 4vh;
+    font-weight: 900;
+    color: white;
+    top: 2vh;
+    left: 3vw;
+}

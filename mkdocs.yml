@@ -1,0 +1,20 @@
+site_name: CountLog
+repo_name: 'craigcarr/CountLog'
+repo_url: 'https://github.com/craigcarr/CountLog'
+
+markdown_extensions:
+  - admonition
+
+theme:
+  name: material
+  palette:
+    primary: 'blue'
+    accent: 'blue'
+  logo:
+    icon: 'send'
+
+nav:
+  - Home: index.md
+  - Use Cases: usecases.md
+  - Alternatives: alternatives.md
+  - Installation: installation.md
