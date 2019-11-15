@@ -3,11 +3,11 @@ import SettingsHeader from '../../Headers/SettingsHeader/SettingsHeader';
 import SettingsContent from '../../Contents/SettingsContent/SettingsContent';
 import AboutFooter from '../../Footers/AboutFooter/AboutFooter';
 
-class SettingsPage extends Component {
-  componentDidMount() {
-    console.log(this.props)
-  }
+type Props = {}
 
+type State = {}
+
+class SettingsPage extends Component<Props, State> {
   render() {
     return (
       <div>

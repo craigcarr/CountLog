@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import './EditContent.css';
-import CounterDatabase from '../../CounterDatabase';
 
-type Props = {
-  db: CounterDatabase,
-}
+type Props = {}
+
 type State = {}
 
 class EditContent extends Component<Props, State> {

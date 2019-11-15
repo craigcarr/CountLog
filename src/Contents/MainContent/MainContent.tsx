@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { Icon, Button, Table } from 'semantic-ui-react';
 import _ from 'lodash';
-import CounterDatabase from '../../CounterDatabase';
+import SettingsAPI from '../../Interfaces/SettingsAPI';
+import CountersAPI from '../../Interfaces/CountersAPI';
 import './MainContent.css';
 
-type Props = {
-  db: CounterDatabase,
-}
+type Props = {}
 
 type State = {
   tableData: any,
@@ -19,66 +18,85 @@ class MainContent extends Component<Props, State> {
   }
 
   componentDidMount() {
-    this.props.db.getAllCounters().then(counters => {
+    CountersAPI.getAllCounters().then(counters => {
       this.setState({ tableData: counters })
     });
   }
 
   handleIncrement(id: number) {
+    SettingsAPI.getSettingValue('isVibrationEnabled').then(setting => {
+      if (setting !== undefined && setting.value === true) {
+        window.navigator.vibrate(200);
+      }
+    });
+
     let callback = () => {
-      this.props.db.getAllCounters().then(counters => {
+      CountersAPI.getAllCounters().then(counters => {
         this.setState({ tableData: counters })
       });
     }
 
-    this.props.db.incrementCounter(id, callback)
+    CountersAPI.incrementCounter(id, callback)
   }
 
   handleDecrement(id: number) {
+    SettingsAPI.getSettingValue('isVibrationEnabled').then(setting => {
+      if (setting !== undefined && setting.value === true) {
+        window.navigator.vibrate(200);
+      }
+    });
+
     let callback = () => {
-      this.props.db.getAllCounters().then(counters => {
+      CountersAPI.getAllCounters().then(counters => {
         this.setState({ tableData: counters })
       });
     }
 
-    this.props.db.decrementCounter(id, callback);
+    CountersAPI.decrementCounter(id, callback);
   }
 
   render() {
+    let tableContent = null;
+
+    // @ts-ignore
+    if (this.state.tableData.length === 0) {
+      tableContent = <Table.Row><Table.Cell>There are no counters to display.</Table.Cell></Table.Row>
+    } else {
+      tableContent = _.map(this.state.tableData, ({ id, name, color, value }) => (
+        <Table.Row key={id}>
+          <Table.Cell className="tableCell">
+            <Button
+              onClick={e => { this.handleDecrement(id) }}
+              className="counterDecrement"
+              style={{ backgroundColor: color, color: 'white' }}
+              icon
+              circular><Icon name="minus"></Icon>
+            </Button>
+            <Link to={"statistics/" + id}>
+              <Button
+                className="counterDisplay"
+                style={{ backgroundColor: color, color: 'white' }}>
+                <p className="counterText">{name}</p>
+                <p className="counterText">{value}</p>
+              </Button>
+            </Link>
+            <Button
+              onClick={e => { this.handleIncrement(id) }}
+              className="counterIncrement"
+              style={{ backgroundColor: color, color: 'white' }}
+              icon
+              circular><Icon name="plus"></Icon>
+            </Button>
+          </Table.Cell>
+        </Table.Row>
+      ))
+    }
+
     return (
       <div id="mainContent" className="content">
         <Table unstackable>
           <Table.Body>
-            {/*
-  // @ts-ignore */}
-            {_.map(this.state.tableData, ({ id, name, color, value }) => (
-              <Table.Row key={id}>
-                <Table.Cell className="tableCell">
-                  <Button
-                    onClick={e => { this.handleDecrement(id) }}
-                    className="counterDecrement"
-                    style={{ backgroundColor: color, color: 'white' }}
-                    icon
-                    circular><Icon name="minus"></Icon>
-                  </Button>
-                  <Link to={"statistics/" + id}>
-                    <Button
-                      className="counterDisplay"
-                      style={{ backgroundColor: color, color: 'white' }}>
-                      <p className="counterText">{name}</p>
-                      <p className="counterText">{value}</p>
-                    </Button>
-                  </Link>
-                  <Button
-                    onClick={e => { this.handleIncrement(id) }}
-                    className="counterIncrement"
-                    style={{ backgroundColor: color, color: 'white' }}
-                    icon
-                    circular><Icon name="plus"></Icon>
-                  </Button>
-                </Table.Cell>
-              </Table.Row>
-            ))}
+            {tableContent}
           </Table.Body>
         </Table>
 

@@ -16,6 +16,7 @@
   top: 10vh;
   height: 80vh;
   width: 100%;
+  overflow-y: scroll;
 
   /* For debug purposes only. */
   border-style: solid;

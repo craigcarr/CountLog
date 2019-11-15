@@ -7,6 +7,8 @@ import CreatePage from './Pages/CreatePage/CreatePage';
 import CounterDatabase from './CounterDatabase';
 import EditPage from './Pages/EditPage/EditPage';
 import StatisticsPage from './Pages/StatisticsPage/StatisticsPage';
+import SettingsAPI from './Interfaces/SettingsAPI';
+import CountersAPI from './Interfaces/CountersAPI';
 import './App.css';
 
 type Props = {}
@@ -20,6 +22,11 @@ class App extends Component<Props, State> {
     db: new CounterDatabase()
   }
 
+  componentWillMount() {
+    SettingsAPI._initialize(this.state.db);
+    CountersAPI._initialize(this.state.db);
+  }
+
   render() {
     return (
       <Router>
@@ -28,23 +35,20 @@ class App extends Component<Props, State> {
             <Route path="/about">
               <AboutPage></AboutPage>
             </Route>
+            <Route path="/create">
+              <CreatePage></CreatePage>
+            </Route>
             <Route path="/edit/:counterId" render={(props) =>
-              <EditPage {...props} db={this.state.db}></EditPage>
+              <EditPage {...props}></EditPage>
             } />
             <Route path="/statistics/:counterId" render={(props) =>
-              <StatisticsPage {...props} db={this.state.db}></StatisticsPage>
+              <StatisticsPage {...props}></StatisticsPage>
             } />
             <Route path="/settings">
               <SettingsPage></SettingsPage>
             </Route>
-            <Route path="/create">
-              <CreatePage db={this.state.db}></CreatePage>
-            </Route>
-            <Route path="/about">
-              <AboutPage></AboutPage>
-            </Route>
             <Route path="/">
-              <MainPage db={this.state.db}></MainPage>
+              <MainPage></MainPage>
             </Route>
           </Switch>
         </div>

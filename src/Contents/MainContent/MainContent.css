@@ -1,7 +1,3 @@
-#mainContent {
-  overflow-y: scroll;
-}
-
 #createCounterBtn {
   position: fixed;
   bottom: 11vh;

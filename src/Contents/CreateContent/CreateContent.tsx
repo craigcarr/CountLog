@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import './CreateContent.css';
 import { Table, Input, Button, Icon } from 'semantic-ui-react';
 import { BlockPicker } from 'react-color';
 import { Link } from 'react-router-dom';
-import CounterDatabase from '../../CounterDatabase';
+import CountersAPI from '../../Interfaces/CountersAPI';
+import './CreateContent.css';
 
-type Props = {
-  db: CounterDatabase,
-}
+type Props = {}
 
 type State = {
   name: string,
@@ -47,7 +45,7 @@ class CreateContent extends Component<Props, State> {
   }
 
   onSaveCounterClicked = () => {
-    this.props.db.insertCounter({
+    CountersAPI.insertCounter({
       name: this.state.name,
       color: this.state.color,
       value: this.state.value});

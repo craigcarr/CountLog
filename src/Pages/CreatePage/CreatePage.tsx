@@ -3,11 +3,8 @@ import CreateHeader from '../../Headers/CreateHeader/CreateHeader';
 import AboutFooter from '../../Footers/AboutFooter/AboutFooter';
 import CreateContent from '../../Contents/CreateContent/CreateContent';
 import './CreatePage.css';
-import CounterDatabase from '../../CounterDatabase';
 
-type Props = {
-  db: CounterDatabase,
-}
+type Props = {}
 
 type State = {}
 
@@ -16,7 +13,7 @@ class CreatePage extends Component<Props, State> {
     return (
       <div>
         <CreateHeader></CreateHeader>
-        <CreateContent db={this.props.db}></CreateContent>
+        <CreateContent></CreateContent>
         <AboutFooter></AboutFooter>
       </div>
     );

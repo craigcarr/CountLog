@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import AboutFooter from '../../Footers/AboutFooter/AboutFooter';
-import CounterDatabase from '../../CounterDatabase';
 import EditHeader from '../../Headers/EditHeader/EditHeader';
 import EditContent from '../../Contents/EditContent/EditContent';
 
-type Props = {
-  db: CounterDatabase,
-}
+type Props = {}
 
 type State = {}
 
@@ -15,7 +12,7 @@ class EditPage extends Component<Props, State> {
     return (
       <div>
         <EditHeader></EditHeader>
-        <EditContent db={this.props.db}></EditContent>
+        <EditContent></EditContent>
         <AboutFooter></AboutFooter>
       </div>
     );
