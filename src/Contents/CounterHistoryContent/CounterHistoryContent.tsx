@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from "react-router-dom";
-import { Icon, Button, Table } from 'semantic-ui-react';
+import { withRouter } from "react-router-dom";
+import { Button, Table } from 'semantic-ui-react';
 import _ from 'lodash';
 import CountersAPI from '../../Interfaces/CountersAPI';
 import './CounterHistoryContent.css';

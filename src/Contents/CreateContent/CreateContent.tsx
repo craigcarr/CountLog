@@ -29,7 +29,7 @@ class CreateContent extends Component<Props, State> {
   }
 
   handleValueChange = (e: any) => {
-    this.setState({ value: e.target.value})
+    this.setState({ value: e.target.value })
   }
 
   isInputValid = () => {
@@ -37,18 +37,21 @@ class CreateContent extends Component<Props, State> {
       return false;
     } else if (!this.state.color || !this.state.name) {
       return false;
-    } else if (this.state.value === undefined || this.state.value === null) {
+    // @ts-ignore
+    } else if (isNaN(parseInt(this.state.value))) {
       return false;
     } else {
       return true;
     }
   }
 
-  onSaveCounterClicked = () => {
+  onSaveCounterClicked() {
     CountersAPI.insertCounter({
       name: this.state.name,
       color: this.state.color,
-      value: this.state.value});
+      // @ts-ignore
+      value: parseInt(this.state.value),
+    });
   }
 
   colors = [
@@ -100,7 +103,12 @@ class CreateContent extends Component<Props, State> {
             </Table.Body>
           </Table>
 
-          <Button onClick={this.onSaveCounterClicked} disabled={this.isInputValid() === false} icon circular id="saveCounterBtn">
+          <Button
+            id="saveCounterBtn"
+            onClick={() => { this.onSaveCounterClicked() }}
+            disabled={this.isInputValid() === false}
+            icon
+            circular>
             <Link to='/'>
               <Icon name="save">
               </Icon>
