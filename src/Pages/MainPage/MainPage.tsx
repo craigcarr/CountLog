@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import MainHeader from '../../Headers/MainHeader/MainHeader';
-import MainContent from '../../Contents/MainContent/MainContent';
+import MainHeader from './MainHeader';
+import MainContent from './MainContent';
 
 type Props = {}
 
@@ -9,10 +9,10 @@ type State = {}
 class MainPage extends Component<Props, State> {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <MainHeader></MainHeader>
         <MainContent></MainContent>
-      </div>
+      </React.Fragment>
     );
   }
 }

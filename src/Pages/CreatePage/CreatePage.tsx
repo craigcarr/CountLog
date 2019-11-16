@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import CreateHeader from '../../Headers/CreateHeader/CreateHeader';
-import CreateContent from '../../Contents/CreateContent/CreateContent';
-import './CreatePage.css';
+import CreateHeader from './CreateHeader';
+import CreateContent from './CreateContent';
 
 type Props = {}
 
@@ -10,10 +9,10 @@ type State = {}
 class CreatePage extends Component<Props, State> {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <CreateHeader></CreateHeader>
         <CreateContent></CreateContent>
-      </div>
+      </React.Fragment>
     );
   }
 }

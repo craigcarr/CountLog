@@ -3,10 +3,7 @@
   top: 0vh;
   height: 10vh;
   width: 100%;
-
   background-color: #333333;
-
-  /* For debug purposes only. */
   border-style: solid;
   border-width: 1px;
 }
@@ -21,20 +18,6 @@
   height: 90vh;
   width: 100%;
   overflow-y: scroll;
-
-  /* For debug purposes only. */
   border-style: solid;
   border-width: 1px;
 }
-
-/* .footer {
-  position: fixed;
-  top: 90vh;
-  height: 10vh;
-  width: 100%;
-
-  background-color: #333333;
-
-  border-style: solid;
-  border-width: 1px;
-} */

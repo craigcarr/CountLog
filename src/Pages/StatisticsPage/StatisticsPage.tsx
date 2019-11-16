@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import StatisticsHeader from '../../Headers/StatisticsHeader/StatisticsHeader';
-import StatisticsContent from '../../Contents/StatisticsContent/StatisticsContent';
+import StatisticsHeader from './StatisticsHeader';
+import StatisticsContent from './StatisticsContent';
 
 type Props = {}
 
@@ -9,12 +9,12 @@ type State = {}
 class StatisticsPage extends Component<Props, State> {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <StatisticsHeader></StatisticsHeader>
         {/*
         // @ts-ignore */}
         <StatisticsContent counterId={parseInt(this.props.match.params['counterId'])}></StatisticsContent>
-      </div>
+      </React.Fragment>
     );
   }
 }

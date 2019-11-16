@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CounterDeleteHeader from '../../Headers/CounterDeleteHeader/CounterDeleteHeader';
-import CounterDeleteContent from '../../Contents/CounterDeleteContent/CounterDeleteContent';
+import CounterDeleteHeader from './CounterDeleteHeader';
+import CounterDeleteContent from './CounterDeleteContent';
 
 type Props = {}
 
@@ -9,10 +9,10 @@ type State = {}
 class CounterDeletePage extends Component<Props, State> {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <CounterDeleteHeader></CounterDeleteHeader>
         <CounterDeleteContent></CounterDeleteContent>
-      </div>
+      </React.Fragment>
     );
   }
 }

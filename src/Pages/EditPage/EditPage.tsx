@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import EditHeader from '../../Headers/EditHeader/EditHeader';
-import EditContent from '../../Contents/EditContent/EditContent';
+import EditHeader from './EditHeader';
+import EditContent from './EditContent';
 
 type Props = {}
 

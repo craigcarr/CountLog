@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import SettingsHeader from '../../Headers/SettingsHeader/SettingsHeader';
-import SettingsContent from '../../Contents/SettingsContent/SettingsContent';
+import SettingsHeader from './SettingsHeader';
+import SettingsContent from './SettingsContent';
 
 type Props = {}
 
@@ -9,10 +9,10 @@ type State = {}
 class SettingsPage extends Component<Props, State> {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <SettingsHeader></SettingsHeader>
         <SettingsContent></SettingsContent>
-      </div>
+      </React.Fragment>
     );
   }
 }

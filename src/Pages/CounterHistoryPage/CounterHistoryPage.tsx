@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CounterHistoryHeader from '../../Headers/CounterHistoryHeader/CounterHistoryHeader';
-import CounterHistoryContent from '../../Contents/CounterHistoryContent/CounterHistoryContent';
+import CounterHistoryHeader from './CounterHistoryHeader';
+import CounterHistoryContent from './CounterHistoryContent';
 
 type Props = {}
 
@@ -9,10 +9,10 @@ type State = {}
 class CounterHistoryPage extends Component<Props, State> {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <CounterHistoryHeader></CounterHistoryHeader>
         <CounterHistoryContent></CounterHistoryContent>
-      </div>
+      </React.Fragment>
     );
   }
 }
