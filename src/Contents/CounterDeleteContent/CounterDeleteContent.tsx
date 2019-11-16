@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
-import './CounterDeleteContent.css';
 import CountersAPI from '../../Interfaces/CountersAPI';
+import './CounterDeleteContent.css';
 
 type Props = {}
 

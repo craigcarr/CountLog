@@ -16,7 +16,30 @@ class CountersAPI {
   }
 
   public static deleteCounter(counterId: number) {
-    // TODO Delete associated events.
+    this.db.incrementEvents.toArray().then(events => {
+      events.forEach(event => {
+        if (event['counterId'] === counterId) {
+          if (event['id'] === undefined) {
+            // TODO Do something
+          } else {
+            this.db.incrementEvents.delete(event['id']);
+          }
+        }
+      });
+    })
+
+    this.db.decrementEvents.toArray().then(events => {
+      events.forEach(event => {
+        if (event['counterId'] === counterId) {
+          if (event['id'] === undefined) {
+            // TODO Do something
+          } else {
+            this.db.decrementEvents.delete(event['id']);
+          }
+        }
+      });
+    })
+
     return this.db.counters.delete(counterId);
   }
 
