@@ -11,6 +11,14 @@ class CountersAPI {
     return this.db.counters.toArray();
   }
 
+  public static getIncrementEventsForCounter(counterId: number) {
+    return this.db.incrementEvents.where('counterId').equals(counterId).toArray();
+  }
+
+  public static getDecrementEventsForCounter(counterId: number) {
+    return this.db.decrementEvents.where('counterId').equals(counterId).toArray();
+  }
+
   public static getCounterById(id: number) {
     return this.db.counters.get(id);
   }

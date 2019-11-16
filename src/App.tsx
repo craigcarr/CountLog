@@ -10,6 +10,7 @@ import StatisticsPage from './Pages/StatisticsPage/StatisticsPage';
 import SettingsAPI from './Interfaces/SettingsAPI';
 import CountersAPI from './Interfaces/CountersAPI';
 import CounterDeletePage from './Pages/CounterDeletePage/CounterDeletePage';
+import CounterHistoryPage from './Pages/CounterHistoryPage/CounterHistoryPage';
 import './App.css';
 
 type Props = {}
@@ -43,6 +44,9 @@ class App extends Component<Props, State> {
             </Route>
             <Route path="/deletecounter/:counterId" render={(props) =>
               <CounterDeletePage {...props}></CounterDeletePage>
+            } />
+            <Route path="/counterhistory/:counterId" render={(props) =>
+              <CounterHistoryPage {...props}></CounterHistoryPage>
             } />
             <Route path="/edit/:counterId" render={(props) =>
               <EditPage {...props}></EditPage>

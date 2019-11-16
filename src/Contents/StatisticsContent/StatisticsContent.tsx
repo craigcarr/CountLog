@@ -34,7 +34,12 @@ class StatisticsContent extends Component<Props, State> {
 
   deleteButtonClicked() {
     // @ts-ignore
-    this.props.history.push('/deletecounter/' + this.props.counterId, {counterId: this.props.counterId})
+    this.props.history.push('/deletecounter/' + this.props.counterId)
+  }
+
+  viewButtonClicked() {
+    // @ts-ignore
+    this.props.history.push('/counterhistory/' + this.props.counterId)
   }
 
   render() {
@@ -67,12 +72,20 @@ class StatisticsContent extends Component<Props, State> {
               <Table.Cell>
                 <Button
                   className='myButton'
-                  onClick={() => { this.deleteButtonClicked() }}>Delete</Button>
+                  onClick={() => { this.deleteButtonClicked() }}>
+                  Delete
+                </Button>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell>View History</Table.Cell>
-              <Table.Cell><Button className='myButton'>View</Button></Table.Cell>
+              <Table.Cell>
+                <Button
+                  className='myButton'
+                  onClick={() => { this.viewButtonClicked() }}>
+                  View
+                </Button>
+              </Table.Cell>
             </Table.Row>
           </Table.Body>
         </Table>

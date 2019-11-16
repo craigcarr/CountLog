@@ -1,0 +1,10 @@
+.eventDisplay {
+  width: 100%;
+  left: 0%;
+  border-style: solid !important;
+  border-color: black !important;
+}
+
+.eventTableCell {
+  padding: 0.2em !important;
+}

@@ -8,10 +8,6 @@ type Props = {}
 type State = {}
 
 class StatisticsPage extends Component<Props, State> {
-  componentDidMount() {
-    console.log()
-  }
-
   render() {
     return (
       <div>
