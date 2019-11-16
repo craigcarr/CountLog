@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 import CountersAPI from '../../Interfaces/CountersAPI';
 import './CreateContent.css';
 
-type Props = {}
+type Props = {
+  id: number | undefined,
+}
 
 type State = {
   name: string,
@@ -18,6 +20,25 @@ class CreateContent extends Component<Props, State> {
     name: '',
     color: 'red',
     value: 0,
+  }
+
+  componentDidMount() {
+    if (this.props.id !== undefined) {
+      CountersAPI.getCounterById(this.props.id).then(counter => {
+        if (counter === undefined) {
+          // TODO Do something
+        } else {
+          console.log(this.state)
+          this.setState({
+            name: counter.name,
+            color: counter.color,
+            value: counter.value,
+          })
+
+          console.log(this.state)
+        }
+      })
+    }
   }
 
   handleNameChange = (e: any) => {
@@ -37,7 +58,7 @@ class CreateContent extends Component<Props, State> {
       return false;
     } else if (!this.state.color || !this.state.name) {
       return false;
-    // @ts-ignore
+      // @ts-ignore
     } else if (isNaN(parseInt(this.state.value))) {
       return false;
     } else {
@@ -46,12 +67,22 @@ class CreateContent extends Component<Props, State> {
   }
 
   onSaveCounterClicked() {
-    CountersAPI.insertCounter({
-      name: this.state.name,
-      color: this.state.color,
-      // @ts-ignore
-      value: parseInt(this.state.value),
-    });
+    if (this.props.id === undefined) {
+      CountersAPI.insertCounter({
+        name: this.state.name,
+        color: this.state.color,
+        // @ts-ignore
+        value: parseInt(this.state.value),
+      });
+    } else {
+      CountersAPI.insertCounter({
+        id: this.props.id,
+        name: this.state.name,
+        color: this.state.color,
+        // @ts-ignore
+        value: parseInt(this.state.value),
+      });
+    }
   }
 
   colors = [
@@ -75,11 +106,13 @@ class CreateContent extends Component<Props, State> {
                   Name
                 </Table.Cell>
                 <Table.Cell>
-                  <Input onChange={this.handleNameChange}></Input>
+                  <Input defaultValue={this.state.name} onChange={this.handleNameChange}></Input>
                 </Table.Cell>
               </Table.Row>
               <Table.Row>
-                <Table.Cell>Color</Table.Cell>
+                <Table.Cell>
+                  Color
+                </Table.Cell>
                 <Table.Cell>
                   <BlockPicker
                     color={this.state.color}
@@ -89,8 +122,9 @@ class CreateContent extends Component<Props, State> {
                 </Table.Cell>
               </Table.Row>
               <Table.Row>
-                <Table.Cell>Initial Value</Table.Cell>
-                {/* TODO Better input validation. */}
+                <Table.Cell>
+                  Initial Value
+                </Table.Cell>
                 <Table.Cell>
                   <Input
                     onChange={this.handleValueChange}

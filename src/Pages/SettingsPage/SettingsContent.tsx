@@ -34,6 +34,7 @@ class SettingsContent extends Component<Props, State> {
 
       let result = array2dict(settings);
 
+      // TODO Shouldn't call `this.setState` in a constructor.
       this.setState({
         isVibrationEnabled: result['isVibrationEnabled'],
         isClickSoundEnabled: result['isClickSoundEnabled'],

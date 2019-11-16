@@ -11,7 +11,8 @@ class CreatePage extends Component<Props, State> {
     return (
       <React.Fragment>
         <CreateHeader></CreateHeader>
-        <CreateContent></CreateContent>
+        <CreateContent id={undefined}>
+        </CreateContent>
       </React.Fragment>
     );
   }

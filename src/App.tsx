@@ -5,7 +5,7 @@ import AboutPage from './Pages/AboutPage/AboutPage';
 import SettingsPage from './Pages/SettingsPage/SettingsPage';
 import CreatePage from './Pages/CreatePage/CreatePage';
 import CounterDatabase from './CounterDatabase';
-import EditPage from './Pages/EditPage/EditPage';
+import CounterEditPage from './Pages/CounterEditPage/CounterEditPage';
 import StatisticsPage from './Pages/StatisticsPage/StatisticsPage';
 import SettingsAPI from './Interfaces/SettingsAPI';
 import CountersAPI from './Interfaces/CountersAPI';
@@ -42,6 +42,9 @@ class App extends Component<Props, State> {
             <Route path="/create">
               <CreatePage></CreatePage>
             </Route>
+            <Route path="/editcounter/:counterId" render={(props) =>
+              <CounterEditPage {...props}></CounterEditPage>
+            } />
             <Route path="/deletecounter/:counterId" render={(props) =>
               <CounterDeletePage {...props}></CounterDeletePage>
             } />
@@ -49,7 +52,7 @@ class App extends Component<Props, State> {
               <CounterHistoryPage {...props}></CounterHistoryPage>
             } />
             <Route path="/edit/:counterId" render={(props) =>
-              <EditPage {...props}></EditPage>
+              <CounterEditPage {...props}></CounterEditPage>
             } />
             <Route path="/statistics/:counterId" render={(props) =>
               <StatisticsPage {...props}></StatisticsPage>

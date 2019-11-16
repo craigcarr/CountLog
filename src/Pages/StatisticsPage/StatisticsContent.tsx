@@ -32,6 +32,11 @@ class StatisticsContent extends Component<Props, State> {
     });
   }
 
+  editButtonClicked() {
+    // @ts-ignore
+    this.props.history.push('/editcounter/' + this.props.counterId)
+  }
+
   deleteButtonClicked() {
     // @ts-ignore
     this.props.history.push('/deletecounter/' + this.props.counterId)
@@ -62,7 +67,11 @@ class StatisticsContent extends Component<Props, State> {
             <Table.Row>
               <Table.Cell>Edit Counter</Table.Cell>
               <Table.Cell>
-                <Button className='myButton'>Edit</Button>
+                <Button
+                  className='myButton'
+                  onClick={() => { this.editButtonClicked() }}>
+                  Edit
+                </Button>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
