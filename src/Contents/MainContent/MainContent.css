@@ -4,7 +4,6 @@
   right: 4vw;
   font-size: 3vh;
   text-align: center;
-  /* TODO Figure out how to animate button presses when using a custom `background-color`. */
   background-color: blue;
   color: white;
   border-style: solid;

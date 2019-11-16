@@ -55,14 +55,13 @@ class CreateContent extends Component<Props, State> {
   }
 
   colors = [
-    'red',
-    'orange',
-    'yellow',
-    'green',
-    '#0000FF',
-    'indigo',
-    'violet',
-    'black',
+    '#FF0000', // red
+    '#FF9900', // orange
+    '#CCCC00', // yellow
+    '#00AA00', // green
+    '#0000FF', // blue
+    '#440088', // purple
+    '#000000', // black
   ]
 
   render() {
