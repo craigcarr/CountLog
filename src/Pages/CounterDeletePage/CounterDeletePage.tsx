@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AboutFooter from '../../Footers/AboutFooter/AboutFooter';
 import CounterDeleteHeader from '../../Headers/CounterDeleteHeader/CounterDeleteHeader';
 import CounterDeleteContent from '../../Contents/CounterDeleteContent/CounterDeleteContent';
 
@@ -13,7 +12,6 @@ class CounterDeletePage extends Component<Props, State> {
       <div>
         <CounterDeleteHeader></CounterDeleteHeader>
         <CounterDeleteContent></CounterDeleteContent>
-        <AboutFooter></AboutFooter>
       </div>
     );
   }

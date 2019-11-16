@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import SettingsHeader from '../../Headers/SettingsHeader/SettingsHeader';
 import SettingsContent from '../../Contents/SettingsContent/SettingsContent';
-import AboutFooter from '../../Footers/AboutFooter/AboutFooter';
 
 type Props = {}
 
@@ -13,7 +12,6 @@ class SettingsPage extends Component<Props, State> {
       <div>
         <SettingsHeader></SettingsHeader>
         <SettingsContent></SettingsContent>
-        <AboutFooter></AboutFooter>
       </div>
     );
   }

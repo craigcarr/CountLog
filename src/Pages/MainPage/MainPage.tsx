@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MainHeader from '../../Headers/MainHeader/MainHeader';
 import MainContent from '../../Contents/MainContent/MainContent';
-import AboutFooter from '../../Footers/AboutFooter/AboutFooter';
 
 type Props = {}
 
@@ -13,7 +12,6 @@ class MainPage extends Component<Props, State> {
       <div>
         <MainHeader></MainHeader>
         <MainContent></MainContent>
-        <AboutFooter></AboutFooter>
       </div>
     );
   }

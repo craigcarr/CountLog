@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import CreateHeader from '../../Headers/CreateHeader/CreateHeader';
-import AboutFooter from '../../Footers/AboutFooter/AboutFooter';
 import CreateContent from '../../Contents/CreateContent/CreateContent';
 import './CreatePage.css';
 
@@ -14,7 +13,6 @@ class CreatePage extends Component<Props, State> {
       <div>
         <CreateHeader></CreateHeader>
         <CreateContent></CreateContent>
-        <AboutFooter></AboutFooter>
       </div>
     );
   }

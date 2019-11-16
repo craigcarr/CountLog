@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AboutFooter from '../../Footers/AboutFooter/AboutFooter';
 import EditHeader from '../../Headers/EditHeader/EditHeader';
 import EditContent from '../../Contents/EditContent/EditContent';
 
@@ -13,7 +12,6 @@ class EditPage extends Component<Props, State> {
       <div>
         <EditHeader></EditHeader>
         <EditContent></EditContent>
-        <AboutFooter></AboutFooter>
       </div>
     );
   }

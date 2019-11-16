@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AboutFooter from '../../Footers/AboutFooter/AboutFooter';
 import StatisticsHeader from '../../Headers/StatisticsHeader/StatisticsHeader';
 import StatisticsContent from '../../Contents/StatisticsContent/StatisticsContent';
 
@@ -15,7 +14,6 @@ class StatisticsPage extends Component<Props, State> {
         {/*
         // @ts-ignore */}
         <StatisticsContent counterId={parseInt(this.props.match.params['counterId'])}></StatisticsContent>
-        <AboutFooter></AboutFooter>
       </div>
     );
   }
