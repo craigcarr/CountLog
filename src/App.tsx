@@ -9,6 +9,7 @@ import EditPage from './Pages/EditPage/EditPage';
 import StatisticsPage from './Pages/StatisticsPage/StatisticsPage';
 import SettingsAPI from './Interfaces/SettingsAPI';
 import CountersAPI from './Interfaces/CountersAPI';
+import CounterDeletePage from './Pages/CounterDeletePage/CounterDeletePage';
 import './App.css';
 
 type Props = {}
@@ -22,7 +23,9 @@ class App extends Component<Props, State> {
     db: new CounterDatabase()
   }
 
-  componentWillMount() {
+  constructor(props: any) {
+    super(props);
+
     SettingsAPI._initialize(this.state.db);
     CountersAPI._initialize(this.state.db);
   }
@@ -38,6 +41,9 @@ class App extends Component<Props, State> {
             <Route path="/create">
               <CreatePage></CreatePage>
             </Route>
+            <Route path="/deletecounter/:counterId" render={(props) =>
+              <CounterDeletePage {...props}></CounterDeletePage>
+            } />
             <Route path="/edit/:counterId" render={(props) =>
               <EditPage {...props}></EditPage>
             } />

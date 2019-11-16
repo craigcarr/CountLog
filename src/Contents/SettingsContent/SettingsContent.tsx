@@ -20,7 +20,9 @@ class SettingsContent extends Component<Props, State> {
     isDarkModeEnabled: false,
   }
 
-  componentWillMount() {
+  constructor(props: any) {
+    super(props);
+
     SettingsAPI.getAllSettings().then((settings) => {
       // TODO Kind of unsafe from TypeScript's perspective.
       function array2dict(settings: any): any {

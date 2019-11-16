@@ -18,7 +18,7 @@ class StatisticsPage extends Component<Props, State> {
         <StatisticsHeader></StatisticsHeader>
         {/*
         // @ts-ignore */}
-        <StatisticsContent counterId={this.props.match.params['counterId']}></StatisticsContent>
+        <StatisticsContent counterId={parseInt(this.props.match.params['counterId'])}></StatisticsContent>
         <AboutFooter></AboutFooter>
       </div>
     );
