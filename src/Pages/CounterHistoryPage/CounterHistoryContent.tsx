@@ -56,6 +56,8 @@ class MainContent extends Component<Props, State> {
   render() {
     let tableContent = null;
 
+
+    // TODO Handle duplicate key warning
     // @ts-ignore
     if (this.state.tableData.length === 0) {
       tableContent = <Table.Row><Table.Cell>There are no counters to display.</Table.Cell></Table.Row>

@@ -58,7 +58,7 @@ class CountersAPI {
   public static incrementCounter(counterId: number, callback: any) {
     this.db.counters.get(counterId).then(counter => {
       if (counter === undefined) {
-        console.error('counter is undefined')
+        // TODO Do something
       } else {
         let incrementEvent = {
           counterId: counterId,
@@ -78,7 +78,7 @@ class CountersAPI {
   public static decrementCounter(counterId: number, callback: any) {
     this.db.counters.get(counterId).then(counter => {
       if (counter === undefined) {
-        console.error('counter is undefined')
+        // TODO Do something
       } else {
         let decrementEvent = {
           counterId: counterId,

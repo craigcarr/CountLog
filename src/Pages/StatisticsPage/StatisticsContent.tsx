@@ -26,8 +26,10 @@ class StatisticsContent extends Component<Props, State> {
       if (counter === undefined) {
         // TODO Do something
       } else {
-        this.state.counterName = counter.name;
-        this.state.counterValue = counter.value;
+        this.setState({
+          counterName: counter.name,
+          counterValue: counter.value,
+        })
       }
     });
   }
