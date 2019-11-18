@@ -28,14 +28,11 @@ class CreateContent extends Component<Props, State> {
         if (counter === undefined) {
           // TODO Do something
         } else {
-          console.log(this.state)
           this.setState({
             name: counter.name,
             color: counter.color,
             value: counter.value,
           })
-
-          console.log(this.state)
         }
       })
     }

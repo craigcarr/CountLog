@@ -1,22 +1,21 @@
-import CounterDatabase, { ICounter } from "../CounterDatabase";
+import CounterDatabase, { ICounter, EventType } from "../CounterDatabase";
 
 class CountersAPI {
   private static db: CounterDatabase;
 
   public static _initialize(db: CounterDatabase) {
-      this.db = db;
+    this.db = db;
   };
 
   public static getAllCounters() {
     return this.db.counters.toArray();
   }
 
-  public static getIncrementEventsForCounter(counterId: number) {
-    return this.db.incrementEvents.where('counterId').equals(counterId).toArray();
-  }
-
-  public static getDecrementEventsForCounter(counterId: number) {
-    return this.db.decrementEvents.where('counterId').equals(counterId).toArray();
+  public static getEventsForCounter(counterId: number, type: EventType) {
+    return this.db.events
+      .where(['counterId', 'type'])
+      .equals([counterId, type])
+      .toArray();
   }
 
   public static getCounterById(id: number) {
@@ -24,29 +23,29 @@ class CountersAPI {
   }
 
   public static deleteCounter(counterId: number) {
-    this.db.incrementEvents.toArray().then(events => {
+    this.db.events.where('type').equals('increment').toArray().then(events => {
       events.forEach(event => {
         if (event['counterId'] === counterId) {
           if (event['id'] === undefined) {
             // TODO Do something
           } else {
-            this.db.incrementEvents.delete(event['id']);
+            this.db.events.delete(event['id']);
           }
         }
       });
-    })
+    });
 
-    this.db.decrementEvents.toArray().then(events => {
+    this.db.events.where('type').equals('decrement').toArray().then(events => {
       events.forEach(event => {
         if (event['counterId'] === counterId) {
           if (event['id'] === undefined) {
             // TODO Do something
           } else {
-            this.db.decrementEvents.delete(event['id']);
+            this.db.events.delete(event['id']);
           }
         }
       });
-    })
+    });
 
     return this.db.counters.delete(counterId);
   }
@@ -62,11 +61,12 @@ class CountersAPI {
       } else {
         let incrementEvent = {
           counterId: counterId,
+          type: 'increment',
           timestamp: Date.now().toString(),
           annotation: '',
-        }
+        };
 
-        this.db.incrementEvents.put(incrementEvent).then(() => {
+        this.db.events.put(incrementEvent).then(() => {
           this.db.counters.update(counterId, { value: counter.value + 1 }).then(
             callback()
           );
@@ -82,11 +82,12 @@ class CountersAPI {
       } else {
         let decrementEvent = {
           counterId: counterId,
+          type: 'decrement',
           timestamp: Date.now().toString(),
           annotation: '',
         }
 
-        this.db.decrementEvents.put(decrementEvent).then(() => {
+        this.db.events.put(decrementEvent).then(() => {
           this.db.counters.update(counterId, { value: counter.value - 1 }).then(
             callback()
           );

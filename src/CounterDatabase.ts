@@ -7,16 +7,10 @@ export interface ICounter {
   value: number;
 }
 
-export interface IIncrementEvent {
+export interface IEvent {
   id?: number;
   counterId: number;
-  timestamp: string;
-  annotation: string;
-}
-
-export interface IDecrementEvent {
-  id?: number;
-  counterId: number;
+  type: string;
   timestamp: string;
   annotation: string;
 }
@@ -26,10 +20,14 @@ export interface ISettings {
   value: any;
 }
 
+export enum EventType {
+  Increment = "increment",
+  Decrement = "decrement",
+}
+
 class CounterDatabase extends Dexie {
   counters: Dexie.Table<ICounter, number>;
-  incrementEvents: Dexie.Table<IIncrementEvent, number>;
-  decrementEvents: Dexie.Table<IDecrementEvent, number>;
+  events: Dexie.Table<IEvent, number>;
   settings: Dexie.Table<ISettings, number>;
 
   constructor() {
@@ -37,14 +35,12 @@ class CounterDatabase extends Dexie {
 
     this.version(1).stores({
       counters: "++id, name, color, value",
-      incrementEvents: "++id, counterId, timestamp, annotation",
-      decrementEvents: "++id, counterId, timestamp, annotation",
+      events: "++id, counterId, type, timestamp, annotation, [counterId+type]",
       settings: "++name, value",
     });
 
     this.counters = this.table("counters");
-    this.incrementEvents = this.table("incrementEvents")
-    this.decrementEvents = this.table("decrementEvents")
+    this.events = this.table("events")
     this.settings = this.table("settings")
   }
 }
