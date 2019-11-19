@@ -1,4 +1,4 @@
-import CounterDatabase, { ICounter, EventType } from "../CounterDatabase";
+import CounterDatabase, { ICounter, IEvent, EventType } from "../CounterDatabase";
 
 class CountersAPI {
   private static db: CounterDatabase;
@@ -11,11 +11,18 @@ class CountersAPI {
     return this.db.counters.toArray();
   }
 
-  public static getEventsForCounter(counterId: number, type: EventType) {
-    return this.db.events
-      .where(['counterId', 'type'])
-      .equals([counterId, type])
-      .toArray();
+  public static getEventsForCounter(counterId: number, type: EventType | undefined) {
+    if (type === undefined) {
+      return this.db.events
+        .where('counterId')
+        .equals(counterId)
+        .toArray();
+    } else {
+      return this.db.events
+        .where(['counterId', 'type'])
+        .equals([counterId, type])
+        .toArray();
+    }
   }
 
   public static getCounterById(id: number) {
@@ -23,35 +30,30 @@ class CountersAPI {
   }
 
   public static deleteCounter(counterId: number) {
-    this.db.events.where('type').equals('increment').toArray().then(events => {
-      events.forEach(event => {
-        if (event['counterId'] === counterId) {
-          if (event['id'] === undefined) {
-            // TODO Do something
-          } else {
-            this.db.events.delete(event['id']);
-          }
+    this.db.events.where('counterId').equals(counterId).toArray().then(events => {
+      for (let event of events) {
+        if (event.id === undefined) {
+          // TODO Do something
+        } else {
+          this.db.events.delete(event.id)
         }
-      });
-    });
-
-    this.db.events.where('type').equals('decrement').toArray().then(events => {
-      events.forEach(event => {
-        if (event['counterId'] === counterId) {
-          if (event['id'] === undefined) {
-            // TODO Do something
-          } else {
-            this.db.events.delete(event['id']);
-          }
-        }
-      });
+      }
     });
 
     return this.db.counters.delete(counterId);
   }
 
   public static insertCounter(counter: ICounter) {
-    this.db.counters.put(counter);
+    this.db.counters.put(counter).then(counterId => {
+      let mutateEvent: IEvent = {
+        counterId: counterId,
+        type: EventType.Mutate,
+        timestamp: Date.now().toString(),
+        annotation: '',
+      }
+
+      this.db.events.put(mutateEvent);
+    });
   }
 
   public static incrementCounter(counterId: number, callback: any) {
@@ -59,9 +61,9 @@ class CountersAPI {
       if (counter === undefined) {
         // TODO Do something
       } else {
-        let incrementEvent = {
+        let incrementEvent: IEvent = {
           counterId: counterId,
-          type: 'increment',
+          type: EventType.Increment,
           timestamp: Date.now().toString(),
           annotation: '',
         };
@@ -80,9 +82,9 @@ class CountersAPI {
       if (counter === undefined) {
         // TODO Do something
       } else {
-        let decrementEvent = {
+        let decrementEvent: IEvent= {
           counterId: counterId,
-          type: 'decrement',
+          type: EventType.Decrement,
           timestamp: Date.now().toString(),
           annotation: '',
         }

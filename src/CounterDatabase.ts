@@ -10,7 +10,7 @@ export interface ICounter {
 export interface IEvent {
   id?: number;
   counterId: number;
-  type: string;
+  type: EventType;
   timestamp: string;
   annotation: string;
 }
@@ -23,6 +23,7 @@ export interface ISettings {
 export enum EventType {
   Increment = "increment",
   Decrement = "decrement",
+  Mutate = "mutate",
 }
 
 class CounterDatabase extends Dexie {

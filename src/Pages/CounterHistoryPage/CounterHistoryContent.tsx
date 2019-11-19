@@ -23,32 +23,21 @@ class MainContent extends Component<Props, State> {
     // @ts-ignore
     let counterId = parseInt(this.props.match.params['counterId'])
 
-    CountersAPI.getEventsForCounter(counterId, EventType.Increment).then(incrementEvents => {
-      CountersAPI.getEventsForCounter(counterId, EventType.Decrement).then(decrementEvents => {
+    CountersAPI.getEventsForCounter(counterId, undefined).then(events => {
+      let list = [];
 
-        let list = [];
+      for (let event of events) {
+        list.push({
+          id: event.id,
+          type: event.type,
+          timestamp: event.timestamp,
+        });
+      }
 
-        for (let event of incrementEvents) {
-          list.push({
-            id: event.id,
-            type: EventType.Increment,
-            timestamp: event.timestamp,
-          })
-        }
+      list.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1)
 
-        for (let event of decrementEvents) {
-          list.push({
-            id: event.id,
-            type: EventType.Decrement,
-            timestamp: event.timestamp,
-          })
-        }
-
-        list.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1)
-
-        this.setState({ tableData: list })
-      });
-    });
+      this.setState({ tableData: list })
+    })
   }
 
   foo(timestamp: string): string {
@@ -61,6 +50,8 @@ class MainContent extends Component<Props, State> {
       return 'Increment Event';
     } else if (type === EventType.Decrement) {
       return 'Decrement Event';
+    } else if (type === EventType.Mutate) {
+      return 'Mutation Event';
     } else {
       // TODO Do something
       return 'Unknown Event Type';
@@ -82,7 +73,7 @@ class MainContent extends Component<Props, State> {
 
     // @ts-ignore
     if (this.state.tableData.length === 0) {
-      tableContent = <Table.Row><Table.Cell>There are no counters to display.</Table.Cell></Table.Row>
+      tableContent = <Table.Row><Table.Cell>There are no events to display.</Table.Cell></Table.Row>
     } else {
       tableContent = _.map(this.state.tableData, ({ id, type, timestamp }) => {
         if (this.state.filter === undefined || type === this.state.filter) {
