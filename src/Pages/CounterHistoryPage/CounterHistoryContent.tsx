@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import { Button, Table, Dropdown } from 'semantic-ui-react';
+import { Table, Dropdown, Icon, Button } from 'semantic-ui-react';
 import _ from 'lodash';
 import CountersAPI from '../../Interfaces/CountersAPI';
 import './CounterHistoryContent.css';
@@ -63,9 +63,15 @@ class MainContent extends Component<Props, State> {
       this.setState({ filter: EventType.Increment })
     } else if (data.value === EventType.Decrement) {
       this.setState({ filter: EventType.Decrement })
+    } else if (data.value === EventType.Mutate) {
+      this.setState({ filter: EventType.Mutate })
     } else {
       this.setState({ filter: undefined })
     }
+  }
+
+  editEventClicked(id: number) {
+    console.log(id);
   }
 
   render() {
@@ -80,9 +86,15 @@ class MainContent extends Component<Props, State> {
           return (
             <Table.Row key={id}>
               <Table.Cell className="eventTableCell">
-                <Button className="eventDisplay">
-                  <p className="eventText">{this.getDisplayNameForType(type)}</p>
-                  <p className="eventText">{this.foo(timestamp)}</p>
+                <p>{this.getDisplayNameForType(type)}</p>
+              </Table.Cell>
+              <Table.Cell>
+                <p>{this.foo(timestamp)}</p>
+              </Table.Cell>
+              <Table.Cell>
+                <Button onClick={() => { this.editEventClicked(id) }} circular icon>
+                  <Icon name="edit">
+                  </Icon>
                 </Button>
               </Table.Cell>
             </Table.Row>
@@ -94,30 +106,24 @@ class MainContent extends Component<Props, State> {
     const options = [
       { key: 1, text: 'Increment Events Only', value: EventType.Increment },
       { key: 2, text: 'Decrement Events Only', value: EventType.Decrement },
+      { key: 3, text: 'Mutate Events Only', value: EventType.Mutate },
     ]
 
     return (
       <div id="mainContent" className="content">
-        <Table unstackable>
+        <br></br>
+
+        <Dropdown
+          style={{ width: 90 + '%', left: 5 + '%' }}
+          onChange={(e, data) => { this.handleFilterChanged(data); }}
+          placeholder='Filter'
+          options={options}
+          clearable
+          selection>
+        </Dropdown>
+
+        <Table striped unstackable>
           <Table.Body>
-            <Table.Row>
-              <Table.Cell>
-                <Dropdown
-                  style={{width: 100 + '%'}}
-                  onChange={(e, data) => { this.handleFilterChanged(data); }}
-                  placeholder='Filter'
-                  options={options}
-                  clearable
-                  selection>
-                </Dropdown>
-              </Table.Cell>
-            </Table.Row>
-
-            {/* Separator row for spacing. */}
-            <Table.Row>
-              <Table.Cell></Table.Cell>
-            </Table.Row>
-
             {tableContent}
           </Table.Body>
         </Table>
