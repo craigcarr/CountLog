@@ -70,8 +70,12 @@ class MainContent extends Component<Props, State> {
     }
   }
 
-  editEventClicked(id: number) {
-    console.log(id);
+  editEventClicked(eventId: number) {
+    // @ts-ignore
+    let counterId = parseInt(this.props.match.params['counterId'])
+
+    // @ts-ignore
+    this.props.history.push('/counterhistory/' + counterId + '/editevent/' + eventId)
   }
 
   render() {
