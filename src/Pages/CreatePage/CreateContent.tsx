@@ -12,14 +12,14 @@ type Props = {
 type State = {
   name: string,
   color: string,
-  value: number,
+  valueString: string,
 }
 
 class CreateContent extends Component<Props, State> {
   state = {
     name: '',
     color: 'red',
-    value: 0,
+    valueString: '0',
   }
 
   componentDidMount() {
@@ -31,7 +31,7 @@ class CreateContent extends Component<Props, State> {
           this.setState({
             name: counter.name,
             color: counter.color,
-            value: counter.value,
+            valueString: counter.value.toString(),
           })
         }
       })
@@ -47,7 +47,7 @@ class CreateContent extends Component<Props, State> {
   }
 
   handleValueChange = (e: any) => {
-    this.setState({ value: e.target.value })
+    this.setState({ valueString: e.target.value })
   }
 
   isInputValid = () => {
@@ -55,8 +55,7 @@ class CreateContent extends Component<Props, State> {
       return false;
     } else if (!this.state.color || !this.state.name) {
       return false;
-      // @ts-ignore
-    } else if (isNaN(parseInt(this.state.value))) {
+    } else if (isNaN(parseInt(this.state.valueString)) || this.state.valueString.includes('.')) {
       return false;
     } else {
       return true;
@@ -68,16 +67,14 @@ class CreateContent extends Component<Props, State> {
       CountersAPI.insertCounter({
         name: this.state.name,
         color: this.state.color,
-        // @ts-ignore
-        value: parseInt(this.state.value),
+        value: parseInt(this.state.valueString),
       });
     } else {
       CountersAPI.insertCounter({
         id: this.props.id,
         name: this.state.name,
         color: this.state.color,
-        // @ts-ignore
-        value: parseInt(this.state.value),
+        value: parseInt(this.state.valueString),
       });
     }
   }
@@ -126,7 +123,7 @@ class CreateContent extends Component<Props, State> {
                   <Input
                     onChange={this.handleValueChange}
                     type="number"
-                    value={this.state.value}>
+                    value={this.state.valueString}>
                   </Input>
                 </Table.Cell>
               </Table.Row>

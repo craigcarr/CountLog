@@ -9,13 +9,13 @@ import { EventType } from '../../CounterDatabase';
 interface Props extends RouteComponentProps<any> {}
 
 interface State {
-  tableData: any,
+  tableData: any[],
   filter: EventType | undefined,
 }
 
 class MainContent extends Component<Props, State> {
   state = {
-    tableData: {},
+    tableData: [],
     filter: undefined,
   }
 
@@ -77,7 +77,6 @@ class MainContent extends Component<Props, State> {
   render() {
     let tableContent = null;
 
-    // @ts-ignore
     if (this.state.tableData.length === 0) {
       tableContent = <Table.Row><Table.Cell>There are no events to display.</Table.Cell></Table.Row>
     } else {

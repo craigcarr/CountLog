@@ -9,12 +9,12 @@ import './MainContent.css';
 type Props = {}
 
 type State = {
-  tableData: any,
+  tableData: any[],
 }
 
 class MainContent extends Component<Props, State> {
   state = {
-    tableData: {}
+    tableData: []
   }
 
   componentDidMount() {
@@ -32,6 +32,7 @@ class MainContent extends Component<Props, State> {
 
     let callback = () => {
       CountersAPI.getAllCounters().then(counters => {
+        console.log(counters);
         this.setState({ tableData: counters })
       });
     }
@@ -58,7 +59,6 @@ class MainContent extends Component<Props, State> {
   render() {
     let tableContent = null;
 
-    // @ts-ignore
     if (this.state.tableData.length === 0) {
       tableContent = <Table.Row><Table.Cell>There are no counters to display.</Table.Cell></Table.Row>
     } else {
