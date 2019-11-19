@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
-import CountersAPI from '../../Interfaces/CountersAPI';
+import { withRouter, RouteComponentProps } from 'react-router';
 import './EventEditContent.css';
 
-type Props = {}
+interface Props extends RouteComponentProps<any> {}
 
-type State = {}
+interface State {}
 
 class EventEditContent extends Component<Props, State> {
   render() {
-    // @ts-ignore
     let counterId = parseInt(this.props.match.params['counterId'])
-
-    // @ts-ignore
     let eventId = parseInt(this.props.match.params['eventId'])
 
     console.log(counterId, eventId)
@@ -25,5 +21,4 @@ class EventEditContent extends Component<Props, State> {
   }
 }
 
-// @ts-ignore
 export default withRouter(EventEditContent);

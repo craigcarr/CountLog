@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import './CounterEditContent.css';
 import CreateContent from '../CreatePage/CreateContent';
-import { withRouter } from 'react-router';
+import { withRouter, RouteComponentProps } from 'react-router';
+import './CounterEditContent.css';
 
-type Props = {}
+interface Props extends RouteComponentProps<any> {}
 
-type State = {}
+interface State {}
 
 class CounterEditContent extends Component<Props, State> {
   render() {
-    // @ts-ignore
     let counterId = parseInt(this.props.match.params['counterId'])
 
     return (
@@ -18,5 +17,4 @@ class CounterEditContent extends Component<Props, State> {
   }
 }
 
-// @ts-ignore
 export default withRouter(CounterEditContent);

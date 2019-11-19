@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Table, Dropdown, Icon, Button } from 'semantic-ui-react';
 import _ from 'lodash';
 import CountersAPI from '../../Interfaces/CountersAPI';
 import './CounterHistoryContent.css';
 import { EventType } from '../../CounterDatabase';
 
-type Props = {}
+interface Props extends RouteComponentProps<any> {}
 
-type State = {
+interface State {
   tableData: any,
   filter: EventType | undefined,
 }
@@ -20,7 +20,6 @@ class MainContent extends Component<Props, State> {
   }
 
   componentDidMount() {
-    // @ts-ignore
     let counterId = parseInt(this.props.match.params['counterId'])
 
     CountersAPI.getEventsForCounter(counterId, undefined).then(events => {
@@ -71,10 +70,7 @@ class MainContent extends Component<Props, State> {
   }
 
   editEventClicked(eventId: number) {
-    // @ts-ignore
     let counterId = parseInt(this.props.match.params['counterId'])
-
-    // @ts-ignore
     this.props.history.push('/counterhistory/' + counterId + '/editevent/' + eventId)
   }
 
@@ -136,5 +132,4 @@ class MainContent extends Component<Props, State> {
   }
 }
 
-// @ts-ignore
 export default withRouter(MainContent);

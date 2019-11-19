@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'semantic-ui-react';
-import { withRouter } from 'react-router';
+import { withRouter, RouteComponentProps } from 'react-router';
 import CountersAPI from '../../Interfaces/CountersAPI';
 import './CounterDeleteContent.css';
 
-type Props = {}
+interface Props extends RouteComponentProps<any> {}
 
-type State = {}
+interface State {}
 
 class CounterDeleteContent extends Component<Props, State> {
   deleteButtonClicked() {
-    // @ts-ignore
     let counterId = parseInt(this.props.match.params['counterId'])
 
     CountersAPI.deleteCounter(counterId).then(() => {
-      // @ts-ignore
       this.props.history.push('/')
     });
   }
@@ -43,5 +41,4 @@ class CounterDeleteContent extends Component<Props, State> {
   }
 }
 
-// @ts-ignore
 export default withRouter(CounterDeleteContent);

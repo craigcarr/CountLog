@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import CountersAPI from '../../Interfaces/CountersAPI';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import './StatisticsContent.css';
 
-type Props = {
+interface Props extends RouteComponentProps<any> {
   counterId: number,
 }
 
-type State = {
+interface State {
   counterName: string,
   counterValue: number,
 }
@@ -35,17 +35,14 @@ class StatisticsContent extends Component<Props, State> {
   }
 
   editButtonClicked() {
-    // @ts-ignore
     this.props.history.push('/editcounter/' + this.props.counterId)
   }
 
   deleteButtonClicked() {
-    // @ts-ignore
     this.props.history.push('/deletecounter/' + this.props.counterId)
   }
 
   viewButtonClicked() {
-    // @ts-ignore
     this.props.history.push('/counterhistory/' + this.props.counterId)
   }
 
@@ -105,5 +102,4 @@ class StatisticsContent extends Component<Props, State> {
   }
 }
 
-// @ts-ignore
 export default withRouter(StatisticsContent);

@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { Button, Icon } from "semantic-ui-react";
+import { withRouter, RouteComponentProps } from "react-router";
 import './CounterHistoryHeader.css';
-import { withRouter } from "react-router";
 
-class CounterHistoryHeader extends Component {
+interface Props extends RouteComponentProps<any> {}
+
+interface State {}
+
+class CounterHistoryHeader extends Component<Props, State> {
   onBackButtonClicked() {
-    // @ts-ignore
     this.props.history.goBack()
   }
 
@@ -23,5 +26,4 @@ class CounterHistoryHeader extends Component {
   }
 }
 
-// @ts-ignore
 export default withRouter(CounterHistoryHeader);

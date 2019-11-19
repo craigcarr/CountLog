@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Button, Icon } from "semantic-ui-react";
 import './CounterEditHeader.css';
 
-class EditHeader extends Component {
+interface Props extends RouteComponentProps<any> {}
+
+interface State {}
+
+class EditHeader extends Component<Props, State> {
   onBackButtonClicked() {
-    // @ts-ignore
     this.props.history.goBack()
   }
 
@@ -23,5 +26,4 @@ class EditHeader extends Component {
   }
 }
 
-// @ts-ignore
 export default withRouter(EditHeader);

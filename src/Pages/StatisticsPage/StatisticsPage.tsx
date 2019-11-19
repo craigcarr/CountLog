@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 import StatisticsHeader from './StatisticsHeader';
 import StatisticsContent from './StatisticsContent';
+import { withRouter, RouteComponentProps } from 'react-router';
 
-type Props = {}
+interface Props extends RouteComponentProps<any> {}
 
-type State = {}
+interface State {}
 
 class StatisticsPage extends Component<Props, State> {
   render() {
     return (
       <React.Fragment>
         <StatisticsHeader></StatisticsHeader>
-        {/*
-        // @ts-ignore */}
         <StatisticsContent counterId={parseInt(this.props.match.params['counterId'])}></StatisticsContent>
       </React.Fragment>
     );
   }
 }
 
-export default StatisticsPage;
+export default withRouter(StatisticsPage);
