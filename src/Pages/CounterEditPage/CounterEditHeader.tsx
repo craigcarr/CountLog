@@ -3,11 +3,11 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Button, Icon } from "semantic-ui-react";
 import './CounterEditHeader.css';
 
-interface Props extends RouteComponentProps<any> {}
+interface IProps extends RouteComponentProps<any> {}
 
-interface State {}
+interface IState {}
 
-class EditHeader extends Component<Props, State> {
+class EditHeader extends Component<IProps, IState> {
   onBackButtonClicked() {
     this.props.history.goBack()
   }

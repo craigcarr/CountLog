@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import CounterHistoryHeader from './CounterHistoryHeader';
 import CounterHistoryContent from './CounterHistoryContent';
 
-type Props = {}
+interface IProps {}
 
-type State = {}
+interface IState {}
 
-class CounterHistoryPage extends Component<Props, State> {
+class CounterHistoryPage extends Component<IProps, IState> {
   render() {
     return (
       <React.Fragment>

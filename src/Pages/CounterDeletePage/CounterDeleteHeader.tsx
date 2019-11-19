@@ -3,11 +3,11 @@ import { Button, Icon } from "semantic-ui-react";
 import './CounterDeleteHeader.css';
 import { withRouter, RouteComponentProps } from "react-router";
 
-interface Props extends RouteComponentProps<any> {}
+interface IProps extends RouteComponentProps<any> {}
 
-interface State {}
+interface IState {}
 
-class CounterDeleteHeader extends Component<Props, State> {
+class CounterDeleteHeader extends Component<IProps, IState> {
   onBackButtonClicked() {
     this.props.history.goBack()
   }

@@ -4,16 +4,16 @@ import CountersAPI from '../../Interfaces/CountersAPI';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import './StatisticsContent.css';
 
-interface Props extends RouteComponentProps<any> {
+interface IProps extends RouteComponentProps<any> {
   counterId: number,
 }
 
-interface State {
+interface IState {
   counterName: string,
   counterValue: number,
 }
 
-class StatisticsContent extends Component<Props, State> {
+class StatisticsContent extends Component<IProps, IState> {
   state = {
     counterValue: 0,
     counterName: '',

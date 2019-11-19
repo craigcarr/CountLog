@@ -3,16 +3,16 @@ import StatisticsHeader from './StatisticsHeader';
 import StatisticsContent from './StatisticsContent';
 import { withRouter, RouteComponentProps } from 'react-router';
 
-interface Props extends RouteComponentProps<any> {}
+interface IProps extends RouteComponentProps<any> {}
 
-interface State {}
+interface IState {}
 
-class StatisticsPage extends Component<Props, State> {
+class StatisticsPage extends Component<IProps> {
   render() {
     return (
       <React.Fragment>
         <StatisticsHeader></StatisticsHeader>
-        <StatisticsContent counterId={parseInt(this.props.match.params['counterId'])}></StatisticsContent>
+        <StatisticsContent counterId={parseInt(this.props.match.params['counterId'], 10)}></StatisticsContent>
       </React.Fragment>
     );
   }

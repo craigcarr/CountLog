@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import CreateHeader from './CreateHeader';
 import CreateContent from './CreateContent';
 
-type Props = {}
+interface IProps {}
 
-type State = {}
+interface IState {}
 
-class CreatePage extends Component<Props, State> {
+class CreatePage extends Component<IProps, IState> {
   render() {
     return (
       <React.Fragment>

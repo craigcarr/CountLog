@@ -14,13 +14,13 @@ import CounterHistoryPage from './Pages/CounterHistoryPage/CounterHistoryPage';
 import EventEditPage from './Pages/EventEditPage/EventEditPage';
 import './App.css';
 
-type Props = {}
+interface IProps {}
 
-type State = {
+interface IState {
   db: CounterDatabase,
 }
 
-class App extends Component<Props, State> {
+class App extends Component<IProps, IState> {
   state = {
     db: new CounterDatabase()
   }

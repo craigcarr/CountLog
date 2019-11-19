@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import SettingsHeader from './SettingsHeader';
 import SettingsContent from './SettingsContent';
 
-type Props = {}
+interface IProps {}
 
-type State = {}
+interface IState {}
 
-class SettingsPage extends Component<Props, State> {
+class SettingsPage extends Component<IProps, IState> {
   render() {
     return (
       <React.Fragment>

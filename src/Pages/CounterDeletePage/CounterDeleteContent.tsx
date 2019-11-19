@@ -4,13 +4,13 @@ import { withRouter, RouteComponentProps } from 'react-router';
 import CountersAPI from '../../Interfaces/CountersAPI';
 import './CounterDeleteContent.css';
 
-interface Props extends RouteComponentProps<any> {}
+interface IProps extends RouteComponentProps<any> {}
 
-interface State {}
+interface IState {}
 
-class CounterDeleteContent extends Component<Props, State> {
+class CounterDeleteContent extends Component<IProps, IState> {
   deleteButtonClicked() {
-    let counterId = parseInt(this.props.match.params['counterId'])
+    let counterId = parseInt(this.props.match.params['counterId'], 10)
 
     CountersAPI.deleteCounter(counterId).then(() => {
       this.props.history.push('/')

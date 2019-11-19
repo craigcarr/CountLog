@@ -3,11 +3,11 @@ import { Button, Icon } from "semantic-ui-react";
 import { withRouter, RouteComponentProps } from "react-router";
 import './EventEditHeader.css';
 
-interface Props extends RouteComponentProps<any> {}
+interface IProps extends RouteComponentProps<any> {}
 
-interface State {}
+interface IState {}
 
-class EventEditHeader extends Component<Props, State> {
+class EventEditHeader extends Component<IProps, IState> {
   onBackButtonClicked() {
     this.props.history.goBack()
   }

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import CounterEditHeader from './CounterEditHeader';
 import CounterEditContent from './CounterEditContent';
 
-type Props = {}
+interface IProps {}
 
-type State = {}
+interface IState {}
 
-class CounterEditPage extends Component<Props, State> {
+class CounterEditPage extends Component<IProps, IState> {
   render() {
     return (
       <div>

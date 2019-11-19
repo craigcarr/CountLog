@@ -3,16 +3,16 @@ import { Table, Checkbox, } from 'semantic-ui-react';
 import SettingsAPI from '../../Interfaces/SettingsAPI';
 import './SettingsContent.css';
 
-type Props = {}
+interface IProps {}
 
-type State = {
+interface IState {
   isVibrationEnabled: boolean,
   isClickSoundEnabled: boolean,
   isScreenAlwaysOn: boolean,
   isDarkModeEnabled: boolean,
 }
 
-class SettingsContent extends Component<Props, State> {
+class SettingsContent extends Component<IProps, IState> {
   state = {
     isVibrationEnabled: false,
     isClickSoundEnabled: false,
@@ -25,11 +25,13 @@ class SettingsContent extends Component<Props, State> {
 
     SettingsAPI.getAllSettings().then((settings) => {
       // TODO Kind of unsafe from TypeScript's perspective.
-      function array2dict(settings: any): any {
-        return settings.reduce(function (map: any, setting: any) {
-          map[setting.name] = setting.value;
-          return map;
-        }, {});
+      function array2dict(array: any): any {
+        return array.reduce(
+          (map: any, setting: any) => {
+            map[setting.name] = setting.value;
+            return map;
+          },
+          {});
       }
 
       let result = array2dict(settings);

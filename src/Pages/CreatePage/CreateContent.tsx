@@ -5,17 +5,17 @@ import { Link } from 'react-router-dom';
 import CountersAPI from '../../Interfaces/CountersAPI';
 import './CreateContent.css';
 
-type Props = {
+interface IProps {
   id: number | undefined,
 }
 
-type State = {
+interface IState {
   name: string,
   color: string,
   valueString: string,
 }
 
-class CreateContent extends Component<Props, State> {
+class CreateContent extends Component<IProps, IState> {
   state = {
     name: '',
     color: 'red',
@@ -55,7 +55,7 @@ class CreateContent extends Component<Props, State> {
       return false;
     } else if (!this.state.color || !this.state.name) {
       return false;
-    } else if (isNaN(parseInt(this.state.valueString)) || this.state.valueString.includes('.')) {
+    } else if (isNaN(parseInt(this.state.valueString, 10)) || this.state.valueString.includes('.')) {
       return false;
     } else {
       return true;
@@ -67,14 +67,14 @@ class CreateContent extends Component<Props, State> {
       CountersAPI.insertCounter({
         name: this.state.name,
         color: this.state.color,
-        value: parseInt(this.state.valueString),
+        value: parseInt(this.state.valueString, 10),
       });
     } else {
       CountersAPI.insertCounter({
         id: this.props.id,
         name: this.state.name,
         color: this.state.color,
-        value: parseInt(this.state.valueString),
+        value: parseInt(this.state.valueString, 10),
       });
     }
   }

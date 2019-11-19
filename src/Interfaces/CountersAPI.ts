@@ -82,7 +82,7 @@ class CountersAPI {
       if (counter === undefined) {
         // TODO Do something
       } else {
-        let decrementEvent: IEvent= {
+        let decrementEvent: IEvent = {
           counterId: counterId,
           type: EventType.Decrement,
           timestamp: Date.now().toString(),

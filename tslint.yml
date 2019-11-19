@@ -1,0 +1,18 @@
+# https://palantir.github.io/tslint/rules/
+extends: "tslint:recommended"
+rules:
+  "semicolon": false                      # TODO Possibly re-enable later (seems more annoying than helpful)
+  "prefer-const": false                   # TODO Possibly re-enable later (seems more annoying than helpful)
+  "quotemark": [false]                    # Need to fight with VSCode-added imports
+  "no-console": [false, "log", "error"]   # Used for debugging too often
+  "no-trailing-whitespace": false         # Handled by EditorConfig
+  "object-literal-sort-keys": false       # Doesn't always make sense
+  "arrow-parens": false                   # Unnecessary and annoying
+  "trailing-comma": false                 # Unnecessary and annoying
+  "ordered-imports": false                # Need to fight with VSCode-added imports
+  "member-access": false                  # Worthless for React-specific methods
+  "member-ordering": [false]              # Doesn't always make sense
+  "object-literal-shorthand": false       # Makes things more confusing
+  "no-empty-interface": false             # Needed for React components
+  "no-string-literal": false              # Needed for getting values passed through routes
+  "interface-over-type-literal" false     # An auto-generated file doesn't do this (serviceWorker.ts)

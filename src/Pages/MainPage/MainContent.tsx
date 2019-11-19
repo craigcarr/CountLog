@@ -6,13 +6,13 @@ import SettingsAPI from '../../Interfaces/SettingsAPI';
 import CountersAPI from '../../Interfaces/CountersAPI';
 import './MainContent.css';
 
-type Props = {}
+interface IProps {}
 
-type State = {
+interface IState {
   tableData: any[],
 }
 
-class MainContent extends Component<Props, State> {
+class MainContent extends Component<IProps, IState> {
   state = {
     tableData: []
   }

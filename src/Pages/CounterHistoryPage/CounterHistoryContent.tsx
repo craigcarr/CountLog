@@ -6,21 +6,21 @@ import CountersAPI from '../../Interfaces/CountersAPI';
 import './CounterHistoryContent.css';
 import { EventType } from '../../CounterDatabase';
 
-interface Props extends RouteComponentProps<any> {}
+interface IProps extends RouteComponentProps<any> {}
 
-interface State {
+interface IState {
   tableData: any[],
   filter: EventType | undefined,
 }
 
-class MainContent extends Component<Props, State> {
+class MainContent extends Component<IProps, IState> {
   state = {
     tableData: [],
     filter: undefined,
   }
 
   componentDidMount() {
-    let counterId = parseInt(this.props.match.params['counterId'])
+    let counterId = parseInt(this.props.match.params['counterId'], 10)
 
     CountersAPI.getEventsForCounter(counterId, undefined).then(events => {
       let list = [];
@@ -39,8 +39,8 @@ class MainContent extends Component<Props, State> {
     })
   }
 
-  foo(timestamp: string): string {
-    let date = new Date(parseInt(timestamp));
+  displayTimestamp(timestamp: string): string {
+    let date = new Date(parseInt(timestamp, 10));
     return date.toLocaleString();
   }
 
@@ -70,7 +70,7 @@ class MainContent extends Component<Props, State> {
   }
 
   editEventClicked(eventId: number) {
-    let counterId = parseInt(this.props.match.params['counterId'])
+    let counterId = parseInt(this.props.match.params['counterId'], 10)
     this.props.history.push('/counterhistory/' + counterId + '/editevent/' + eventId)
   }
 
@@ -88,7 +88,7 @@ class MainContent extends Component<Props, State> {
                 <p>{this.getDisplayNameForType(type)}</p>
               </Table.Cell>
               <Table.Cell>
-                <p>{this.foo(timestamp)}</p>
+                <p>{this.displayTimestamp(timestamp)}</p>
               </Table.Cell>
               <Table.Cell>
                 <Button onClick={() => { this.editEventClicked(id) }} circular icon>

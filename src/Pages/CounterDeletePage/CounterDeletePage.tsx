@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import CounterDeleteHeader from './CounterDeleteHeader';
 import CounterDeleteContent from './CounterDeleteContent';
 
-type Props = {}
+interface IProps {}
 
-type State = {}
+interface IState {}
 
-class CounterDeletePage extends Component<Props, State> {
+class CounterDeletePage extends Component<IProps, IState> {
   render() {
     return (
       <React.Fragment>
