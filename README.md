@@ -17,7 +17,7 @@ TODO
 
 ### Linting
 - Use `eclint check 'src/**/*'` to check for EditorConfig linting errors.
-- Use `tslint src/**/*.ts*` to check for TSLint linting errors (TODO not set up yet).
+- Use `tslint src/**/*.ts*` to check for TSLint linting errors.
 
 ### MkDocs Installation
 - Use `pip install mkdocs` to install MkDocs.

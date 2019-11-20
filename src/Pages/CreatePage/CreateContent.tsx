@@ -4,6 +4,7 @@ import { BlockPicker } from 'react-color';
 import { Link } from 'react-router-dom';
 import CountersAPI from '../../Interfaces/CountersAPI';
 import './CreateContent.css';
+import LoggingAPI from '../../Interfaces/LoggingAPI';
 
 interface IProps {
   id: number | undefined,
@@ -26,7 +27,7 @@ class CreateContent extends Component<IProps, IState> {
     if (this.props.id !== undefined) {
       CountersAPI.getCounterById(this.props.id).then(counter => {
         if (counter === undefined) {
-          // TODO Do something
+          LoggingAPI.error('counter is undefined')
         } else {
           this.setState({
             name: counter.name,

@@ -3,6 +3,7 @@ import { Table, Button } from 'semantic-ui-react';
 import CountersAPI from '../../Interfaces/CountersAPI';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import './StatisticsContent.css';
+import LoggingAPI from '../../Interfaces/LoggingAPI';
 
 interface IProps extends RouteComponentProps<any> {
   counterId: number,
@@ -24,7 +25,7 @@ class StatisticsContent extends Component<IProps, IState> {
 
     CountersAPI.getCounterById(this.props.counterId).then(counter => {
       if (counter === undefined) {
-        // TODO Do something
+        LoggingAPI.error('counter is undefined')
       } else {
         this.setState({
           counterName: counter.name,

@@ -5,6 +5,7 @@ import _ from 'lodash';
 import CountersAPI from '../../Interfaces/CountersAPI';
 import './CounterHistoryContent.css';
 import { EventType } from '../../CounterDatabase';
+import LoggingAPI from '../../Interfaces/LoggingAPI';
 
 interface IProps extends RouteComponentProps<any> {}
 
@@ -52,7 +53,7 @@ class MainContent extends Component<IProps, IState> {
     } else if (type === EventType.Mutate) {
       return 'Mutation Event';
     } else {
-      // TODO Do something
+      LoggingAPI.error('type has an unknown EventType')
       return 'Unknown Event Type';
     }
   }

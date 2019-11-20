@@ -5,6 +5,7 @@
   "dependencies": {
     "dexie": "^2.0.4",
     "lodash": "^4.17.15",
+    "loglevel": "^1.6.6",
     "react": "^16.11.0",
     "react-color": "^2.17.3",
     "react-dom": "^16.11.0",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.146",
+    "@types/node": "12.12.7",
     "@types/react": "16.9.11",
     "@types/react-color": "^3.0.1",
     "@types/react-dom": "16.9.4",

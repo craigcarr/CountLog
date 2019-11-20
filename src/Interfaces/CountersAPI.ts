@@ -1,4 +1,5 @@
 import CounterDatabase, { ICounter, IEvent, EventType } from "../CounterDatabase";
+import LoggingAPI from "./LoggingAPI";
 
 class CountersAPI {
   private static db: CounterDatabase;
@@ -33,7 +34,7 @@ class CountersAPI {
     this.db.events.where('counterId').equals(counterId).toArray().then(events => {
       for (let event of events) {
         if (event.id === undefined) {
-          // TODO Do something
+          LoggingAPI.error('event.id is undefined')
         } else {
           this.db.events.delete(event.id)
         }
@@ -59,7 +60,7 @@ class CountersAPI {
   public static incrementCounter(counterId: number, callback: any) {
     this.db.counters.get(counterId).then(counter => {
       if (counter === undefined) {
-        // TODO Do something
+        LoggingAPI.error('counter is undefined')
       } else {
         let incrementEvent: IEvent = {
           counterId: counterId,
@@ -80,7 +81,7 @@ class CountersAPI {
   public static decrementCounter(counterId: number, callback: any) {
     this.db.counters.get(counterId).then(counter => {
       if (counter === undefined) {
-        // TODO Do something
+        LoggingAPI.error('counter is undefined')
       } else {
         let decrementEvent: IEvent = {
           counterId: counterId,

@@ -13,6 +13,7 @@ import CounterDeletePage from './Pages/CounterDeletePage/CounterDeletePage';
 import CounterHistoryPage from './Pages/CounterHistoryPage/CounterHistoryPage';
 import EventEditPage from './Pages/EventEditPage/EventEditPage';
 import './App.css';
+import LoggingAPI from './Interfaces/LoggingAPI';
 
 interface IProps {}
 
@@ -30,6 +31,7 @@ class App extends Component<IProps, IState> {
 
     SettingsAPI._initialize(this.state.db);
     CountersAPI._initialize(this.state.db);
+    LoggingAPI._initialize();
   }
 
   render() {
