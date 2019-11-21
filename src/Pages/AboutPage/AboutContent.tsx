@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './AboutContent.css';
+import styles from './AboutContent.module.scss';
 
 class AboutContent extends Component {
   render() {
     return (
-      <div className="content">
+      <div className={styles.content}>
         About Content
       </div>
     )

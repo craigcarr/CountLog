@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Button, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import './MainHeader.css';
+import styles from './MainHeader.module.scss';
 
 class MainHeader extends Component {
   render() {
     return (
-      <div className="header">
-        <p id="mainHeaderText">Active Counters</p>
+      <div className={styles.header}>
+        <p id={styles.mainHeaderText}>Active Counters</p>
 
         <Link to="/settings">
-          <Button circular icon id="settingsBtn">
+          <Button circular icon id={styles.settingsBtn}>
             <Icon name="settings">
             </Icon>
           </Button>

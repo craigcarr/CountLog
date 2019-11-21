@@ -1,11 +1,13 @@
-#backBtn {
+@import '../../App.scss';
+
+#counterEditBackBtn {
   position: absolute;
   font-size: 3vh;
   top: 1vh;
   left: 2vw;
 }
 
-#aboutHeaderText {
+#counterEditHeaderText {
   position: absolute;
   font-size: 4vh;
   font-weight: 900;

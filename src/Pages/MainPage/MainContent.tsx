@@ -4,7 +4,7 @@ import { Icon, Button, Table } from 'semantic-ui-react';
 import _ from 'lodash';
 import SettingsAPI from '../../Interfaces/SettingsAPI';
 import CountersAPI from '../../Interfaces/CountersAPI';
-import './MainContent.css';
+import styles from './MainContent.module.scss';
 
 interface IProps {}
 
@@ -32,7 +32,6 @@ class MainContent extends Component<IProps, IState> {
 
     let callback = () => {
       CountersAPI.getAllCounters().then(counters => {
-        console.log(counters);
         this.setState({ tableData: counters })
       });
     }
@@ -64,25 +63,25 @@ class MainContent extends Component<IProps, IState> {
     } else {
       tableContent = _.map(this.state.tableData, ({ id, name, color, value }) => (
         <Table.Row key={id}>
-          <Table.Cell className="tableCell">
+          <Table.Cell className={styles.tableCell}>
             <Button
               onClick={e => { this.handleDecrement(id) }}
-              className="counterDecrement"
+              className={styles.counterDecrement}
               style={{ backgroundColor: color, color: 'white' }}
               icon
               circular><Icon name="minus"></Icon>
             </Button>
             <Link to={"statistics/" + id}>
               <Button
-                className="counterDisplay"
+                className={styles.counterDisplay}
                 style={{ backgroundColor: color, color: 'white' }}>
-                <p className="counterText">{name}</p>
-                <p className="counterText">{value}</p>
+                <p className={styles.counterText}>{name}</p>
+                <p className={styles.counterText}>{value}</p>
               </Button>
             </Link>
             <Button
               onClick={e => { this.handleIncrement(id) }}
-              className="counterIncrement"
+              className={styles.counterIncrement}
               style={{ backgroundColor: color, color: 'white' }}
               icon
               circular><Icon name="plus"></Icon>
@@ -93,7 +92,7 @@ class MainContent extends Component<IProps, IState> {
     }
 
     return (
-      <div id="mainContent" className="content">
+      <div id={styles.mainContent} className={styles.content}>
         <Table unstackable>
           <Table.Body>
             {tableContent}
@@ -106,7 +105,7 @@ class MainContent extends Component<IProps, IState> {
         <br></br>
 
         <Link to="/create">
-          <Button circular icon id="createCounterBtn">
+          <Button circular icon id={styles.createCounterBtn}>
             <Icon name="plus">
             </Icon>
           </Button>

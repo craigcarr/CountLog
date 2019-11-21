@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Checkbox, } from 'semantic-ui-react';
 import SettingsAPI from '../../Interfaces/SettingsAPI';
-import './SettingsContent.css';
+import styles from './SettingsContent.module.scss';
 
 interface IProps {}
 
@@ -90,7 +90,7 @@ class SettingsContent extends Component<IProps, IState> {
 
   render() {
     return (
-      <div className="content">
+      <div className={styles.content}>
         <Table unstackable columns={2}>
           <Table.Body>
             <Table.Row>

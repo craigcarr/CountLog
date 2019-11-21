@@ -1,11 +1,13 @@
-#eventEditBackBtn {
+@import '../../App.scss';
+
+#backBtn {
   position: absolute;
   font-size: 3vh;
   top: 1vh;
   left: 2vw;
 }
 
-#eventEditHeaderText {
+#counterDeleteHeaderText {
   position: absolute;
   font-size: 4vh;
   font-weight: 900;

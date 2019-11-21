@@ -6,6 +6,7 @@
     "dexie": "^2.0.4",
     "lodash": "^4.17.15",
     "loglevel": "^1.6.6",
+    "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-color": "^2.17.3",
     "react-dom": "^16.11.0",

@@ -3,7 +3,7 @@ import { Table, Input, Button, Icon } from 'semantic-ui-react';
 import { BlockPicker } from 'react-color';
 import { Link } from 'react-router-dom';
 import CountersAPI from '../../Interfaces/CountersAPI';
-import './CreateContent.css';
+import styles from './CreateContent.module.scss';
 import LoggingAPI from '../../Interfaces/LoggingAPI';
 
 interface IProps {
@@ -93,7 +93,7 @@ class CreateContent extends Component<IProps, IState> {
   render() {
     return (
       <div>
-        <div id="createContent" className="content">
+        <div id={styles.createContent} className={styles.content}>
           <Table unstackable columns={2}>
             <Table.Body>
               <Table.Row>
@@ -132,7 +132,7 @@ class CreateContent extends Component<IProps, IState> {
           </Table>
 
           <Button
-            id="saveCounterBtn"
+            id={styles.saveCounterBtn}
             onClick={() => { this.onSaveCounterClicked() }}
             disabled={this.isInputValid() === false}
             icon

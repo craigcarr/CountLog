@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CreateContent from '../CreatePage/CreateContent';
 import { withRouter, RouteComponentProps } from 'react-router';
-import './CounterEditContent.css';
 
 interface IProps extends RouteComponentProps<any> {}
 

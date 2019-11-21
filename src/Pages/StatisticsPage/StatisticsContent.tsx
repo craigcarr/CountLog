@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import CountersAPI from '../../Interfaces/CountersAPI';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import './StatisticsContent.css';
+import styles from './StatisticsContent.module.scss';
 import LoggingAPI from '../../Interfaces/LoggingAPI';
 
 interface IProps extends RouteComponentProps<any> {
@@ -49,7 +49,7 @@ class StatisticsContent extends Component<IProps, IState> {
 
   render() {
     return (
-      <div className="content">
+      <div className={styles.content}>
         <Table unstackable columns={2}>
           <Table.Body>
             <Table.Row>
@@ -68,7 +68,7 @@ class StatisticsContent extends Component<IProps, IState> {
               <Table.Cell>Edit Counter</Table.Cell>
               <Table.Cell>
                 <Button
-                  className='myButton'
+                  className={styles.myButton}
                   onClick={() => { this.editButtonClicked() }}>
                   Edit
                 </Button>
@@ -80,7 +80,7 @@ class StatisticsContent extends Component<IProps, IState> {
               </Table.Cell>
               <Table.Cell>
                 <Button
-                  className='myButton'
+                  className={styles.myButton}
                   onClick={() => { this.deleteButtonClicked() }}>
                   Delete
                 </Button>
@@ -90,7 +90,7 @@ class StatisticsContent extends Component<IProps, IState> {
               <Table.Cell>View History</Table.Cell>
               <Table.Cell>
                 <Button
-                  className='myButton'
+                  className={styles.myButton}
                   onClick={() => { this.viewButtonClicked() }}>
                   View
                 </Button>

@@ -3,9 +3,9 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Table, Dropdown, Icon, Button } from 'semantic-ui-react';
 import _ from 'lodash';
 import CountersAPI from '../../Interfaces/CountersAPI';
-import './CounterHistoryContent.css';
 import { EventType } from '../../CounterDatabase';
 import LoggingAPI from '../../Interfaces/LoggingAPI';
+import styles from './CounterHistoryContent.module.scss';
 
 interface IProps extends RouteComponentProps<any> {}
 
@@ -85,7 +85,7 @@ class MainContent extends Component<IProps, IState> {
         if (this.state.filter === undefined || type === this.state.filter) {
           return (
             <Table.Row key={id}>
-              <Table.Cell className="eventTableCell">
+              <Table.Cell className={styles.eventTableCell}>
                 <p>{this.getDisplayNameForType(type)}</p>
               </Table.Cell>
               <Table.Cell>
@@ -110,7 +110,7 @@ class MainContent extends Component<IProps, IState> {
     ]
 
     return (
-      <div id="mainContent" className="content">
+      <div id={styles.mainContent} className={styles.content}>
         <br></br>
 
         <Dropdown

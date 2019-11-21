@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import { withRouter, RouteComponentProps } from 'react-router';
 import CountersAPI from '../../Interfaces/CountersAPI';
-import './CounterDeleteContent.css';
+import styles from './CounterDeleteContent.module.scss';
 
 interface IProps extends RouteComponentProps<any> {}
 
@@ -19,7 +19,7 @@ class CounterDeleteContent extends Component<IProps, IState> {
 
   render() {
     return (
-      <div className="content">
+      <div className={styles.content}>
         <Table unstackable columns={1}>
           <Table.Body>
             <Table.Row>
@@ -29,7 +29,7 @@ class CounterDeleteContent extends Component<IProps, IState> {
             </Table.Row>
             <Table.Row>
               <Table.Cell>
-                <Button id="deleteButton" onClick={() => { this.deleteButtonClicked() }}>
+                <Button id={styles.deleteButton} onClick={() => { this.deleteButtonClicked() }}>
                   Confirm Delete
                 </Button>
               </Table.Cell>

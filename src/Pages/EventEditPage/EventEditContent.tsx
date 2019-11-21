@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
-import './EventEditContent.css';
+import styles from './EventEditContent.module.scss';
 
 interface IProps extends RouteComponentProps<any> {}
 
@@ -14,7 +14,7 @@ class EventEditContent extends Component<IProps, IState> {
     console.log(counterId, eventId)
 
     return (
-      <div className="content">
+      <div className={styles.content}>
         TODO
       </div>
     )

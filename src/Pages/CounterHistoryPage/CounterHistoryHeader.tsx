@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Icon } from "semantic-ui-react";
 import { withRouter, RouteComponentProps } from "react-router";
-import './CounterHistoryHeader.css';
+import styles from './CounterHistoryHeader.module.scss';
 
 interface IProps extends RouteComponentProps<any> {}
 
@@ -14,10 +14,10 @@ class CounterHistoryHeader extends Component<IProps, IState> {
 
   render() {
     return (
-      <div className="header">
-        <p id="counterViewHeaderText">Counter History</p>
+      <div className={styles.header}>
+        <p id={styles.counterViewHeaderText}>Counter History</p>
 
-        <Button id="backBtn" onClick={() => { this.onBackButtonClicked() }} circular icon>
+        <Button id={styles.backBtn} onClick={() => { this.onBackButtonClicked() }} circular icon>
           <Icon name="arrow left">
           </Icon>
         </Button>

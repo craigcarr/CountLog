@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Icon } from "semantic-ui-react";
 import { withRouter, RouteComponentProps } from "react-router";
-import './EventEditHeader.css';
+import styles from './EventEditHeader.module.scss';
 
 interface IProps extends RouteComponentProps<any> {}
 
@@ -14,10 +14,10 @@ class EventEditHeader extends Component<IProps, IState> {
 
   render() {
     return (
-      <div className="header">
-        <p id="eventEditHeaderText">Edit Event</p>
+      <div className={styles.header}>
+        <p id={styles.eventEditHeaderText}>Edit Event</p>
 
-        <Button id="eventEditBackBtn" onClick={() => {this.onBackButtonClicked()}} circular icon>
+        <Button id={styles.eventEditBackBtn} onClick={() => {this.onBackButtonClicked()}} circular icon>
           <Icon name="arrow left">
           </Icon>
         </Button>

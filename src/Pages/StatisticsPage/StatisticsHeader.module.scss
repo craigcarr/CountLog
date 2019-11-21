@@ -1,11 +1,13 @@
-#backBtn {
+@import '../../App.scss';
+
+#homeBtn {
   position: absolute;
   font-size: 3vh;
   top: 1vh;
   left: 2vw;
 }
 
-#counterDeleteHeaderText {
+#statisticsHeaderText {
   position: absolute;
   font-size: 4vh;
   font-weight: 900;

@@ -1,18 +1,13 @@
-#homeBtn {
+@import '../../App.scss';
+
+#eventEditBackBtn {
   position: absolute;
   font-size: 3vh;
   top: 1vh;
   left: 2vw;
 }
 
-#aboutBtn {
-  position: absolute;
-  font-size: 3vh;
-  top: 1vh;
-  left: 20vw;
-}
-
-#settingsHeaderText {
+#eventEditHeaderText {
   position: absolute;
   font-size: 4vh;
   font-weight: 900;

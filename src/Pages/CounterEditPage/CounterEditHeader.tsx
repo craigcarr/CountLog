@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Button, Icon } from "semantic-ui-react";
-import './CounterEditHeader.css';
+import styles from './CounterEditHeader.module.scss';
 
 interface IProps extends RouteComponentProps<any> {}
 
@@ -14,10 +14,14 @@ class EditHeader extends Component<IProps, IState> {
 
   render() {
     return (
-      <div className="header">
-        <p id="counterEditHeaderText">Edit Counter</p>
+      <div className={styles.header}>
+        <p id={styles.counterEditHeaderText}>Edit Counter</p>
 
-        <Button onClick={() => { this.onBackButtonClicked() }} circular icon id="counterEditBackBtn">
+        <Button
+          onClick={() => { this.onBackButtonClicked() }}
+          circular
+          icon
+          id={styles.counterEditBackBtn}>
           <Icon name="arrow left">
           </Icon>
         </Button>

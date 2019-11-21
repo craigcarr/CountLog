@@ -1,23 +1,23 @@
 import React, { Component } from "react";
-import './SettingsHeader.css';
+import styles from './SettingsHeader.module.scss';
 import { Button, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 class SettingsHeader extends Component {
   render() {
     return (
-      <div className="header">
-        <p id="settingsHeaderText">Settings</p>
+      <div className={styles.header}>
+        <p id={styles.settingsHeaderText}>Settings</p>
 
         <Link to="/">
-          <Button id="homeBtn" circular icon>
+          <Button id={styles.homeBtn} circular icon>
             <Icon name="arrow left">
             </Icon>
           </Button>
         </Link>
 
         <Link to="/about">
-          <Button id="aboutBtn" circular icon>
+          <Button id={styles.aboutBtn} circular icon>
             <Icon name="question">
             </Icon>
           </Button>

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import './CreateHeader.css';
+import styles from './CreateHeader.module.scss';
 import { Link } from 'react-router-dom';
 import { Button, Icon } from 'semantic-ui-react';
 
 class CreateHeader extends Component {
   render() {
     return (
-      <div className="header">
-        <p id="createHeaderText">Create Counter</p>
+      <div className={styles.header}>
+        <p id={styles.createHeaderText}>Create Counter</p>
 
         <Link to="/">
-          <Button icon circular id="cancelCounterBtn">
+          <Button icon circular id={styles.cancelCounterBtn}>
             <Icon name="cancel">
             </Icon>
           </Button>
