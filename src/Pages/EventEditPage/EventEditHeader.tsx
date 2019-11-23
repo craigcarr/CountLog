@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Icon } from "semantic-ui-react";
 import { withRouter, RouteComponentProps } from "react-router";
 import styles from './EventEditHeader.module.scss';
+import HeaderText from "../../Components/HeaderText/HeaderText";
 
 interface IProps extends RouteComponentProps<any> {}
 
@@ -15,7 +16,7 @@ class EventEditHeader extends Component<IProps, IState> {
   render() {
     return (
       <div className={styles.header}>
-        <p id={styles.eventEditHeaderText}>Edit Event</p>
+        <HeaderText className={styles.headerText}>Edit Event</HeaderText>
 
         <Button id={styles.eventEditBackBtn} onClick={() => {this.onBackButtonClicked()}} circular icon>
           <Icon name="arrow left">

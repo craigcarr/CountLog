@@ -53,19 +53,25 @@ class StatisticsContent extends Component<IProps, IState> {
         <Table unstackable columns={2}>
           <Table.Body>
             <Table.Row>
-              <Table.Cell>Counter Name</Table.Cell>
+              <Table.Cell className={styles.tableCell}>
+                <text className={styles.bodyText}>Counter Name</text>
+              </Table.Cell>
               <Table.Cell>
-                {this.state.counterName}
+                <text className={styles.bodyText}>{this.state.counterName}</text>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
-              <Table.Cell>Current Value</Table.Cell>
+              <Table.Cell className={styles.tableCell}>
+                <text className={styles.bodyText}>Current Value</text>
+              </Table.Cell>
               <Table.Cell>
-                {this.state.counterValue}
+                <text className={styles.bodyText}>{this.state.counterValue}</text>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
-              <Table.Cell>Edit Counter</Table.Cell>
+              <Table.Cell className={styles.tableCell}>
+                <text className={styles.bodyText}>Edit Counter</text>
+              </Table.Cell>
               <Table.Cell>
                 <Button
                   className={styles.myButton}
@@ -75,8 +81,8 @@ class StatisticsContent extends Component<IProps, IState> {
               </Table.Cell>
             </Table.Row>
             <Table.Row>
-              <Table.Cell>
-                Delete Counter
+              <Table.Cell className={styles.tableCell}>
+                <text className={styles.bodyText}>Delete Counter</text>
               </Table.Cell>
               <Table.Cell>
                 <Button
@@ -87,7 +93,9 @@ class StatisticsContent extends Component<IProps, IState> {
               </Table.Cell>
             </Table.Row>
             <Table.Row>
-              <Table.Cell>View History</Table.Cell>
+              <Table.Cell className={styles.tableCell}>
+                <text className={styles.bodyText}>View History</text>
+              </Table.Cell>
               <Table.Cell>
                 <Button
                   className={styles.myButton}

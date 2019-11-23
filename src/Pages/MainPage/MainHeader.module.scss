@@ -1,17 +1,12 @@
-@import '../../App.scss';
+@import "../../App.scss";
 
-#settingsBtn {
-    position: absolute;
-    font-size: 3vmax;
-    top: 1vmax;
-    right: 2vmax;
+.headerText {
+  left: 3vmax;
 }
 
-#mainHeaderText {
-    position: absolute;
-    font-size: 4vmax;
-    font-weight: 900;
-    color: white;
-    top: 2vmax;
-    left: 3vmax;
+#settingsBtn {
+  position: absolute;
+  font-size: 3vmax;
+  top: 1vmax;
+  right: 2vmax;
 }

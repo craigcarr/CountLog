@@ -1,17 +1,12 @@
 @import '../../App.scss';
 
+.headerText {
+  right: 3vmax;
+}
+
 #homeBtn {
   position: absolute;
   font-size: 3vmax;
   top: 1vmax;
   left: 2vmax;
-}
-
-#statisticsHeaderText {
-  position: absolute;
-  font-size: 4vmax;
-  font-weight: 900;
-  color: white;
-  top: 2vmax;
-  right: 3vmax;
 }

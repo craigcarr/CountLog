@@ -94,33 +94,40 @@ class SettingsContent extends Component<IProps, IState> {
         <Table unstackable columns={2}>
           <Table.Body>
             <Table.Row>
-              <Table.Cell>Dark Mode</Table.Cell>
+              <Table.Cell className={styles.tableCell}>
+                <text className={styles.bodyText}>Dark Mode</text>
+              </Table.Cell>
               <Table.Cell>
                 <Checkbox
+                  className={styles.checkBox}
                   toggle
                   checked={this.state.isDarkModeEnabled}
                   onChange={() => { this.darkModeEnabledSettingChanged() }}>
                 </Checkbox>
-                <p>Not yet supported!</p>
+                <p className={styles.bodyText}>Not yet supported!</p>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
-              <Table.Cell>
-                Click Sound
-                </Table.Cell>
+              <Table.Cell className={styles.tableCell}>
+                <text className={styles.bodyText}>Click Sound</text>
+              </Table.Cell>
               <Table.Cell>
                 <Checkbox
+                  className={styles.checkBox}
                   toggle
                   checked={this.state.isClickSoundEnabled}
                   onChange={() => { this.clickSoundSettingChanged() }}>
                 </Checkbox>
-                <p>Not yet supported!</p>
+                <p className={styles.bodyText}>Not yet supported!</p>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
-              <Table.Cell>Vibration</Table.Cell>
+              <Table.Cell className={styles.tableCell}>
+                <text className={styles.bodyText}>Vibration</text>
+              </Table.Cell>
               <Table.Cell>
                 <Checkbox
+                  className={styles.checkBox}
                   toggle
                   checked={this.state.isVibrationEnabled}
                   onChange={() => { this.vibrationSettingChanged() }}>
@@ -128,14 +135,17 @@ class SettingsContent extends Component<IProps, IState> {
               </Table.Cell>
             </Table.Row>
             <Table.Row>
-              <Table.Cell>Screen Always On</Table.Cell>
+              <Table.Cell className={styles.tableCell}>
+                <text className={styles.bodyText}>Screen Always On</text>
+              </Table.Cell>
               <Table.Cell>
                 <Checkbox
+                  className={styles.checkBox}
                   toggle
                   checked={this.state.isScreenAlwaysOn}
                   onChange={() => { this.screenAlwaysOnSettingChanged() }}>
                 </Checkbox>
-                <p>Not yet supported!</p>
+                <p className={styles.bodyText}>Not yet supported!</p>
               </Table.Cell>
             </Table.Row>
           </Table.Body>

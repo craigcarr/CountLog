@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Icon } from "semantic-ui-react";
 import styles from './CounterDeleteHeader.module.scss';
 import { withRouter, RouteComponentProps } from "react-router";
+import HeaderText from "../../Components/HeaderText/HeaderText";
 
 interface IProps extends RouteComponentProps<any> {}
 
@@ -15,7 +16,7 @@ class CounterDeleteHeader extends Component<IProps, IState> {
   render() {
     return (
       <div className={styles.header}>
-        <p id={styles.counterDeleteHeaderText}>Delete Counter</p>
+        <HeaderText className={styles.headerText}>Delete Counter</HeaderText>
 
         <Button id={styles.backBtn} onClick={() => {this.onBackButtonClicked()}} circular icon>
           <Icon name="arrow left">
