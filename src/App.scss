@@ -2,8 +2,8 @@ $theme: 'light';
 
 .header {
   position: fixed;
-  top: 0vh;
-  height: 10vh;
+  top: 0vmax;
+  height: 10vmax;
   width: 100%;
   background-color: #333333;
   border-style: solid;
@@ -16,8 +16,8 @@ $theme: 'light';
 
 .content {
   position: fixed;
-  top: 10vh;
-  height: 90vh;
+  top: 10vmax;
+  bottom: 0px;
   width: 100%;
   overflow-y: scroll;
   border-style: solid;

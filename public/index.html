@@ -38,18 +38,18 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <script>
-      var viewwidth = window.innerWidth
-        || document.documentElement.clientWidth
-        || document.body.clientWidth;
+  <script>
+    // var viewwidth = window.innerWidth
+    //   || document.documentElement.clientWidth
+    //   || document.body.clientWidth;
 
-      var viewheight = window.innerHeight
-        || document.documentElement.clientHeight
-        || document.body.clientHeight;
+    var viewheight = window.innerHeight
+      || document.documentElement.clientHeight
+      || document.body.clientHeight;
 
-      let viewport = document.querySelector("meta[name=viewport]");
-      viewport.setAttribute("content", "height=" + viewheight + ", width=" + viewwidth + ", initial-scale=1.0");
-    </script>
+    let viewport = document.querySelector("meta[name=viewport]");
+    viewport.setAttribute("content", "height=" + viewheight + ", width=device-width" + ", initial-scale=1.0");
+  </script>
 </body>
 
 </html>
