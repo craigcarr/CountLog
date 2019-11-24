@@ -46,7 +46,7 @@ class SettingsContent extends Component<IProps, IState> {
     });
   }
 
-  vibrationSettingChanged() {
+  vibrationSettingChanged = () => {
     let newValue = !this.state.isVibrationEnabled;
 
     this.setState({ isVibrationEnabled: newValue }, () => {
@@ -61,7 +61,7 @@ class SettingsContent extends Component<IProps, IState> {
     })
   }
 
-  clickSoundSettingChanged() {
+  clickSoundSettingChanged = () => {
     if (this.state.isClickSoundEnabled) {
       this.setState({ isClickSoundEnabled: false })
     } else {
@@ -70,7 +70,7 @@ class SettingsContent extends Component<IProps, IState> {
     }
   }
 
-  screenAlwaysOnSettingChanged() {
+  screenAlwaysOnSettingChanged = () => {
     if (this.state.isScreenAlwaysOn) {
       this.setState({ isScreenAlwaysOn: false })
     } else {
@@ -79,7 +79,7 @@ class SettingsContent extends Component<IProps, IState> {
     }
   }
 
-  darkModeEnabledSettingChanged() {
+  darkModeEnabledSettingChanged = () => {
     if (this.state.isDarkModeEnabled) {
       this.setState({ isDarkModeEnabled: false })
     } else {
@@ -102,7 +102,7 @@ class SettingsContent extends Component<IProps, IState> {
                   className={styles.checkBox}
                   toggle
                   checked={this.state.isDarkModeEnabled}
-                  onChange={() => { this.darkModeEnabledSettingChanged() }}>
+                  onChange={this.darkModeEnabledSettingChanged}>
                 </Checkbox>
                 <p className={styles.bodyText}>Not yet supported!</p>
               </Table.Cell>
@@ -116,7 +116,7 @@ class SettingsContent extends Component<IProps, IState> {
                   className={styles.checkBox}
                   toggle
                   checked={this.state.isClickSoundEnabled}
-                  onChange={() => { this.clickSoundSettingChanged() }}>
+                  onChange={this.clickSoundSettingChanged}>
                 </Checkbox>
                 <p className={styles.bodyText}>Not yet supported!</p>
               </Table.Cell>
@@ -130,7 +130,7 @@ class SettingsContent extends Component<IProps, IState> {
                   className={styles.checkBox}
                   toggle
                   checked={this.state.isVibrationEnabled}
-                  onChange={() => { this.vibrationSettingChanged() }}>
+                  onChange={this.vibrationSettingChanged}>
                 </Checkbox>
               </Table.Cell>
             </Table.Row>
@@ -143,7 +143,7 @@ class SettingsContent extends Component<IProps, IState> {
                   className={styles.checkBox}
                   toggle
                   checked={this.state.isScreenAlwaysOn}
-                  onChange={() => { this.screenAlwaysOnSettingChanged() }}>
+                  onChange={this.screenAlwaysOnSettingChanged}>
                 </Checkbox>
                 <p className={styles.bodyText}>Not yet supported!</p>
               </Table.Cell>

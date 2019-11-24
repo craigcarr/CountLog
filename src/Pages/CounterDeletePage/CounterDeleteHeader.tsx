@@ -9,7 +9,7 @@ interface IProps extends RouteComponentProps<any> {}
 interface IState {}
 
 class CounterDeleteHeader extends Component<IProps, IState> {
-  onBackButtonClicked() {
+  onBackButtonClicked = () => {
     this.props.history.goBack()
   }
 
@@ -18,7 +18,7 @@ class CounterDeleteHeader extends Component<IProps, IState> {
       <div className={styles.header}>
         <HeaderText className={styles.headerText}>Delete Counter</HeaderText>
 
-        <Button id={styles.backBtn} onClick={() => {this.onBackButtonClicked()}} circular icon>
+        <Button id={styles.backBtn} onClick={this.onBackButtonClicked} circular icon>
           <Icon name="arrow left">
           </Icon>
         </Button>

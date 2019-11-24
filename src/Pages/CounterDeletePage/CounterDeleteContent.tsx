@@ -9,7 +9,7 @@ interface IProps extends RouteComponentProps<any> {}
 interface IState {}
 
 class CounterDeleteContent extends Component<IProps, IState> {
-  deleteButtonClicked() {
+  deleteButtonClicked = () => {
     let counterId = parseInt(this.props.match.params['counterId'], 10)
 
     CountersAPI.deleteCounter(counterId).then(() => {
@@ -29,7 +29,7 @@ class CounterDeleteContent extends Component<IProps, IState> {
             </Table.Row>
             <Table.Row>
               <Table.Cell>
-                <Button id={styles.deleteButton} onClick={() => { this.deleteButtonClicked() }}>
+                <Button id={styles.deleteButton} onClick={this.deleteButtonClicked}>
                   Confirm Delete
                 </Button>
               </Table.Cell>

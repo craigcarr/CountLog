@@ -63,7 +63,7 @@ class CreateContent extends Component<IProps, IState> {
     }
   }
 
-  onSaveCounterClicked() {
+  onSaveCounterClicked = () => {
     if (this.props.id === undefined) {
       CountersAPI.insertCounter({
         name: this.state.name,
@@ -133,7 +133,7 @@ class CreateContent extends Component<IProps, IState> {
 
           <Button
             id={styles.saveCounterBtn}
-            onClick={() => { this.onSaveCounterClicked() }}
+            onClick={this.onSaveCounterClicked}
             disabled={this.isInputValid() === false}
             icon
             circular>

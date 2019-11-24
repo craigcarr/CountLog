@@ -70,7 +70,7 @@ class MainContent extends Component<IProps, IState> {
     }
   }
 
-  editEventClicked(eventId: number) {
+  editEventClicked = (eventId: number) => () => {
     let counterId = parseInt(this.props.match.params['counterId'], 10)
     this.props.history.push('/counterhistory/' + counterId + '/editevent/' + eventId)
   }
@@ -92,7 +92,7 @@ class MainContent extends Component<IProps, IState> {
                 <p>{this.displayTimestamp(timestamp)}</p>
               </Table.Cell>
               <Table.Cell>
-                <Button onClick={() => { this.editEventClicked(id) }} circular icon>
+                <Button onClick={this.editEventClicked(id)} circular icon>
                   <Icon name="edit">
                   </Icon>
                 </Button>

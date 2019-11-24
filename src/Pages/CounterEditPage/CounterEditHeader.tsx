@@ -9,7 +9,7 @@ interface IProps extends RouteComponentProps<any> {}
 interface IState {}
 
 class EditHeader extends Component<IProps, IState> {
-  onBackButtonClicked() {
+  onBackButtonClicked = () => {
     this.props.history.goBack()
   }
 
@@ -19,7 +19,7 @@ class EditHeader extends Component<IProps, IState> {
         <HeaderText className={styles.headerText}>Edit Counter</HeaderText>
 
         <Button
-          onClick={() => { this.onBackButtonClicked() }}
+          onClick={this.onBackButtonClicked}
           circular
           icon
           id={styles.counterEditBackBtn}>

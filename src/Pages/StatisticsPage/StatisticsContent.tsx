@@ -35,15 +35,15 @@ class StatisticsContent extends Component<IProps, IState> {
     });
   }
 
-  editButtonClicked() {
+  editButtonClicked = () => {
     this.props.history.push('/editcounter/' + this.props.counterId)
   }
 
-  deleteButtonClicked() {
+  deleteButtonClicked = () => {
     this.props.history.push('/deletecounter/' + this.props.counterId)
   }
 
-  viewButtonClicked() {
+  viewButtonClicked = () => {
     this.props.history.push('/counterhistory/' + this.props.counterId)
   }
 
@@ -75,7 +75,7 @@ class StatisticsContent extends Component<IProps, IState> {
               <Table.Cell>
                 <Button
                   className={styles.myButton}
-                  onClick={() => { this.editButtonClicked() }}>
+                  onClick={this.editButtonClicked}>
                   Edit
                 </Button>
               </Table.Cell>
@@ -87,7 +87,7 @@ class StatisticsContent extends Component<IProps, IState> {
               <Table.Cell>
                 <Button
                   className={styles.myButton}
-                  onClick={() => { this.deleteButtonClicked() }}>
+                  onClick={this.deleteButtonClicked}>
                   Delete
                 </Button>
               </Table.Cell>
@@ -99,7 +99,7 @@ class StatisticsContent extends Component<IProps, IState> {
               <Table.Cell>
                 <Button
                   className={styles.myButton}
-                  onClick={() => { this.viewButtonClicked() }}>
+                  onClick={this.viewButtonClicked}>
                   View
                 </Button>
               </Table.Cell>
