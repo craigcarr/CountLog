@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Table, Input, Button, Icon } from 'semantic-ui-react';
 import { BlockPicker } from 'react-color';
-import { Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import CountersAPI from '../../Interfaces/CountersAPI';
 import styles from './CreateContent.module.scss';
 import LoggingAPI from '../../Interfaces/LoggingAPI';
 
-interface IProps {
+interface IProps extends RouteComponentProps<any> {
   id: number | undefined,
 }
 
@@ -78,6 +78,8 @@ class CreateContent extends Component<IProps, IState> {
         value: parseInt(this.state.valueString, 10),
       });
     }
+
+    this.props.history.push('/')
   }
 
   colors = [
@@ -137,10 +139,8 @@ class CreateContent extends Component<IProps, IState> {
             disabled={this.isInputValid() === false}
             icon
             circular>
-            <Link to='/'>
-              <Icon name="save">
-              </Icon>
-            </Link>
+            <Icon name="save">
+            </Icon>
           </Button>
         </div>
       </div>
@@ -148,4 +148,4 @@ class CreateContent extends Component<IProps, IState> {
   }
 }
 
-export default CreateContent;
+export default withRouter(CreateContent);

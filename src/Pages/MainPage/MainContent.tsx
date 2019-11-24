@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Icon, Button, Table } from 'semantic-ui-react';
 import _ from 'lodash';
 import SettingsAPI from '../../Interfaces/SettingsAPI';
 import CountersAPI from '../../Interfaces/CountersAPI';
 import styles from './MainContent.module.scss';
 
-interface IProps {}
+interface IProps extends RouteComponentProps<any> { }
 
 interface IState {
   tableData: any[],
@@ -55,6 +55,14 @@ class MainContent extends Component<IProps, IState> {
     CountersAPI.decrementCounter(id, callback);
   }
 
+  onCounterButtonClicked = (id: number) => () => {
+    this.props.history.push('/statistics/' + id)
+  }
+
+  onCreateButtonClicked = () => {
+    this.props.history.push('/create')
+  }
+
   render() {
     let tableContent = null;
 
@@ -71,14 +79,13 @@ class MainContent extends Component<IProps, IState> {
               icon
               circular><Icon name="minus"></Icon>
             </Button>
-            <Link to={"statistics/" + id}>
-              <Button
-                className={styles.counterDisplay}
-                style={{ backgroundColor: color, color: 'white' }}>
-                <p className={styles.counterText}>{name}</p>
-                <p className={styles.counterText}>{value}</p>
-              </Button>
-            </Link>
+            <Button
+              onClick={this.onCounterButtonClicked(id)}
+              className={styles.counterDisplay}
+              style={{ backgroundColor: color, color: 'white' }}>
+              <p className={styles.counterText}>{name}</p>
+              <p className={styles.counterText}>{value}</p>
+            </Button>
             <Button
               onClick={e => { this.handleIncrement(id) }}
               className={styles.counterIncrement}
@@ -104,15 +111,13 @@ class MainContent extends Component<IProps, IState> {
         <br></br>
         <br></br>
 
-        <Link to="/create">
-          <Button circular icon id={styles.createCounterBtn}>
-            <Icon name="plus">
-            </Icon>
-          </Button>
-        </Link>
+        <Button circular icon id={styles.createCounterBtn} onClick={this.onCreateButtonClicked}>
+          <Icon name="plus">
+          </Icon>
+        </Button>
       </div>
     )
   }
 }
 
-export default MainContent;
+export default withRouter(MainContent);

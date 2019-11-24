@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Button, Icon } from 'semantic-ui-react';
 import styles from './AboutHeader.module.scss';
 import HeaderText from '../../Components/HeaderText/HeaderText';
 
-class AboutHeader extends Component {
+interface IProps extends RouteComponentProps<any> { }
+
+interface IState { }
+
+class AboutHeader extends Component<IProps, IState> {
+  onBackButtonClicked = () => {
+    this.props.history.goBack()
+  }
+
   render() {
     return (
       <div className={styles.header}>
         <HeaderText className={styles.headerText}>About CountLog</HeaderText>
 
-        <Link to="/settings">
-          <Button icon circular id={styles.backBtn}>
-            <Icon name="arrow left">
-            </Icon>
-          </Button>
-        </Link>
+        <Button icon circular id={styles.backBtn} onClick={this.onBackButtonClicked}>
+          <Icon name="arrow left">
+          </Icon>
+        </Button>
       </div>
     )
   }
 }
 
-export default AboutHeader;
+export default withRouter(AboutHeader);
