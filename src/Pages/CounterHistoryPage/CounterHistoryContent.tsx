@@ -92,7 +92,7 @@ class MainContent extends Component<IProps, IState> {
                 <p>{this.displayTimestamp(timestamp)}</p>
               </Table.Cell>
               <Table.Cell>
-                <Button onClick={this.editEventClicked(id)} circular icon>
+                <Button id={styles.myButton} onClick={this.editEventClicked(id)} circular icon>
                   <Icon name="edit">
                   </Icon>
                 </Button>
@@ -114,7 +114,7 @@ class MainContent extends Component<IProps, IState> {
         <br></br>
 
         <Dropdown
-          style={{ width: 90 + '%', left: 5 + '%' }}
+          id={styles.dropdown}
           onChange={(e, data) => { this.handleFilterChanged(data); }}
           placeholder='Filter'
           options={options}

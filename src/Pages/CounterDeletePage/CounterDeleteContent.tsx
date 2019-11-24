@@ -24,7 +24,7 @@ class CounterDeleteContent extends Component<IProps, IState> {
           <Table.Body>
             <Table.Row>
               <Table.Cell>
-                Are you sure you want to delete this counter? All data associated with this counter will be lost.
+                <p>Are you sure you want to delete this counter? All data associated with this counter will be lost.</p>
               </Table.Cell>
             </Table.Row>
             <Table.Row>

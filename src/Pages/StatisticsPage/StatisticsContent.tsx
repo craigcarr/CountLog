@@ -54,23 +54,23 @@ class StatisticsContent extends Component<IProps, IState> {
           <Table.Body>
             <Table.Row>
               <Table.Cell className={styles.tableCell}>
-                <p className={styles.bodyText}>Counter Name</p>
+                <p>Counter Name</p>
               </Table.Cell>
               <Table.Cell>
-                <p className={styles.bodyText}>{this.state.counterName}</p>
+                <p>{this.state.counterName}</p>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell className={styles.tableCell}>
-                <p className={styles.bodyText}>Current Value</p>
+                <p>Current Value</p>
               </Table.Cell>
               <Table.Cell>
-                <p className={styles.bodyText}>{this.state.counterValue}</p>
+                <p>{this.state.counterValue}</p>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell className={styles.tableCell}>
-                <p className={styles.bodyText}>Edit Counter</p>
+                <p>Edit Counter</p>
               </Table.Cell>
               <Table.Cell>
                 <Button
@@ -82,7 +82,7 @@ class StatisticsContent extends Component<IProps, IState> {
             </Table.Row>
             <Table.Row>
               <Table.Cell className={styles.tableCell}>
-                <p className={styles.bodyText}>Delete Counter</p>
+                <p>Delete Counter</p>
               </Table.Cell>
               <Table.Cell>
                 <Button
@@ -94,7 +94,7 @@ class StatisticsContent extends Component<IProps, IState> {
             </Table.Row>
             <Table.Row>
               <Table.Cell className={styles.tableCell}>
-                <p className={styles.bodyText}>View History</p>
+                <p>View History</p>
               </Table.Cell>
               <Table.Cell>
                 <Button
