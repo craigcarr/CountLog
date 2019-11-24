@@ -54,23 +54,23 @@ class StatisticsContent extends Component<IProps, IState> {
           <Table.Body>
             <Table.Row>
               <Table.Cell className={styles.tableCell}>
-                <text className={styles.bodyText}>Counter Name</text>
+                <p className={styles.bodyText}>Counter Name</p>
               </Table.Cell>
               <Table.Cell>
-                <text className={styles.bodyText}>{this.state.counterName}</text>
+                <p className={styles.bodyText}>{this.state.counterName}</p>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell className={styles.tableCell}>
-                <text className={styles.bodyText}>Current Value</text>
+                <p className={styles.bodyText}>Current Value</p>
               </Table.Cell>
               <Table.Cell>
-                <text className={styles.bodyText}>{this.state.counterValue}</text>
+                <p className={styles.bodyText}>{this.state.counterValue}</p>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell className={styles.tableCell}>
-                <text className={styles.bodyText}>Edit Counter</text>
+                <p className={styles.bodyText}>Edit Counter</p>
               </Table.Cell>
               <Table.Cell>
                 <Button
@@ -82,7 +82,7 @@ class StatisticsContent extends Component<IProps, IState> {
             </Table.Row>
             <Table.Row>
               <Table.Cell className={styles.tableCell}>
-                <text className={styles.bodyText}>Delete Counter</text>
+                <p className={styles.bodyText}>Delete Counter</p>
               </Table.Cell>
               <Table.Cell>
                 <Button
@@ -94,7 +94,7 @@ class StatisticsContent extends Component<IProps, IState> {
             </Table.Row>
             <Table.Row>
               <Table.Cell className={styles.tableCell}>
-                <text className={styles.bodyText}>View History</text>
+                <p className={styles.bodyText}>View History</p>
               </Table.Cell>
               <Table.Cell>
                 <Button

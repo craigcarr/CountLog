@@ -95,7 +95,7 @@ class SettingsContent extends Component<IProps, IState> {
           <Table.Body>
             <Table.Row>
               <Table.Cell className={styles.tableCell}>
-                <text className={styles.bodyText}>Dark Mode</text>
+                <p className={styles.bodyText}>Dark Mode</p>
               </Table.Cell>
               <Table.Cell>
                 <Checkbox
@@ -109,7 +109,7 @@ class SettingsContent extends Component<IProps, IState> {
             </Table.Row>
             <Table.Row>
               <Table.Cell className={styles.tableCell}>
-                <text className={styles.bodyText}>Click Sound</text>
+                <p className={styles.bodyText}>Click Sound</p>
               </Table.Cell>
               <Table.Cell>
                 <Checkbox
@@ -123,7 +123,7 @@ class SettingsContent extends Component<IProps, IState> {
             </Table.Row>
             <Table.Row>
               <Table.Cell className={styles.tableCell}>
-                <text className={styles.bodyText}>Vibration</text>
+                <p className={styles.bodyText}>Vibration</p>
               </Table.Cell>
               <Table.Cell>
                 <Checkbox
@@ -136,7 +136,7 @@ class SettingsContent extends Component<IProps, IState> {
             </Table.Row>
             <Table.Row>
               <Table.Cell className={styles.tableCell}>
-                <text className={styles.bodyText}>Screen Always On</text>
+                <p className={styles.bodyText}>Screen Always On</p>
               </Table.Cell>
               <Table.Cell>
                 <Checkbox
