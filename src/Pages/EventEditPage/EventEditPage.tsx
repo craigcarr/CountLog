@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import EventEditHeader from './EventEditHeader';
-import EventEditContent from './EventEditContent';
+import EventEditHeader from './EventEditHeader/EventEditHeader';
+import EventEditContent from './EventEditContent/EventEditContent';
 
 class EventEditPage extends Component {
   render() {

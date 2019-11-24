@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import AboutContent from './AboutContent';
-import AboutHeader from './AboutHeader';
+import AboutContent from './AboutContent/AboutContent';
+import AboutHeader from './AboutHeader/AboutHeader';
 
 class AboutPage extends Component {
   render() {

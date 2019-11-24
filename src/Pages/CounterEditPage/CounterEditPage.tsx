@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CounterEditHeader from './CounterEditHeader';
-import CounterEditContent from './CounterEditContent';
+import CounterEditHeader from './CounterEditHeader/CounterEditHeader';
+import CounterEditContent from './CounterEditContent/CounterEditContent';
 
 interface IProps {}
 

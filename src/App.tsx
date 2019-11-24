@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainPage from './Pages/MainPage/MainPage';
 import AboutPage from './Pages/AboutPage/AboutPage';
 import SettingsPage from './Pages/SettingsPage/SettingsPage';
-import CreatePage from './Pages/CreatePage/CreatePage';
+import CounterCreatePage from './Pages/CounterCreatePage/CounterCreatePage';
 import CounterDatabase from './CounterDatabase';
 import CounterEditPage from './Pages/CounterEditPage/CounterEditPage';
 import StatisticsPage from './Pages/StatisticsPage/StatisticsPage';
@@ -43,7 +43,7 @@ class App extends Component<IProps, IState> {
               <AboutPage></AboutPage>
             </Route>
             <Route path="/create">
-              <CreatePage></CreatePage>
+              <CounterCreatePage></CounterCreatePage>
             </Route>
             <Route path="/editcounter/:counterId" render={(props) =>
               <CounterEditPage {...props}></CounterEditPage>

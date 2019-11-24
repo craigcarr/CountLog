@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import MainHeader from './MainHeader';
-import MainContent from './MainContent';
+import MainHeader from './MainHeader/MainHeader';
+import MainContent from './MainContent/MainContent';
 
 interface IProps {}
 

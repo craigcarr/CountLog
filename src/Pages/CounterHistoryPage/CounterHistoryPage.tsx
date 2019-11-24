@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CounterHistoryHeader from './CounterHistoryHeader';
-import CounterHistoryContent from './CounterHistoryContent';
+import CounterHistoryHeader from './CounterHistoryHeader/CounterHistoryHeader';
+import CounterHistoryContent from './CounterHistoryContent/CounterHistoryContent';
 
 interface IProps {}
 

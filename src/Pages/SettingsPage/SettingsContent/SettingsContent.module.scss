@@ -1,0 +1,10 @@
+@import '../../../App.scss';
+
+.checkBox {
+  transform: scale(1.5);
+  padding: 1vmax;
+}
+
+.tableCell {
+  padding: $bodyTextSize !important;
+}

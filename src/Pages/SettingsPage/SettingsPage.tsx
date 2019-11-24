@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import SettingsHeader from './SettingsHeader';
-import SettingsContent from './SettingsContent';
+import SettingsHeader from './SettingsHeader/SettingsHeader';
+import SettingsContent from './SettingsContent/SettingsContent';
 
 interface IProps {}
 

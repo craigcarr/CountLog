@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CounterDeleteHeader from './CounterDeleteHeader';
-import CounterDeleteContent from './CounterDeleteContent';
+import CounterDeleteHeader from './CounterDeleteHeader/CounterDeleteHeader';
+import CounterDeleteContent from './CounterDeleteContent/CounterDeleteContent';
 
 interface IProps {}
 

@@ -1,0 +1,19 @@
+@import "../../../App.scss";
+
+#myButton {
+  font-size: 2vmax;
+}
+
+#dropdown {
+  width: 90%;
+  left: 5%;
+}
+
+span[class="text"] {
+  font-size: 2vmax !important;
+}
+
+// TODO Figure out how to apply this padding without it getting overridden.
+// div[role="option"][class="item"] {
+//   margin: 5vmax !important;
+// }
