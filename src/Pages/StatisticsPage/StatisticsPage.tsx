@@ -12,7 +12,7 @@ class StatisticsPage extends Component<IProps> {
     return (
       <React.Fragment>
         <StatisticsHeader></StatisticsHeader>
-        <StatisticsContent counterId={parseInt(this.props.match.params['counterId'], 10)}></StatisticsContent>
+        <StatisticsContent></StatisticsContent>
       </React.Fragment>
     );
   }

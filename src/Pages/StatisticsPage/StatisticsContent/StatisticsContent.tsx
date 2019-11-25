@@ -5,17 +5,17 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import styles from './StatisticsContent.module.scss';
 import LoggingAPI from '../../../Interfaces/LoggingAPI';
 
-interface IProps extends RouteComponentProps<any> {
-  counterId: number,
-}
+interface IProps extends RouteComponentProps<any> {}
 
 interface IState {
+  counterId: number,
   counterName: string,
   counterValue: number,
 }
 
 class StatisticsContent extends Component<IProps, IState> {
   state = {
+    counterId: -1,
     counterValue: 0,
     counterName: '',
   }
@@ -23,7 +23,9 @@ class StatisticsContent extends Component<IProps, IState> {
   constructor(props: any) {
     super(props);
 
-    CountersAPI.getCounterById(this.props.counterId).then(counter => {
+    this.state.counterId = parseInt(this.props.match.params['counterId'], 10)
+
+    CountersAPI.getCounterById(this.state.counterId).then(counter => {
       if (counter === undefined) {
         LoggingAPI.error('counter is undefined')
       } else {
@@ -36,15 +38,15 @@ class StatisticsContent extends Component<IProps, IState> {
   }
 
   editButtonClicked = () => {
-    this.props.history.push('/editcounter/' + this.props.counterId)
+    this.props.history.push('/editcounter/' + this.state.counterId)
   }
 
   deleteButtonClicked = () => {
-    this.props.history.push('/deletecounter/' + this.props.counterId)
+    this.props.history.push('/deletecounter/' + this.state.counterId)
   }
 
   viewButtonClicked = () => {
-    this.props.history.push('/counterhistory/' + this.props.counterId)
+    this.props.history.push('/counterhistory/' + this.state.counterId)
   }
 
   render() {
