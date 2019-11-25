@@ -15,7 +15,7 @@ import EventEditPage from './Pages/EventEditPage/EventEditPage';
 import LoggingAPI from './Interfaces/LoggingAPI';
 import './App.scss';
 
-interface IProps {}
+interface IProps { }
 
 interface IState {
   db: CounterDatabase,
@@ -37,40 +37,38 @@ class App extends Component<IProps, IState> {
   render() {
     return (
       <Router>
-        <div>
-          <Switch>
-            <Route path="/about">
-              <AboutPage></AboutPage>
-            </Route>
-            <Route path="/create">
-              <CounterCreatePage></CounterCreatePage>
-            </Route>
-            <Route path="/editcounter/:counterId" render={(props) =>
-              <CounterEditPage {...props}></CounterEditPage>
-            } />
-            <Route path="/deletecounter/:counterId" render={(props) =>
-              <CounterDeletePage {...props}></CounterDeletePage>
-            } />
-            <Route path="/counterhistory/:counterId/editevent/:eventId" render={(props) =>
-              <EventEditPage {...props}></EventEditPage>
-            } />
-            <Route path="/counterhistory/:counterId" render={(props) =>
-              <CounterHistoryPage {...props}></CounterHistoryPage>
-            } />
-            <Route path="/edit/:counterId" render={(props) =>
-              <CounterEditPage {...props}></CounterEditPage>
-            } />
-            <Route path="/statistics/:counterId" render={(props) =>
-              <StatisticsPage {...props}></StatisticsPage>
-            } />
-            <Route path="/settings">
-              <SettingsPage></SettingsPage>
-            </Route>
-            <Route path="/">
-              <MainPage></MainPage>
-            </Route>
-          </Switch>
-        </div>
+        <Switch>
+          <Route path="/about">
+            <AboutPage></AboutPage>
+          </Route>
+          <Route path="/create">
+            <CounterCreatePage></CounterCreatePage>
+          </Route>
+          <Route path="/editcounter/:counterId">
+            <CounterEditPage></CounterEditPage>
+          </Route>
+          <Route path="/deletecounter/:counterId">
+            <CounterDeletePage></CounterDeletePage>
+          </Route>
+          <Route path="/counterhistory/:counterId/editevent/:eventId">
+            <EventEditPage></EventEditPage>
+          </Route>
+          <Route path="/counterhistory/:counterId">
+            <CounterHistoryPage></CounterHistoryPage>
+          </Route>
+          <Route path="/edit/:counterId">
+            <CounterEditPage></CounterEditPage>
+          </Route>
+          <Route path="/statistics/:counterId">
+            <StatisticsPage></StatisticsPage>
+          </Route>
+          <Route path="/settings">
+            <SettingsPage></SettingsPage>
+          </Route>
+          <Route path="/">
+            <MainPage></MainPage>
+          </Route>
+        </Switch>
       </Router>
     );
   }

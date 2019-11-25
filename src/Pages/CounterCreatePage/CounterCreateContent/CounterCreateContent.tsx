@@ -19,7 +19,7 @@ interface IState {
 class CounterCreateContent extends Component<IProps, IState> {
   state = {
     name: '',
-    color: 'red',
+    color: '#ff0000',
     valueString: '0',
   }
 

@@ -2,7 +2,11 @@
 
 .myButton {
   width: 100%;
-  font-size: 2vmax !important;
+  font-size: $bodyTextSize !important;
+}
+
+.colorButton {
+  font-size: $bodyTextSize !important;
 }
 
 .tableCell {

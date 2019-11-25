@@ -5,11 +5,12 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import styles from './StatisticsContent.module.scss';
 import LoggingAPI from '../../../Interfaces/LoggingAPI';
 
-interface IProps extends RouteComponentProps<any> {}
+interface IProps extends RouteComponentProps<any> { }
 
 interface IState {
   counterId: number,
   counterName: string,
+  counterColor: string,
   counterValue: number,
 }
 
@@ -17,6 +18,7 @@ class StatisticsContent extends Component<IProps, IState> {
   state = {
     counterId: -1,
     counterValue: 0,
+    counterColor: '',
     counterName: '',
   }
 
@@ -31,6 +33,7 @@ class StatisticsContent extends Component<IProps, IState> {
       } else {
         this.setState({
           counterName: counter.name,
+          counterColor: counter.color,
           counterValue: counter.value,
         })
       }
@@ -60,6 +63,18 @@ class StatisticsContent extends Component<IProps, IState> {
               </Table.Cell>
               <Table.Cell>
                 <p>{this.state.counterName}</p>
+              </Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell className={styles.tableCell}>
+                <p>Current Color</p>
+              </Table.Cell>
+              <Table.Cell>
+                <Button
+                  className={styles.colorButton}
+                  style={{backgroundColor: this.state.counterColor, color: 'white'}}>
+                  {this.state.counterColor}
+                </Button>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
