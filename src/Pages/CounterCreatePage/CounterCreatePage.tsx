@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CouonterCreateHeader from './CounterCreateHeader/CounterCreateHeader';
+import CounterCreateHeader from './CounterCreateHeader/CounterCreateHeader';
 import CounterCreateContent from './CounterCreateContent/CounterCreateContent';
 
 interface IProps {}
@@ -10,7 +10,7 @@ class CounterCreatePage extends Component<IProps, IState> {
   render() {
     return (
       <React.Fragment>
-        <CouonterCreateHeader></CouonterCreateHeader>
+        <CounterCreateHeader></CounterCreateHeader>
         <CounterCreateContent id={undefined}>
         </CounterCreateContent>
       </React.Fragment>
