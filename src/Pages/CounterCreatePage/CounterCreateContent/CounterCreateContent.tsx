@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Table, Input, Button, Icon } from 'semantic-ui-react';
-import { BlockPicker } from 'react-color';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import CountersAPI from '../../../Interfaces/CountersAPI';
 import styles from './CounterCreateContent.module.scss';
 import LoggingAPI from '../../../Interfaces/LoggingAPI';
+import ColorPicker from '../../../Components/ColorPicker/ColorPicker';
 
 interface IProps extends RouteComponentProps<any> {
   id: number | undefined,
@@ -82,16 +82,6 @@ class CounterCreateContent extends Component<IProps, IState> {
     this.props.history.push('/')
   }
 
-  colors = [
-    '#FF0000', // red
-    '#FF9900', // orange
-    '#CCCC00', // yellow
-    '#00AA00', // green
-    '#0000FF', // blue
-    '#440088', // purple
-    '#000000', // black
-  ]
-
   render() {
     return (
       <div>
@@ -111,11 +101,7 @@ class CounterCreateContent extends Component<IProps, IState> {
                   Color
                 </Table.Cell>
                 <Table.Cell>
-                  <BlockPicker
-                    color={this.state.color}
-                    triangle="hide"
-                    colors={this.colors}
-                    onChangeComplete={this.handleColorChange} />
+                  <ColorPicker onColorChange={(color: any) => this.setState({color: color})}></ColorPicker>
                 </Table.Cell>
               </Table.Row>
               <Table.Row>
