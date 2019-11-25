@@ -1,4 +1,4 @@
-import CounterDatabase, { ICounter, IEvent, EventType } from "../CounterDatabase";
+import CounterDatabase, { ICounter, IEvent, EventType, IDisplayValue } from "../CounterDatabase";
 import LoggingAPI from "./LoggingAPI";
 
 class CountersAPI {
@@ -26,6 +26,10 @@ class CountersAPI {
     }
   }
 
+  public static getDisplayValuesForCounter(counterId: number) {
+    return this.db.displayValues.where('counterId').equals(counterId).toArray();
+  }
+
   public static getCounterById(id: number) {
     return this.db.counters.get(id);
   }
@@ -37,6 +41,16 @@ class CountersAPI {
           LoggingAPI.error('event.id is undefined')
         } else {
           this.db.events.delete(event.id)
+        }
+      }
+    });
+
+    this.db.displayValues.where('counterId').equals(counterId).toArray().then(displayValues => {
+      for (let displayValue of displayValues) {
+        if (displayValue.id === undefined) {
+          LoggingAPI.error('displayValue.id is undefined')
+        } else {
+          this.db.displayValues.delete(displayValue.id)
         }
       }
     });
@@ -54,6 +68,14 @@ class CountersAPI {
       }
 
       this.db.events.put(mutateEvent);
+
+      let displayValue: IDisplayValue = {
+        counterId: counterId,
+        timestamp: Date.now().toString(),
+        value: counter.value,
+      }
+
+      this.db.displayValues.put(displayValue);
     });
   }
 
@@ -70,9 +92,17 @@ class CountersAPI {
         };
 
         this.db.events.put(incrementEvent).then(() => {
-          this.db.counters.update(counterId, { value: counter.value + 1 }).then(
+          let displayValue: IDisplayValue = {
+            counterId: counterId,
+            timestamp: Date.now().toString(),
+            value: counter.value + 1,
+          }
+
+          this.db.displayValues.put(displayValue);
+
+          this.db.counters.update(counterId, { value: counter.value + 1 }).then(() => {
             callback()
-          );
+          });
         });
       }
     });
@@ -91,9 +121,17 @@ class CountersAPI {
         }
 
         this.db.events.put(decrementEvent).then(() => {
-          this.db.counters.update(counterId, { value: counter.value - 1 }).then(
+          let displayValue: IDisplayValue = {
+            counterId: counterId,
+            timestamp: Date.now().toString(),
+            value: counter.value - 1,
+          }
+
+          this.db.displayValues.put(displayValue);
+
+          this.db.counters.update(counterId, { value: counter.value - 1 }).then(() => {
             callback()
-          );
+          });
         });
       }
     });

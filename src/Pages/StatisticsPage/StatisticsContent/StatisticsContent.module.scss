@@ -12,3 +12,16 @@
 .tableCell {
   padding: 2vmax !important;
 }
+
+.chartDiv {
+  position: absolute;
+  width: 100%;
+  height: var(--trueVMin);
+  border-style: solid;
+  border-width: 0.5vmax;
+  background-color: #dddddd;
+}
+
+svg {
+  height: var(--trueVMin) !important;
+}

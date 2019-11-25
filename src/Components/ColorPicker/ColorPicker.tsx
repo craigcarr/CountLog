@@ -9,7 +9,7 @@ interface IProps {
 }
 
 export default function ColorPicker(props: IProps) {
-  const [selectedColor, setSelectedColor] = useState(props.color);
+  const [selectedColor, setSelectedColor] = useState<string>(props.color);
 
   React.useEffect(() => {
     setSelectedColor(props.color);
@@ -18,7 +18,7 @@ export default function ColorPicker(props: IProps) {
   let colors = [
     '#ff0000', // red
     '#ff9900', // orange
-    '#cccc00', // yellow
+    '#bbbb00', // yellow
     '#00aa00', // green
     '#0000ff', // blue
     '#440088', // purple
