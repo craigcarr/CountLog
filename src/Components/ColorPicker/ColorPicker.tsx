@@ -4,18 +4,23 @@ import styles from './ColorPicker.module.scss';
 import _ from "lodash";
 
 interface IProps {
+  color: string,
   onColorChange: any,
 }
 
 export default function ColorPicker(props: IProps) {
-  const [selectedColor, setSelectedColor] = useState('#FF0000');
+  const [selectedColor, setSelectedColor] = useState(props.color);
+
+  React.useEffect(() => {
+    setSelectedColor(props.color);
+  }, [props.color])
 
   let colors = [
-    '#FF0000', // red
-    '#FF9900', // orange
-    '#CCCC00', // yellow
-    '#00AA00', // green
-    '#0000FF', // blue
+    '#ff0000', // red
+    '#ff9900', // orange
+    '#cccc00', // yellow
+    '#00aa00', // green
+    '#0000ff', // blue
     '#440088', // purple
     '#000000', // black
   ]

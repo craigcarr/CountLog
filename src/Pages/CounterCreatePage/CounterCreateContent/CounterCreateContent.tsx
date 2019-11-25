@@ -101,7 +101,9 @@ class CounterCreateContent extends Component<IProps, IState> {
                   Color
                 </Table.Cell>
                 <Table.Cell>
-                  <ColorPicker onColorChange={(color: any) => this.setState({color: color})}></ColorPicker>
+                  <ColorPicker
+                    color={this.state.color}
+                    onColorChange={(color: any) => this.setState({color: color})} />
                 </Table.Cell>
               </Table.Row>
               <Table.Row>
