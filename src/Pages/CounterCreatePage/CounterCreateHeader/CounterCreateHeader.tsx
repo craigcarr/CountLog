@@ -1,30 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styles from './CounterCreateHeader.module.scss';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Button, Icon } from 'semantic-ui-react';
 import HeaderText from '../../../Components/HeaderText/HeaderText';
+import HeaderCancelButton from '../../../Components/HeaderCancelButton/HeaderCancelButton';
 
-interface IProps extends RouteComponentProps<any> { }
-
-interface IState { }
-
-class CounterCreateHeader extends Component<IProps, IState> {
-  onCancelButtonClicked = () => {
-    this.props.history.push('/')
-  }
-
-  render() {
-    return (
-      <div className={styles.header}>
-        <HeaderText className={styles.headerText}>Create Counter</HeaderText>
-
-        <Button icon circular id={styles.cancelCounterBtn} onClick={this.onCancelButtonClicked}>
-          <Icon name="cancel">
-          </Icon>
-        </Button>
-      </div>
-    )
-  }
+export default function CounterCreateHeader() {
+  return (
+    <div className={styles.header}>
+      <HeaderText className={styles.headerText}>Create Counter</HeaderText>
+      <HeaderCancelButton className={styles.cancelBtn}></HeaderCancelButton>
+    </div>
+  );
 }
-
-export default withRouter(CounterCreateHeader);

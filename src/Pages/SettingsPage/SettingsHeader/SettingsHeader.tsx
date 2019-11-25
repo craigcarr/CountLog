@@ -1,39 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import styles from './SettingsHeader.module.scss';
-import { Button, Icon } from "semantic-ui-react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
 import HeaderText from "../../../Components/HeaderText/HeaderText";
+import HeaderBackButton from "../../../Components/HeaderBackButton/HeaderBackButton";
+import HeaderAboutButton from "../../../Components/HeaderAboutButton/HeaderAboutButton";
 
-interface IProps extends RouteComponentProps<any> { }
-
-interface IState { }
-
-class SettingsHeader extends Component<IProps, IState> {
-  onBackButtonClicked = () => {
-    this.props.history.goBack()
-  }
-
-  onAboutButtonClicked = () => {
-    this.props.history.push('/about')
-  }
-
-  render() {
-    return (
-      <div className={styles.header}>
-        <HeaderText className={styles.headerText}>Settings</HeaderText>
-
-        <Button id={styles.homeBtn} circular icon onClick={this.onBackButtonClicked}>
-          <Icon name="arrow left">
-          </Icon>
-        </Button>
-
-        <Button id={styles.aboutBtn} circular icon onClick={this.onAboutButtonClicked}>
-          <Icon name="question">
-          </Icon>
-        </Button>
-      </div>
-    );
-  }
+export default function SettingsHeader() {
+  return (
+    <div className={styles.header}>
+      <HeaderText className={styles.headerText}>Settings</HeaderText>
+      <HeaderBackButton className={styles.backBtn}></HeaderBackButton>
+      <HeaderAboutButton className={styles.aboutBtn}></HeaderAboutButton>
+    </div>
+  );
 }
-
-export default withRouter(SettingsHeader);
