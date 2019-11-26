@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "semantic-ui-react";
 import styles from './ColorPicker.module.scss';
 import _ from "lodash";
@@ -11,7 +11,7 @@ interface IProps {
 export default function ColorPicker(props: IProps) {
   const [selectedColor, setSelectedColor] = useState<string>(props.color);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setSelectedColor(props.color);
   }, [props.color])
 

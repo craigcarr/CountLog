@@ -1,44 +1,39 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Table, Button } from 'semantic-ui-react';
-import { withRouter, RouteComponentProps } from 'react-router';
 import CountersAPI from '../../../Interfaces/CountersAPI';
 import styles from './CounterDeleteContent.module.scss';
+import { useHistory, useParams } from 'react-router';
 
-interface IProps extends RouteComponentProps<any> {}
+export default function CounterDeleteContent() {
+  let history = useHistory();
+  let params = useParams<any>();
 
-interface IState {}
-
-class CounterDeleteContent extends Component<IProps, IState> {
-  deleteButtonClicked = () => {
-    let counterId = parseInt(this.props.match.params['counterId'], 10)
+  function deleteButtonClicked() {
+    let counterId = parseInt(params['counterId'], 10)
 
     CountersAPI.deleteCounter(counterId).then(() => {
-      this.props.history.push('/')
+      history.push('/')
     });
   }
 
-  render() {
-    return (
-      <div className={styles.content}>
-        <Table unstackable columns={1}>
-          <Table.Body>
-            <Table.Row>
-              <Table.Cell>
-                <p>Are you sure you want to delete this counter? All data associated with this counter will be lost.</p>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                <Button id={styles.deleteButton} onClick={this.deleteButtonClicked}>
-                  Confirm Delete
+  return (
+    <div className={styles.content}>
+      <Table unstackable columns={1}>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell>
+              <p>Are you sure you want to delete this counter? All data associated with this counter will be lost.</p>
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>
+              <Button id={styles.deleteButton} onClick={deleteButtonClicked}>
+                Confirm Delete
                 </Button>
-              </Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
-      </div>
-    )
-  }
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+    </div>
+  );
 }
-
-export default withRouter(CounterDeleteContent);
