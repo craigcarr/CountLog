@@ -1,1 +1,9 @@
 @import '../../../App.scss';
+
+.myHeader {
+  font-size: $bodyTextSize + 1vmax;
+}
+
+.myButton {
+  font-size: $bodyTextSize !important;
+}
