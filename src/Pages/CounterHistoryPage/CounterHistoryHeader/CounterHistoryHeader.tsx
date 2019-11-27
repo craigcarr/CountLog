@@ -7,7 +7,7 @@ export default function CounterHistoryHeader() {
   return (
     <div className={styles.header}>
       <HeaderText className={styles.headerText}>Counter History</HeaderText>
-      <HeaderBackButton className={styles.backBtn}></HeaderBackButton>
+      <HeaderBackButton className={styles.backBtn} iconName="arrow left"></HeaderBackButton>
     </div>
   );
 }

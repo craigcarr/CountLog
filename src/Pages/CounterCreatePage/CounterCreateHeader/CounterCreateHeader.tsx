@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './CounterCreateHeader.module.scss';
 import HeaderText from '../../../Components/HeaderText/HeaderText';
-import HeaderCancelButton from '../../../Components/HeaderCancelButton/HeaderCancelButton';
+import HeaderBackButton from '../../../Components/HeaderBackButton/HeaderBackButton';
 
 export default function CounterCreateHeader() {
   return (
     <div className={styles.header}>
       <HeaderText className={styles.headerText}>Create Counter</HeaderText>
-      <HeaderCancelButton className={styles.cancelBtn}></HeaderCancelButton>
+      <HeaderBackButton className={styles.cancelBtn} iconName="cancel"></HeaderBackButton>
     </div>
   );
 }

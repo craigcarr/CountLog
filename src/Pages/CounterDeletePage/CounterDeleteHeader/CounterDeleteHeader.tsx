@@ -8,7 +8,7 @@ class CounterDeleteHeader extends Component {
     return (
       <div className={styles.header}>
         <HeaderText className={styles.headerText}>Delete Counter</HeaderText>
-        <HeaderBackButton className={styles.backBtn}></HeaderBackButton>
+        <HeaderBackButton className={styles.backBtn} iconName="arrow left"></HeaderBackButton>
       </div>
     )
   }

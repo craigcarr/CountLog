@@ -7,7 +7,7 @@ export default function AboutHeader() {
   return (
     <div className={styles.header}>
       <HeaderText className={styles.headerText}>About CountLog</HeaderText>
-      <HeaderBackButton className={styles.backBtn}></HeaderBackButton>
+      <HeaderBackButton className={styles.backBtn} iconName="arrow left"></HeaderBackButton>
     </div>
   );
 }

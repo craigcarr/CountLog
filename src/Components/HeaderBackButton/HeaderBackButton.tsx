@@ -1,10 +1,11 @@
 import React from "react";
 import styles from './HeaderBackButton.module.scss';
-import { Button, Icon } from "semantic-ui-react";
+import { Button, Icon, SemanticICONS } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
 interface IProps {
   className: any,
+  iconName: SemanticICONS,
 }
 
 export default function HeaderBackButton(props: IProps) {
@@ -20,7 +21,7 @@ export default function HeaderBackButton(props: IProps) {
       circular
       icon
       onClick={onBackButtonClicked}>
-      <Icon name="arrow left">
+      <Icon name={props.iconName}>
       </Icon>
     </Button>
   );

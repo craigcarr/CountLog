@@ -7,7 +7,7 @@ export default function EditHeader() {
   return (
     <div className={styles.header}>
       <HeaderText className={styles.headerText}>Edit Counter</HeaderText>
-      <HeaderBackButton className={styles.backBtn}></HeaderBackButton>
+      <HeaderBackButton className={styles.backBtn} iconName="arrow left"></HeaderBackButton>
     </div>
   );
 }

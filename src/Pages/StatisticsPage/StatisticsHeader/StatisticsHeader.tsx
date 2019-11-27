@@ -7,7 +7,7 @@ export default function StatisticsHeader() {
   return (
     <div className={styles.header}>
       <HeaderText className={styles.headerText}>Counter Statistics</HeaderText>
-      <HeaderBackButton className={styles.backBtn}></HeaderBackButton>
+      <HeaderBackButton className={styles.backBtn} iconName="arrow left"></HeaderBackButton>
     </div>
   );
 }
