@@ -1,19 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CounterCreateContent from '../../CounterCreatePage/CounterCreateContent/CounterCreateContent';
-import { withRouter, RouteComponentProps } from 'react-router';
+import { useParams } from 'react-router';
 
-interface IProps extends RouteComponentProps<any> {}
+export default function CounterEditContent() {
+  let params = useParams<any>();
 
-interface IState {}
+  let counterId = parseInt(params['counterId'], 10)
 
-class CounterEditContent extends Component<IProps, IState> {
-  render() {
-    let counterId = parseInt(this.props.match.params['counterId'], 10)
-
-    return (
-      <CounterCreateContent id={counterId}></CounterCreateContent>
-    )
-  }
+  return (
+    <CounterCreateContent id={counterId}></CounterCreateContent>
+  )
 }
-
-export default withRouter(CounterEditContent);

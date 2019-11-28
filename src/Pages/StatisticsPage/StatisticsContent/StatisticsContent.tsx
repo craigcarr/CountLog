@@ -1,57 +1,41 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import CountersAPI from '../../../Interfaces/CountersAPI';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 import styles from './StatisticsContent.module.scss';
 import LoggingAPI from '../../../Interfaces/LoggingAPI';
 import { VictoryChart, VictoryLine, VictoryLabel, VictoryAxis } from "victory";
+import { useHistory, useParams } from 'react-router';
 
-interface IProps extends RouteComponentProps<any> { }
+export default function StatisticsContent() {
+  const [counterId, setCounterId] = useState<number>(-1);
+  const [counterName, setCounterName] = useState<string>('');
+  const [counterColor, setCounterColor] = useState<string>('');
+  const [counterValue, setCounterValue] = useState<number>(0);
+  const [chartData, setChartData] = useState<any[]>([]);
 
-interface IState {
-  counterId: number,
-  counterName: string,
-  counterColor: string,
-  counterValue: number,
-  chartData: any[],
-}
+  let history = useHistory();
+  let params = useParams<any>();
 
-class StatisticsContent extends Component<IProps, IState> {
-  state = {
-    counterId: -1,
-    counterValue: 0,
-    counterColor: '',
-    counterName: '',
-    chartData: [],
-  }
-
-  constructor(props: any) {
-    super(props);
-
+  useEffect(() => {
     // Ghetto hack to handle the specific situation where the user rotates his/her
     // screen from vertical to horizontal in order to get a better view of the chart.
     let trueVMin = 0.8 * Math.min(window.innerHeight, window.innerWidth);
     document.documentElement.style.setProperty("--trueVMin", trueVMin.toString() + 'px');
 
-    this.state.counterId = parseInt(this.props.match.params['counterId'], 10)
+    let counterIdXXX = parseInt(params['counterId'], 10)
+    setCounterId(counterIdXXX);
 
-    CountersAPI.getCounterById(this.state.counterId).then(counter => {
+    CountersAPI.getCounterById(counterIdXXX).then(counter => {
       if (counter === undefined) {
         LoggingAPI.error('counter is undefined')
       } else {
-        this.setState({
-          counterName: counter.name,
-          counterColor: counter.color,
-          counterValue: counter.value,
-        })
+        setCounterName(counter.name);
+        setCounterColor(counter.color);
+        setCounterValue(counter.value);
       }
     });
-  }
 
-  componentDidMount() {
-    let counterId = parseInt(this.props.match.params['counterId'], 10)
-
-    CountersAPI.getDisplayValuesForCounter(counterId).then(displayValues => {
+    CountersAPI.getDisplayValuesForCounter(counterIdXXX).then(displayValues => {
       let list = [];
 
       for (let displayValue of displayValues) {
@@ -63,120 +47,115 @@ class StatisticsContent extends Component<IProps, IState> {
 
       list.sort((a, b) => (a.timestamp > b.timestamp) ? 1 : -1)
 
-      let chartData = [];
+      let chartDataXXX = [];
 
       for (let displayValue of list) {
-        chartData.push(
+        chartDataXXX.push(
           { x: new Date(parseInt(displayValue.timestamp, 10)), y: displayValue.value },
         );
       }
 
-      this.setState({ chartData: chartData });
+      setChartData(chartDataXXX);
     });
+  }, [params]);
+
+  function editButtonClicked() {
+    history.push('/editcounter/' + counterId)
   }
 
-  editButtonClicked = () => {
-    this.props.history.push('/editcounter/' + this.state.counterId)
+  function deleteButtonClicked() {
+    history.push('/deletecounter/' + counterId)
   }
 
-  deleteButtonClicked = () => {
-    this.props.history.push('/deletecounter/' + this.state.counterId)
+  function viewButtonClicked() {
+    history.push('/counterhistory/' + counterId)
   }
 
-  viewButtonClicked = () => {
-    this.props.history.push('/counterhistory/' + this.state.counterId)
-  }
+  return (
+    <div className={styles.content}>
+      <Table unstackable columns={2}>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell className={styles.tableCell}>
+              <p>Counter Name</p>
+            </Table.Cell>
+            <Table.Cell>
+              <p>{counterName}</p>
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell className={styles.tableCell}>
+              <p>Current Color</p>
+            </Table.Cell>
+            <Table.Cell>
+              <Button
+                className={styles.colorButton}
+                style={{ backgroundColor: counterColor, color: 'white' }}>
+                {counterColor}
+              </Button>
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell className={styles.tableCell}>
+              <p>Current Value</p>
+            </Table.Cell>
+            <Table.Cell>
+              <p>{counterValue}</p>
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell className={styles.tableCell}>
+              <p>Edit Counter</p>
+            </Table.Cell>
+            <Table.Cell>
+              <Button
+                className={styles.myButton}
+                onClick={editButtonClicked}>
+                Edit
+                </Button>
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell className={styles.tableCell}>
+              <p>Delete Counter</p>
+            </Table.Cell>
+            <Table.Cell>
+              <Button
+                className={styles.myButton}
+                onClick={deleteButtonClicked}>
+                Delete
+                </Button>
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell className={styles.tableCell}>
+              <p>View History</p>
+            </Table.Cell>
+            <Table.Cell>
+              <Button
+                className={styles.myButton}
+                onClick={viewButtonClicked}>
+                View
+                </Button>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
 
-  render() {
-    return (
-      <div className={styles.content}>
-        <Table unstackable columns={2}>
-          <Table.Body>
-            <Table.Row>
-              <Table.Cell className={styles.tableCell}>
-                <p>Counter Name</p>
-              </Table.Cell>
-              <Table.Cell>
-                <p>{this.state.counterName}</p>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell className={styles.tableCell}>
-                <p>Current Color</p>
-              </Table.Cell>
-              <Table.Cell>
-                <Button
-                  className={styles.colorButton}
-                  style={{ backgroundColor: this.state.counterColor, color: 'white' }}>
-                  {this.state.counterColor}
-                </Button>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell className={styles.tableCell}>
-                <p>Current Value</p>
-              </Table.Cell>
-              <Table.Cell>
-                <p>{this.state.counterValue}</p>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell className={styles.tableCell}>
-                <p>Edit Counter</p>
-              </Table.Cell>
-              <Table.Cell>
-                <Button
-                  className={styles.myButton}
-                  onClick={this.editButtonClicked}>
-                  Edit
-                </Button>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell className={styles.tableCell}>
-                <p>Delete Counter</p>
-              </Table.Cell>
-              <Table.Cell>
-                <Button
-                  className={styles.myButton}
-                  onClick={this.deleteButtonClicked}>
-                  Delete
-                </Button>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell className={styles.tableCell}>
-                <p>View History</p>
-              </Table.Cell>
-              <Table.Cell>
-                <Button
-                  className={styles.myButton}
-                  onClick={this.viewButtonClicked}>
-                  View
-                </Button>
-              </Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
-
-        <div className={styles.chartDiv}>
-          {/* TODO Use `width={window.innerWidth}` to fix the chart's width. */}
-          <VictoryChart scale={{ x: "time" }} padding={{left: 65, right: 15, top: 40, bottom: 40}}>
-            <VictoryLabel text="Display Value versus Time" x={225} y={20} textAnchor="middle" />
-            <VictoryAxis fixLabelOverlap={true}></VictoryAxis>
-            <VictoryAxis dependentAxis fixLabelOverlap={true}></VictoryAxis>
-            <VictoryLine
-
-              style={{
-                data: { stroke: this.state.counterColor },
-              }}
-              data={this.state.chartData}
-            />
-          </VictoryChart>
-        </div>
+      <div className={styles.chartDiv}>
+        {/* TODO Use `width={window.innerWidth}` to fix the chart's width. */}
+        <VictoryChart scale={{ x: "time" }} padding={{ left: 65, right: 15, top: 40, bottom: 40 }}>
+          <VictoryLabel text="Display Value versus Time" x={225} y={20} textAnchor="middle" />
+          <VictoryAxis fixLabelOverlap={true}></VictoryAxis>
+          <VictoryAxis dependentAxis fixLabelOverlap={true}></VictoryAxis>
+          <VictoryLine
+            style={{
+              data: { stroke: counterColor },
+            }}
+            data={chartData}
+          />
+        </VictoryChart>
       </div>
-    )
-  }
+    </div>
+  );
 }
-
-export default withRouter(StatisticsContent);

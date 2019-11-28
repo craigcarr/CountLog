@@ -1,24 +1,18 @@
-import React, { Component } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router';
+import React from 'react';
 import styles from './EventEditContent.module.scss';
+import { useParams } from 'react-router';
 
-interface IProps extends RouteComponentProps<any> {}
+export default function EventEditContent() {
+  let params = useParams<any>();
 
-interface IState {}
+  let counterId = parseInt(params['counterId'], 10)
+  let eventId = parseInt(params['eventId'], 10)
 
-class EventEditContent extends Component<IProps, IState> {
-  render() {
-    let counterId = parseInt(this.props.match.params['counterId'], 10)
-    let eventId = parseInt(this.props.match.params['eventId'], 10)
+  console.log(counterId, eventId)
 
-    console.log(counterId, eventId)
-
-    return (
-      <div className={styles.content}>
-        TODO
-      </div>
-    )
-  }
+  return (
+    <div className={styles.content}>
+      TODO
+    </div>
+  )
 }
-
-export default withRouter(EventEditContent);

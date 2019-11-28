@@ -11,8 +11,6 @@ interface IProps {
 }
 
 export default function CounterCreateContent(props: IProps) {
-  console.log('aaa')
-
   const [name, setName] = useState<string>('');
   const [color, setColor] = useState<string>('#ff0000');
   const [valueString, setValueString] = useState<string>('0');
