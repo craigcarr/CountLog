@@ -1,139 +1,125 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Input, Button, Icon } from 'semantic-ui-react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 import CountersAPI from '../../../Interfaces/CountersAPI';
 import styles from './CounterCreateContent.module.scss';
 import LoggingAPI from '../../../Interfaces/LoggingAPI';
 import ColorPicker from '../../../Components/ColorPicker/ColorPicker';
+import { useHistory } from 'react-router';
 
-interface IProps extends RouteComponentProps<any> {
+interface IProps {
   id: number | undefined,
 }
 
-interface IState {
-  name: string,
-  color: string,
-  valueString: string,
-}
+export default function CounterCreateContent(props: IProps) {
+  console.log('aaa')
 
-class CounterCreateContent extends Component<IProps, IState> {
-  state = {
-    name: '',
-    color: '#ff0000',
-    valueString: '0',
-  }
+  const [name, setName] = useState<string>('');
+  const [color, setColor] = useState<string>('#ff0000');
+  const [valueString, setValueString] = useState<string>('0');
 
-  componentDidMount() {
-    if (this.props.id !== undefined) {
-      CountersAPI.getCounterById(this.props.id).then(counter => {
+  let history = useHistory();
+
+  useEffect(() => {
+    if (props.id !== undefined) {
+      CountersAPI.getCounterById(props.id).then(counter => {
         if (counter === undefined) {
           LoggingAPI.error('counter is undefined')
         } else {
-          this.setState({
-            name: counter.name,
-            color: counter.color,
-            valueString: counter.value.toString(),
-          })
+          setName(counter.name);
+          setColor(counter.color);
+          setValueString(counter.value.toString());
         }
-      })
+      });
     }
+  }, [props.id]);
+
+  function handleNameChange(e: any) {
+    setName(e.target.value);
   }
 
-  handleNameChange = (e: any) => {
-    this.setState({ name: e.target.value });
+  function handleColorChange(e: any) {
+    setColor(e);
   }
 
-  handleColorChange = (e: any) => {
-    this.setState({ color: e.hex });
+  function handleValueChange(e: any) {
+    setValueString(e.target.value);
   }
 
-  handleValueChange = (e: any) => {
-    this.setState({ valueString: e.target.value })
-  }
-
-  isInputValid = () => {
-    if (!this.state) {
+  function isInputValid() {
+    if (!color || !name) {
       return false;
-    } else if (!this.state.color || !this.state.name) {
-      return false;
-    } else if (isNaN(parseInt(this.state.valueString, 10)) || this.state.valueString.includes('.')) {
+    } else if (isNaN(parseInt(valueString, 10)) || valueString.includes('.')) {
       return false;
     } else {
       return true;
     }
   }
 
-  onSaveCounterClicked = () => {
-    if (this.props.id === undefined) {
+  function onSaveCounterClicked() {
+    if (props.id === undefined) {
       CountersAPI.putCounter({
-        name: this.state.name,
-        color: this.state.color,
-        value: parseInt(this.state.valueString, 10),
+        name: name,
+        color: color,
+        value: parseInt(valueString, 10),
       });
     } else {
       CountersAPI.putCounter({
-        id: this.props.id,
-        name: this.state.name,
-        color: this.state.color,
-        value: parseInt(this.state.valueString, 10),
+        id: props.id,
+        name: name,
+        color: color,
+        value: parseInt(valueString, 10),
       });
     }
 
-    this.props.history.push('/')
+    history.push('/');
   }
 
-  render() {
-    return (
-      <div>
-        <div id={styles.createContent} className={styles.content}>
-          <Table unstackable columns={2}>
-            <Table.Body>
-              <Table.Row>
-                <Table.Cell>
-                  Name
+  return (
+    <div id={styles.createContent} className={styles.content}>
+      <Table unstackable columns={2}>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell>
+              Name
                 </Table.Cell>
-                <Table.Cell>
-                  <Input defaultValue={this.state.name} onChange={this.handleNameChange}></Input>
+            <Table.Cell>
+              <Input defaultValue={name} onChange={handleNameChange}></Input>
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>
+              Color
                 </Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>
-                  Color
+            <Table.Cell>
+              <ColorPicker
+                color={color}
+                onColorChange={handleColorChange} />
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>
+              Initial Value
                 </Table.Cell>
-                <Table.Cell>
-                  <ColorPicker
-                    color={this.state.color}
-                    onColorChange={(color: any) => this.setState({color: color})} />
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>
-                  Initial Value
-                </Table.Cell>
-                <Table.Cell>
-                  <Input
-                    onChange={this.handleValueChange}
-                    type="number"
-                    value={this.state.valueString}>
-                  </Input>
-                </Table.Cell>
-              </Table.Row>
-            </Table.Body>
-          </Table>
+            <Table.Cell>
+              <Input
+                onChange={handleValueChange}
+                type="number"
+                value={valueString}>
+              </Input>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
 
-          <Button
-            id={styles.saveCounterBtn}
-            onClick={this.onSaveCounterClicked}
-            disabled={this.isInputValid() === false}
-            icon
-            circular>
-            <Icon name="save">
-            </Icon>
-          </Button>
-        </div>
-      </div>
-    )
-  }
+      <Button
+        id={styles.saveCounterBtn}
+        onClick={onSaveCounterClicked}
+        disabled={isInputValid() === false}
+        icon
+        circular>
+        <Icon name="save">
+        </Icon>
+      </Button>
+    </div>
+  );
 }
-
-export default withRouter(CounterCreateContent);
