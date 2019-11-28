@@ -1,28 +1,15 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Checkbox, } from 'semantic-ui-react';
 import SettingsAPI from '../../../Interfaces/SettingsAPI';
 import styles from './SettingsContent.module.scss';
 
-interface IProps {}
+export default function SettingsContent() {
+  const [isVibrationEnabled, setVibrationEnabled] = useState<boolean>(false);
+  const [isClickSoundEnabled, setClickSoundEnabled] = useState<boolean>(false);
+  const [isScreenAlwaysOn, setScreenAlwaysOn] = useState<boolean>(false);
+  const [isDarkModeEnabled, setDarkModeEnabled] = useState<boolean>(false);
 
-interface IState {
-  isVibrationEnabled: boolean,
-  isClickSoundEnabled: boolean,
-  isScreenAlwaysOn: boolean,
-  isDarkModeEnabled: boolean,
-}
-
-class SettingsContent extends Component<IProps, IState> {
-  state = {
-    isVibrationEnabled: false,
-    isClickSoundEnabled: false,
-    isScreenAlwaysOn: false,
-    isDarkModeEnabled: false,
-  }
-
-  constructor(props: any) {
-    super(props);
-
+  useEffect(() => {
     SettingsAPI.getAllSettings().then((settings) => {
       // TODO Kind of unsafe from TypeScript's perspective.
       function array2dict(array: any): any {
@@ -36,123 +23,104 @@ class SettingsContent extends Component<IProps, IState> {
 
       let result = array2dict(settings);
 
-      // TODO Shouldn't call `this.setState` in a constructor.
-      this.setState({
-        isVibrationEnabled: result['isVibrationEnabled'],
-        isClickSoundEnabled: result['isClickSoundEnabled'],
-        isScreenAlwaysOn: result['isScreenAlwaysOn'],
-        isDarkModeEnabled: result['isDarkModeEnabled'],
-      })
+      setVibrationEnabled(result['isVibrationEnabled']);
+      setClickSoundEnabled(result['isClickSoundEnabled']);
+      setScreenAlwaysOn(result['isScreenAlwaysOn']);
+      setDarkModeEnabled(result['isDarkModeEnabled']);
     });
-  }
+  }, []);
 
-  vibrationSettingChanged = () => {
-    let newValue = !this.state.isVibrationEnabled;
+  function vibrationSettingChanged() {
+    let newValue = !isVibrationEnabled;
 
-    this.setState({ isVibrationEnabled: newValue }, () => {
-      SettingsAPI.putSetting({
-        name: 'isVibrationEnabled',
-        value: this.state.isVibrationEnabled,
-      })
+    setVibrationEnabled(newValue);
 
-      if (newValue === true) {
-        window.navigator.vibrate(200);
-      }
+    SettingsAPI.putSetting({
+      name: 'isVibrationEnabled',
+      value: newValue,
     })
-  }
 
-  clickSoundSettingChanged = () => {
-    if (this.state.isClickSoundEnabled) {
-      this.setState({ isClickSoundEnabled: false })
-    } else {
-      this.setState({ isClickSoundEnabled: true })
-      // TODO Make noise
+    if (newValue === true) {
+      window.navigator.vibrate(200);
     }
   }
 
-  screenAlwaysOnSettingChanged = () => {
-    if (this.state.isScreenAlwaysOn) {
-      this.setState({ isScreenAlwaysOn: false })
-    } else {
-      this.setState({ isScreenAlwaysOn: true })
-      // TODO Some indication of enabling
-    }
+  function clickSoundSettingChanged() {
+    // TODO Make noise
+    setClickSoundEnabled(!isClickSoundEnabled)
   }
 
-  darkModeEnabledSettingChanged = () => {
-    if (this.state.isDarkModeEnabled) {
-      this.setState({ isDarkModeEnabled: false })
-    } else {
-      this.setState({ isDarkModeEnabled: true })
-      // TODO Theme will change on settings screen
-    }
+  function screenAlwaysOnSettingChanged() {
+    // TODO Some indication of enabling
+    setScreenAlwaysOn(!isScreenAlwaysOn)
   }
 
-  render() {
-    return (
-      <div className={styles.content}>
-        <Table unstackable columns={2}>
-          <Table.Body>
-            <Table.Row>
-              <Table.Cell className={styles.tableCell}>
-                <p>Dark Mode</p>
-              </Table.Cell>
-              <Table.Cell>
-                <Checkbox
-                  className={styles.checkBox}
-                  toggle
-                  checked={this.state.isDarkModeEnabled}
-                  onChange={this.darkModeEnabledSettingChanged}>
-                </Checkbox>
-                <p>Not yet supported!</p>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell className={styles.tableCell}>
-                <p>Click Sound</p>
-              </Table.Cell>
-              <Table.Cell>
-                <Checkbox
-                  className={styles.checkBox}
-                  toggle
-                  checked={this.state.isClickSoundEnabled}
-                  onChange={this.clickSoundSettingChanged}>
-                </Checkbox>
-                <p>Not yet supported!</p>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell className={styles.tableCell}>
-                <p>Vibration</p>
-              </Table.Cell>
-              <Table.Cell>
-                <Checkbox
-                  className={styles.checkBox}
-                  toggle
-                  checked={this.state.isVibrationEnabled}
-                  onChange={this.vibrationSettingChanged}>
-                </Checkbox>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell className={styles.tableCell}>
-                <p>Screen Always On</p>
-              </Table.Cell>
-              <Table.Cell>
-                <Checkbox
-                  className={styles.checkBox}
-                  toggle
-                  checked={this.state.isScreenAlwaysOn}
-                  onChange={this.screenAlwaysOnSettingChanged}>
-                </Checkbox>
-                <p>Not yet supported!</p>
-              </Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
-      </div>
-    )
+  function darkModeEnabledSettingChanged() {
+    // TODO Theme will change on settings screen
+    setDarkModeEnabled(!isDarkModeEnabled);
   }
+
+  return (
+    <div className={styles.content}>
+      <Table unstackable columns={2}>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell className={styles.tableCell}>
+              <p>Dark Mode</p>
+            </Table.Cell>
+            <Table.Cell>
+              <Checkbox
+                className={styles.checkBox}
+                toggle
+                checked={isDarkModeEnabled}
+                onChange={darkModeEnabledSettingChanged}>
+              </Checkbox>
+              <p>Not yet supported!</p>
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell className={styles.tableCell}>
+              <p>Click Sound</p>
+            </Table.Cell>
+            <Table.Cell>
+              <Checkbox
+                className={styles.checkBox}
+                toggle
+                checked={isClickSoundEnabled}
+                onChange={clickSoundSettingChanged}>
+              </Checkbox>
+              <p>Not yet supported!</p>
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell className={styles.tableCell}>
+              <p>Vibration</p>
+            </Table.Cell>
+            <Table.Cell>
+              <Checkbox
+                className={styles.checkBox}
+                toggle
+                checked={isVibrationEnabled}
+                onChange={vibrationSettingChanged}>
+              </Checkbox>
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell className={styles.tableCell}>
+              <p>Screen Always On</p>
+            </Table.Cell>
+            <Table.Cell>
+              <Checkbox
+                className={styles.checkBox}
+                toggle
+                checked={isScreenAlwaysOn}
+                onChange={screenAlwaysOnSettingChanged}>
+              </Checkbox>
+              <p>Not yet supported!</p>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+    </div>
+  )
 }
-
-export default SettingsContent;
