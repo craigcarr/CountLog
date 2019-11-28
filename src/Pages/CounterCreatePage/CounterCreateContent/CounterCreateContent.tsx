@@ -65,13 +65,13 @@ class CounterCreateContent extends Component<IProps, IState> {
 
   onSaveCounterClicked = () => {
     if (this.props.id === undefined) {
-      CountersAPI.insertCounter({
+      CountersAPI.putCounter({
         name: this.state.name,
         color: this.state.color,
         value: parseInt(this.state.valueString, 10),
       });
     } else {
-      CountersAPI.insertCounter({
+      CountersAPI.putCounter({
         id: this.props.id,
         name: this.state.name,
         color: this.state.color,

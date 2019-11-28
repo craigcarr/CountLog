@@ -12,6 +12,31 @@ class CountersAPI {
     return this.db.counters.toArray();
   }
 
+  public static getCounterById(id: number) {
+    return this.db.counters.get(id);
+  }
+
+  public static putCounter(counter: ICounter) {
+    this.db.counters.put(counter).then(counterId => {
+      let mutateEvent: IEvent = {
+        counterId: counterId,
+        type: EventType.Mutate,
+        timestamp: Date.now().toString(),
+        annotation: '',
+      }
+
+      this.db.events.put(mutateEvent);
+
+      let displayValue: IDisplayValue = {
+        counterId: counterId,
+        timestamp: Date.now().toString(),
+        value: counter.value,
+      }
+
+      this.db.displayValues.put(displayValue);
+    });
+  }
+
   public static getEventsForCounter(counterId: number, type: EventType | undefined) {
     if (type === undefined) {
       return this.db.events
@@ -28,10 +53,6 @@ class CountersAPI {
 
   public static getDisplayValuesForCounter(counterId: number) {
     return this.db.displayValues.where('counterId').equals(counterId).toArray();
-  }
-
-  public static getCounterById(id: number) {
-    return this.db.counters.get(id);
   }
 
   public static deleteCounter(counterId: number) {
@@ -56,27 +77,6 @@ class CountersAPI {
     });
 
     return this.db.counters.delete(counterId);
-  }
-
-  public static insertCounter(counter: ICounter) {
-    this.db.counters.put(counter).then(counterId => {
-      let mutateEvent: IEvent = {
-        counterId: counterId,
-        type: EventType.Mutate,
-        timestamp: Date.now().toString(),
-        annotation: '',
-      }
-
-      this.db.events.put(mutateEvent);
-
-      let displayValue: IDisplayValue = {
-        counterId: counterId,
-        timestamp: Date.now().toString(),
-        value: counter.value,
-      }
-
-      this.db.displayValues.put(displayValue);
-    });
   }
 
   public static incrementCounter(counterId: number, callback: any) {
