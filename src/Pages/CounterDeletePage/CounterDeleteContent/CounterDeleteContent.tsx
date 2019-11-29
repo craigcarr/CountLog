@@ -5,10 +5,10 @@ import { useHistory, useParams } from 'react-router';
 import { CountersContext } from '../../../App';
 
 export default function CounterDeleteContent() {
-  let history = useHistory();
-  let params = useParams<any>();
+  const history = useHistory();
+  const params = useParams<any>();
 
-  let countersApi = useContext(CountersContext);
+  const countersApi = useContext(CountersContext);
 
   function deleteButtonClicked() {
     let counterId = parseInt(params['counterId'], 10)

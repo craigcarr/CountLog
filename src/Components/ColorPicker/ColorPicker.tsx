@@ -13,7 +13,7 @@ export default function ColorPicker(props: IProps) {
 
   useEffect(() => {
     setSelectedColor(props.color);
-  }, [props.color])
+  }, [props.color]);
 
   let colors = [
     '#ff0000', // red
@@ -23,7 +23,7 @@ export default function ColorPicker(props: IProps) {
     '#0000ff', // blue
     '#440088', // purple
     '#000000', // black
-  ]
+  ];
 
   return (
     <div>

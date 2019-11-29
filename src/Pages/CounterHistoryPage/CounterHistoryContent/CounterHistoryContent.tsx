@@ -10,11 +10,11 @@ export default function MainContent() {
   const [tableData, setTableData] = useState<any[]>([]);
   const [filter, setFilter] = useState<EventType | undefined>(undefined);
 
-  let history = useHistory();
-  let params = useParams<any>();
+  const history = useHistory();
+  const params = useParams<any>();
 
-  let loggingApi = useContext(LoggingContext);
-  let countersApi = useContext(CountersContext);
+  const loggingApi = useContext(LoggingContext);
+  const countersApi = useContext(CountersContext);
 
   useEffect(() => {
     let counterId = parseInt(params['counterId'], 10)

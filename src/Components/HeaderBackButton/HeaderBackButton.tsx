@@ -9,7 +9,7 @@ interface IProps {
 }
 
 export default function HeaderBackButton(props: IProps) {
-  let history = useHistory();
+  const history = useHistory();
 
   function onBackButtonClicked() {
     history.goBack();

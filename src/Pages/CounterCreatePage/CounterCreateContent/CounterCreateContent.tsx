@@ -14,10 +14,10 @@ export default function CounterCreateContent(props: IProps) {
   const [color, setColor] = useState<string>('#ff0000');
   const [valueString, setValueString] = useState<string>('0');
 
-  let history = useHistory();
+  const history = useHistory();
 
-  let loggingApi = useContext(LoggingContext)
-  let countersApi = useContext(CountersContext);
+  const loggingApi = useContext(LoggingContext);
+  const countersApi = useContext(CountersContext);
 
   useEffect(() => {
     if (props.id !== undefined) {

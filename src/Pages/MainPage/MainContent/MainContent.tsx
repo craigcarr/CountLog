@@ -8,10 +8,10 @@ import { CountersContext, SettingsContext } from '../../../App';
 export default function MainContent() {
   const [tableData, setTableData] = useState<any[]>([]);
 
-  let history = useHistory();
+  const history = useHistory();
 
-  let countersApi = useContext(CountersContext);
-  let settingsApi = useContext(SettingsContext);
+  const countersApi = useContext(CountersContext);
+  const settingsApi = useContext(SettingsContext);
 
   useEffect(() => {
     countersApi.getAllCounters().then(counters => {

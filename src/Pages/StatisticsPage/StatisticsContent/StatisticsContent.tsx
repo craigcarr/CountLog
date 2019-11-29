@@ -12,8 +12,8 @@ export default function StatisticsContent() {
   const [counterValue, setCounterValue] = useState<number>(0);
   const [chartData, setChartData] = useState<any[]>([]);
 
-  let history = useHistory();
-  let params = useParams<any>();
+  const history = useHistory();
+  const params = useParams<any>();
 
   const loggingApi = useContext(LoggingContext);
   const countersApi = useContext(CountersContext);

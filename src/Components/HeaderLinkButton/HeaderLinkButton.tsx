@@ -11,7 +11,7 @@ interface IProps {
 }
 
 export default function HeaderLinkButton(props: IProps) {
-  let history = useHistory();
+  const history = useHistory();
 
   function onLinkButtonClicked() {
     history.push(props.route);
