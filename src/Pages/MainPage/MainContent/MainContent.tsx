@@ -1,52 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import { Icon, Button, Table } from 'semantic-ui-react';
 import _ from 'lodash';
-import SettingsAPI from '../../../Interfaces/SettingsAPI';
-import CountersAPI from '../../../Interfaces/CountersAPI';
 import styles from './MainContent.module.scss';
+import { CountersContext, SettingsContext } from '../../../App';
 
 export default function MainContent() {
   const [tableData, setTableData] = useState<any[]>([]);
 
   let history = useHistory();
 
+  let countersApi = useContext(CountersContext);
+  let settingsApi = useContext(SettingsContext);
+
   useEffect(() => {
-    CountersAPI.getAllCounters().then(counters => {
+    countersApi.getAllCounters().then(counters => {
       setTableData(counters);
     });
-  }, []);
+  }, [countersApi]);
 
   function handleIncrement(id: number) {
-    SettingsAPI.getSettingValue('isVibrationEnabled').then(setting => {
+    settingsApi.getSettingValue('isVibrationEnabled').then(setting => {
       if (setting !== undefined && setting.value === true) {
         window.navigator.vibrate(200);
       }
     });
 
     let callback = () => {
-      CountersAPI.getAllCounters().then(counters => {
+      countersApi.getAllCounters().then(counters => {
         setTableData(counters);
       });
     }
 
-    CountersAPI.incrementCounter(id, callback)
+    countersApi.incrementCounter(id, callback)
   }
 
   function handleDecrement(id: number) {
-    SettingsAPI.getSettingValue('isVibrationEnabled').then(setting => {
+    settingsApi.getSettingValue('isVibrationEnabled').then(setting => {
       if (setting !== undefined && setting.value === true) {
         window.navigator.vibrate(200);
       }
     });
 
     let callback = () => {
-      CountersAPI.getAllCounters().then(counters => {
+      countersApi.getAllCounters().then(counters => {
         setTableData(counters);
       });
     }
 
-    CountersAPI.decrementCounter(id, callback);
+    countersApi.decrementCounter(id, callback);
   }
 
   function onCounterButtonClicked(id: number) {

@@ -1,21 +1,21 @@
 import CounterDatabase, { ISettings } from "../CounterDatabase";
 
 class SettingsAPI {
-  private static db: CounterDatabase;
+  private db: CounterDatabase;
 
-  public static _initialize(db: CounterDatabase) {
+  constructor(db: CounterDatabase) {
       this.db = db;
   };
 
-  public static getAllSettings() {
+  public getAllSettings() {
     return this.db.settings.toArray();
   }
 
-  public static getSettingValue(name: string) {
+  public getSettingValue(name: string) {
     return this.db.settings.get({ name: name });
   }
 
-  public static putSetting(setting: ISettings) {
+  public putSetting(setting: ISettings) {
     return this.db.settings.put(setting);
   }
 }

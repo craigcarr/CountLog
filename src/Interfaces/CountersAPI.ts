@@ -2,21 +2,23 @@ import CounterDatabase, { ICounter, IEvent, EventType, IDisplayValue } from "../
 import LoggingAPI from "./LoggingAPI";
 
 class CountersAPI {
-  private static db: CounterDatabase;
+  private db: CounterDatabase;
+  private loggingApi: LoggingAPI;
 
-  public static _initialize(db: CounterDatabase) {
+  constructor(db: CounterDatabase, loggingApi: LoggingAPI) {
     this.db = db;
+    this.loggingApi = loggingApi;
   };
 
-  public static getAllCounters() {
+  public getAllCounters() {
     return this.db.counters.toArray();
   }
 
-  public static getCounterById(id: number) {
+  public getCounterById(id: number) {
     return this.db.counters.get(id);
   }
 
-  public static putCounter(counter: ICounter) {
+  public putCounter(counter: ICounter) {
     this.db.counters.put(counter).then(counterId => {
       let mutateEvent: IEvent = {
         counterId: counterId,
@@ -37,7 +39,7 @@ class CountersAPI {
     });
   }
 
-  public static getEventsForCounter(counterId: number, type: EventType | undefined) {
+  public getEventsForCounter(counterId: number, type: EventType | undefined) {
     if (type === undefined) {
       return this.db.events
         .where('counterId')
@@ -51,15 +53,15 @@ class CountersAPI {
     }
   }
 
-  public static getDisplayValuesForCounter(counterId: number) {
+  public getDisplayValuesForCounter(counterId: number) {
     return this.db.displayValues.where('counterId').equals(counterId).toArray();
   }
 
-  public static deleteCounter(counterId: number) {
+  public deleteCounter(counterId: number) {
     this.db.events.where('counterId').equals(counterId).toArray().then(events => {
       for (let event of events) {
         if (event.id === undefined) {
-          LoggingAPI.error('event.id is undefined')
+          this.loggingApi.error('event.id is undefined')
         } else {
           this.db.events.delete(event.id)
         }
@@ -69,7 +71,7 @@ class CountersAPI {
     this.db.displayValues.where('counterId').equals(counterId).toArray().then(displayValues => {
       for (let displayValue of displayValues) {
         if (displayValue.id === undefined) {
-          LoggingAPI.error('displayValue.id is undefined')
+          this.loggingApi.error('displayValue.id is undefined')
         } else {
           this.db.displayValues.delete(displayValue.id)
         }
@@ -79,10 +81,10 @@ class CountersAPI {
     return this.db.counters.delete(counterId);
   }
 
-  public static incrementCounter(counterId: number, callback: any) {
+  public incrementCounter(counterId: number, callback: any) {
     this.db.counters.get(counterId).then(counter => {
       if (counter === undefined) {
-        LoggingAPI.error('counter is undefined')
+        this.loggingApi.error('counter is undefined')
       } else {
         let incrementEvent: IEvent = {
           counterId: counterId,
@@ -108,10 +110,10 @@ class CountersAPI {
     });
   }
 
-  public static decrementCounter(counterId: number, callback: any) {
+  public decrementCounter(counterId: number, callback: any) {
     this.db.counters.get(counterId).then(counter => {
       if (counter === undefined) {
-        LoggingAPI.error('counter is undefined')
+        this.loggingApi.error('counter is undefined')
       } else {
         let decrementEvent: IEvent = {
           counterId: counterId,

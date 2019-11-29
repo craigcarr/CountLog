@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Table, Button } from 'semantic-ui-react';
-import CountersAPI from '../../../Interfaces/CountersAPI';
 import styles from './CounterDeleteContent.module.scss';
 import { useHistory, useParams } from 'react-router';
+import { CountersContext } from '../../../App';
 
 export default function CounterDeleteContent() {
   let history = useHistory();
   let params = useParams<any>();
 
+  let countersApi = useContext(CountersContext);
+
   function deleteButtonClicked() {
     let counterId = parseInt(params['counterId'], 10)
 
-    CountersAPI.deleteCounter(counterId).then(() => {
+    countersApi.deleteCounter(counterId).then(() => {
       history.push('/')
     });
   }

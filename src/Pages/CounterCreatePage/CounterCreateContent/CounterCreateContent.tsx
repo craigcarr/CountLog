@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Table, Input, Button, Icon } from 'semantic-ui-react';
-import CountersAPI from '../../../Interfaces/CountersAPI';
 import styles from './CounterCreateContent.module.scss';
-import LoggingAPI from '../../../Interfaces/LoggingAPI';
 import ColorPicker from '../../../Components/ColorPicker/ColorPicker';
 import { useHistory } from 'react-router';
+import { LoggingContext, CountersContext } from '../../../App';
 
 interface IProps {
   id: number | undefined,
@@ -17,11 +16,14 @@ export default function CounterCreateContent(props: IProps) {
 
   let history = useHistory();
 
+  let loggingApi = useContext(LoggingContext)
+  let countersApi = useContext(CountersContext);
+
   useEffect(() => {
     if (props.id !== undefined) {
-      CountersAPI.getCounterById(props.id).then(counter => {
+      countersApi.getCounterById(props.id).then(counter => {
         if (counter === undefined) {
-          LoggingAPI.error('counter is undefined')
+          loggingApi.error('counter is undefined')
         } else {
           setName(counter.name);
           setColor(counter.color);
@@ -29,7 +31,7 @@ export default function CounterCreateContent(props: IProps) {
         }
       });
     }
-  }, [props.id]);
+  }, [props.id, countersApi, loggingApi]);
 
   function handleNameChange(e: any) {
     setName(e.target.value);
@@ -55,13 +57,13 @@ export default function CounterCreateContent(props: IProps) {
 
   function onSaveCounterClicked() {
     if (props.id === undefined) {
-      CountersAPI.putCounter({
+      countersApi.putCounter({
         name: name,
         color: color,
         value: parseInt(valueString, 10),
       });
     } else {
-      CountersAPI.putCounter({
+      countersApi.putCounter({
         id: props.id,
         name: name,
         color: color,

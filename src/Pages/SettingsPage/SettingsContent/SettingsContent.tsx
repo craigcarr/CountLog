@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Table, Checkbox, } from 'semantic-ui-react';
-import SettingsAPI from '../../../Interfaces/SettingsAPI';
 import styles from './SettingsContent.module.scss';
+import { SettingsContext } from '../../../App';
 
 export default function SettingsContent() {
   const [isVibrationEnabled, setVibrationEnabled] = useState<boolean>(false);
@@ -9,8 +9,10 @@ export default function SettingsContent() {
   const [isScreenAlwaysOn, setScreenAlwaysOn] = useState<boolean>(false);
   const [isDarkModeEnabled, setDarkModeEnabled] = useState<boolean>(false);
 
+  const settingsApi = useContext(SettingsContext);
+
   useEffect(() => {
-    SettingsAPI.getAllSettings().then((settings) => {
+    settingsApi.getAllSettings().then((settings) => {
       // TODO Kind of unsafe from TypeScript's perspective.
       function array2dict(array: any): any {
         return array.reduce(
@@ -28,14 +30,14 @@ export default function SettingsContent() {
       setScreenAlwaysOn(result['isScreenAlwaysOn']);
       setDarkModeEnabled(result['isDarkModeEnabled']);
     });
-  }, []);
+  }, [settingsApi]);
 
   function vibrationSettingChanged() {
     let newValue = !isVibrationEnabled;
 
     setVibrationEnabled(newValue);
 
-    SettingsAPI.putSetting({
+    settingsApi.putSetting({
       name: 'isVibrationEnabled',
       value: newValue,
     })

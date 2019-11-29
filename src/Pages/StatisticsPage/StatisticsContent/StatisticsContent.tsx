@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Table, Button } from 'semantic-ui-react';
-import CountersAPI from '../../../Interfaces/CountersAPI';
 import styles from './StatisticsContent.module.scss';
-import LoggingAPI from '../../../Interfaces/LoggingAPI';
 import { VictoryChart, VictoryLine, VictoryLabel, VictoryAxis } from "victory";
 import { useHistory, useParams } from 'react-router';
+import { CountersContext, LoggingContext } from '../../../App';
 
 export default function StatisticsContent() {
   const [counterId, setCounterId] = useState<number>(-1);
@@ -16,6 +15,9 @@ export default function StatisticsContent() {
   let history = useHistory();
   let params = useParams<any>();
 
+  const loggingApi = useContext(LoggingContext);
+  const countersApi = useContext(CountersContext);
+
   useEffect(() => {
     // Ghetto hack to handle the specific situation where the user rotates his/her
     // screen from vertical to horizontal in order to get a better view of the chart.
@@ -25,9 +27,9 @@ export default function StatisticsContent() {
     let counterIdXXX = parseInt(params['counterId'], 10)
     setCounterId(counterIdXXX);
 
-    CountersAPI.getCounterById(counterIdXXX).then(counter => {
+    countersApi.getCounterById(counterIdXXX).then(counter => {
       if (counter === undefined) {
-        LoggingAPI.error('counter is undefined')
+        loggingApi.error('counter is undefined')
       } else {
         setCounterName(counter.name);
         setCounterColor(counter.color);
@@ -35,7 +37,7 @@ export default function StatisticsContent() {
       }
     });
 
-    CountersAPI.getDisplayValuesForCounter(counterIdXXX).then(displayValues => {
+    countersApi.getDisplayValuesForCounter(counterIdXXX).then(displayValues => {
       let list = [];
 
       for (let displayValue of displayValues) {
@@ -57,7 +59,7 @@ export default function StatisticsContent() {
 
       setChartData(chartDataXXX);
     });
-  }, [params]);
+  }, [params, countersApi, loggingApi]);
 
   function editButtonClicked() {
     history.push('/editcounter/' + counterId)

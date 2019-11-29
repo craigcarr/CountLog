@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Table, Dropdown, Icon, Button } from 'semantic-ui-react';
 import _ from 'lodash';
-import CountersAPI from '../../../Interfaces/CountersAPI';
 import { EventType } from '../../../CounterDatabase';
-import LoggingAPI from '../../../Interfaces/LoggingAPI';
 import styles from './CounterHistoryContent.module.scss';
 import { useParams, useHistory } from 'react-router';
+import { CountersContext, LoggingContext } from '../../../App';
 
 export default function MainContent() {
   const [tableData, setTableData] = useState<any[]>([]);
@@ -14,10 +13,13 @@ export default function MainContent() {
   let history = useHistory();
   let params = useParams<any>();
 
+  let loggingApi = useContext(LoggingContext);
+  let countersApi = useContext(CountersContext);
+
   useEffect(() => {
     let counterId = parseInt(params['counterId'], 10)
 
-    CountersAPI.getEventsForCounter(counterId, undefined).then(events => {
+    countersApi.getEventsForCounter(counterId, undefined).then(events => {
       let list = [];
 
       for (let event of events) {
@@ -32,7 +34,7 @@ export default function MainContent() {
 
       setTableData(list);
     })
-  }, [params]);
+  }, [params, countersApi]);
 
   function displayTimestamp(timestamp: string): string {
     let date = new Date(parseInt(timestamp, 10));
@@ -47,7 +49,7 @@ export default function MainContent() {
     } else if (type === EventType.Mutate) {
       return 'Mutation Event';
     } else {
-      LoggingAPI.error('type has an unknown EventType')
+      loggingApi.error('type has an unknown EventType')
       return 'Unknown Event Type';
     }
   }
