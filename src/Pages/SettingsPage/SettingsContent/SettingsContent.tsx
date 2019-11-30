@@ -40,7 +40,7 @@ export default function SettingsContent() {
     settingsApi.putSetting({
       name: 'isVibrationEnabled',
       value: newValue,
-    })
+    });
 
     if (newValue === true) {
       window.navigator.vibrate(200);
@@ -48,8 +48,18 @@ export default function SettingsContent() {
   }
 
   function clickSoundSettingChanged() {
-    // TODO Make noise
-    setClickSoundEnabled(!isClickSoundEnabled)
+    let newValue = !isClickSoundEnabled;
+
+    setClickSoundEnabled(newValue);
+
+    settingsApi.putSetting({
+      name: 'isClickSoundEnabled',
+      value: newValue,
+    });
+
+    if (newValue === true) {
+      new Audio("/click.mp3").play();
+    }
   }
 
   function screenAlwaysOnSettingChanged() {
@@ -91,7 +101,6 @@ export default function SettingsContent() {
                 checked={isClickSoundEnabled}
                 onChange={clickSoundSettingChanged}>
               </Checkbox>
-              <p>Not yet supported!</p>
             </Table.Cell>
           </Table.Row>
           <Table.Row>

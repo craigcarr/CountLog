@@ -20,25 +20,23 @@ export default function MainContent() {
   }, [countersApi]);
 
   function handleIncrement(id: number) {
-    settingsApi.getSettingValue('isVibrationEnabled').then(setting => {
-      if (setting !== undefined && setting.value === true) {
-        window.navigator.vibrate(200);
-      }
-    });
-
-    let callback = () => {
-      countersApi.getAllCounters().then(counters => {
-        setTableData(counters);
-      });
-    }
-
-    countersApi.incrementCounter(id, callback)
+    handleChange(id, true);
   }
 
   function handleDecrement(id: number) {
+    handleChange(id, false);
+  }
+
+  function handleChange(id: number, isIncrement: boolean) {
     settingsApi.getSettingValue('isVibrationEnabled').then(setting => {
       if (setting !== undefined && setting.value === true) {
         window.navigator.vibrate(200);
+      }
+    });
+
+    settingsApi.getSettingValue('isClickSoundEnabled').then(setting => {
+      if (setting !== undefined && setting.value === true) {
+      new Audio("/click.mp3").play();
       }
     });
 
@@ -48,7 +46,11 @@ export default function MainContent() {
       });
     }
 
-    countersApi.decrementCounter(id, callback);
+    if (isIncrement) {
+      countersApi.incrementCounter(id, callback)
+    } else {
+      countersApi.decrementCounter(id, callback);
+    }
   }
 
   function onCounterButtonClicked(id: number) {
