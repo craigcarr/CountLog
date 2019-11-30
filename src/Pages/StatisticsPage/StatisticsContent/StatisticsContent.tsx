@@ -90,11 +90,7 @@ export default function StatisticsContent() {
               <p>Current Color</p>
             </Table.Cell>
             <Table.Cell>
-              <Button
-                className={styles.colorButton}
-                style={{ backgroundColor: counterColor, color: 'white' }}>
-                {counterColor}
-              </Button>
+              <p style={{ color: counterColor }}>{counterColor}</p>
             </Table.Cell>
           </Table.Row>
           <Table.Row>
