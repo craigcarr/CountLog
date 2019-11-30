@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Table, Dropdown, Icon, Button } from 'semantic-ui-react';
+import { Table, Dropdown, Icon, Button, Pagination } from 'semantic-ui-react';
 import _ from 'lodash';
 import { EventType } from '../../../CounterDatabase';
 import styles from './CounterHistoryContent.module.scss';
@@ -9,6 +9,7 @@ import { CountersContext, LoggingContext } from '../../../App';
 export default function MainContent() {
   const [tableData, setTableData] = useState<any[]>([]);
   const [filter, setFilter] = useState<EventType | undefined>(undefined);
+  const [activePage, setActivePage] = useState<number>(1);
 
   const history = useHistory();
   const params = useParams<any>();
@@ -43,11 +44,11 @@ export default function MainContent() {
 
   function getDisplayNameForType(type: EventType): string {
     if (type === EventType.Increment) {
-      return 'Increment Event';
+      return 'Increment';
     } else if (type === EventType.Decrement) {
-      return 'Decrement Event';
+      return 'Decrement';
     } else if (type === EventType.Mutate) {
-      return 'Mutation Event';
+      return 'Mutation';
     } else {
       loggingApi.error('type has an unknown EventType')
       return 'Unknown Event Type';
@@ -64,12 +65,31 @@ export default function MainContent() {
     } else {
       setFilter(undefined);
     }
+
+    setActivePage(1);
   }
 
   function editEventClicked(eventId: number) {
     let counterId = parseInt(params['counterId'], 10);
     history.push('/counterhistory/' + counterId + '/editevent/' + eventId);
   }
+
+  function handlePageChange(event: any, data: any) {
+    setActivePage(data.activePage);
+  }
+
+  let itemsPerPage = 5;
+
+  let totalPages = null;
+  if (filter === undefined) {
+    totalPages = Math.ceil(tableData.length / itemsPerPage);
+  } else {
+    totalPages = Math.ceil(tableData.filter(row => row['type'] === filter).length / itemsPerPage);
+  }
+
+  let itemLowerBound = itemsPerPage * (activePage - 1);
+  let itemUpperBound = itemsPerPage * activePage;
+  let counter = 0;
 
   let tableContent = null;
 
@@ -78,22 +98,26 @@ export default function MainContent() {
   } else {
     tableContent = _.map(tableData, ({ id, type, timestamp }) => {
       if (filter === undefined || type === filter) {
-        return (
-          <Table.Row key={id}>
-            <Table.Cell className={styles.eventTableCell}>
-              <p>{getDisplayNameForType(type)}</p>
-            </Table.Cell>
-            <Table.Cell>
-              <p>{displayTimestamp(timestamp)}</p>
-            </Table.Cell>
-            <Table.Cell>
-              <Button id={styles.myButton} onClick={() => { editEventClicked(id) }} circular icon>
-                <Icon name="edit">
-                </Icon>
-              </Button>
-            </Table.Cell>
-          </Table.Row>
-        )
+        counter += 1;
+
+        if (counter > itemLowerBound && counter <= itemUpperBound) {
+          return (
+            <Table.Row key={id}>
+              <Table.Cell className={styles.eventTableCell}>
+                <p>{getDisplayNameForType(type)}</p>
+              </Table.Cell>
+              <Table.Cell>
+                <p>{displayTimestamp(timestamp)}</p>
+              </Table.Cell>
+              <Table.Cell>
+                <Button id={styles.myButton} onClick={() => { editEventClicked(id) }} circular icon>
+                  <Icon name="edit">
+                  </Icon>
+                </Button>
+              </Table.Cell>
+            </Table.Row>
+          )
+        }
       }
     });
   }
@@ -122,6 +146,17 @@ export default function MainContent() {
           {tableContent}
         </Table.Body>
       </Table>
+
+      <Pagination
+        className={styles.pagination}
+        boundaryRange={1}
+        activePage={activePage}
+        firstItem={null}
+        lastItem={null}
+        siblingRange={0}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }
