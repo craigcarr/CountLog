@@ -39,6 +39,14 @@ class CountersAPI {
     });
   }
 
+  public putEvent(event: IEvent) {
+    return this.db.events.put(event);
+  }
+
+  public getEventById(eventId: number) {
+    return this.db.events.get(eventId);
+  }
+
   public getEventsForCounter(counterId: number, type: EventType | undefined) {
     if (type === undefined) {
       return this.db.events
@@ -113,7 +121,7 @@ class CountersAPI {
   public decrementCounter(counterId: number, callback: any) {
     this.db.counters.get(counterId).then(counter => {
       if (counter === undefined) {
-        this.loggingApi.error('counter is undefined')
+        this.loggingApi.error('counter is undefined');
       } else {
         let decrementEvent: IEvent = {
           counterId: counterId,
