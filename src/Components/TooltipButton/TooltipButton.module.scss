@@ -1,0 +1,35 @@
+@import '../../App.scss';
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip:active {
+  // Override global button animation in App.scss
+  opacity: 100% !important;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 2vmax;
+  border-radius: 2vmax;
+  position: absolute;
+  z-index: 1;
+  width: 20vmax;
+  top: 100%;
+  left: 50%;
+  margin-left: -10vmax; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+.tooltiptext {
+  font-size: $bodyTextSize;
+  line-height: $bodyTextSize;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

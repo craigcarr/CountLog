@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Table, Checkbox, } from 'semantic-ui-react';
+import { Table, Checkbox } from 'semantic-ui-react';
 import styles from './SettingsContent.module.scss';
 import { SettingsContext } from '../../../App';
+import TooltipButton from '../../../Components/TooltipButton/TooltipButton';
 
 export default function SettingsContent() {
   const [isVibrationEnabled, setVibrationEnabled] = useState<boolean>(false);
   const [isClickSoundEnabled, setClickSoundEnabled] = useState<boolean>(false);
-  const [isScreenAlwaysOn, setScreenAlwaysOn] = useState<boolean>(false);
   const [isDarkModeEnabled, setDarkModeEnabled] = useState<boolean>(false);
 
   const settingsApi = useContext(SettingsContext);
@@ -27,7 +27,6 @@ export default function SettingsContent() {
 
       setVibrationEnabled(result['isVibrationEnabled']);
       setClickSoundEnabled(result['isClickSoundEnabled']);
-      setScreenAlwaysOn(result['isScreenAlwaysOn']);
       setDarkModeEnabled(result['isDarkModeEnabled']);
     });
   }, [settingsApi]);
@@ -62,11 +61,6 @@ export default function SettingsContent() {
     }
   }
 
-  function screenAlwaysOnSettingChanged() {
-    // TODO Some indication of enabling
-    setScreenAlwaysOn(!isScreenAlwaysOn)
-  }
-
   function darkModeEnabledSettingChanged() {
     // TODO Theme will change on settings screen
     setDarkModeEnabled(!isDarkModeEnabled);
@@ -74,11 +68,14 @@ export default function SettingsContent() {
 
   return (
     <div className={styles.content}>
-      <Table unstackable columns={2}>
+      <Table unstackable columns={3}>
         <Table.Body>
           <Table.Row>
             <Table.Cell className={styles.tableCell}>
               <p>Dark Mode</p>
+            </Table.Cell>
+            <Table.Cell>
+              <TooltipButton text="Change color scheme so the app is optimized for low-light viewing." />
             </Table.Cell>
             <Table.Cell>
               <Checkbox
@@ -95,6 +92,9 @@ export default function SettingsContent() {
               <p>Click Sound</p>
             </Table.Cell>
             <Table.Cell>
+              <TooltipButton text="Play a clicking sound when a counter is incremented or decremented." />
+            </Table.Cell>
+            <Table.Cell>
               <Checkbox
                 className={styles.checkBox}
                 toggle
@@ -108,26 +108,15 @@ export default function SettingsContent() {
               <p>Vibration</p>
             </Table.Cell>
             <Table.Cell>
+              <TooltipButton text="Vibrate the device when a counter is incremented or decremented." />
+            </Table.Cell>
+            <Table.Cell>
               <Checkbox
                 className={styles.checkBox}
                 toggle
                 checked={isVibrationEnabled}
                 onChange={vibrationSettingChanged}>
               </Checkbox>
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell className={styles.tableCell}>
-              <p>Screen Always On</p>
-            </Table.Cell>
-            <Table.Cell>
-              <Checkbox
-                className={styles.checkBox}
-                toggle
-                checked={isScreenAlwaysOn}
-                onChange={screenAlwaysOnSettingChanged}>
-              </Checkbox>
-              <p>Not yet supported!</p>
             </Table.Cell>
           </Table.Row>
         </Table.Body>
