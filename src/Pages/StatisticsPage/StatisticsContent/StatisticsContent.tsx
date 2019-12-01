@@ -3,7 +3,7 @@ import { Table, Button } from 'semantic-ui-react';
 import styles from './StatisticsContent.module.scss';
 import { VictoryChart, VictoryLine, VictoryLabel, VictoryAxis } from "victory";
 import { useHistory, useParams } from 'react-router';
-import { CountersContext, LoggingContext } from '../../../App';
+import { CountersContext } from '../../../App';
 
 export default function StatisticsContent() {
   const [counterId, setCounterId] = useState<number>(-1);
@@ -15,7 +15,6 @@ export default function StatisticsContent() {
   const history = useHistory();
   const params = useParams<any>();
 
-  const loggingApi = useContext(LoggingContext);
   const countersApi = useContext(CountersContext);
 
   useEffect(() => {
@@ -28,13 +27,9 @@ export default function StatisticsContent() {
     setCounterId(counterIdXXX);
 
     countersApi.getCounterById(counterIdXXX).then(counter => {
-      if (counter === undefined) {
-        loggingApi.error('counter is undefined')
-      } else {
-        setCounterName(counter.name);
-        setCounterColor(counter.color);
-        setCounterValue(counter.value);
-      }
+      setCounterName(counter.name);
+      setCounterColor(counter.color);
+      setCounterValue(counter.value);
     });
 
     countersApi.getDisplayValuesForCounter(counterIdXXX).then(displayValues => {
@@ -59,7 +54,7 @@ export default function StatisticsContent() {
 
       setChartData(chartDataXXX);
     });
-  }, [params, countersApi, loggingApi]);
+  }, [params, countersApi]);
 
   function editButtonClicked() {
     history.push('/editcounter/' + counterId)

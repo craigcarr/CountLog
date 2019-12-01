@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { EventType } from '../../../CounterDatabase';
 import styles from './CounterHistoryContent.module.scss';
 import { useParams, useHistory } from 'react-router';
-import { CountersContext, LoggingContext } from '../../../App';
+import { CountersContext } from '../../../App';
 
 export default function MainContent() {
   const [tableData, setTableData] = useState<any[]>([]);
@@ -14,7 +14,6 @@ export default function MainContent() {
   const history = useHistory();
   const params = useParams<any>();
 
-  const loggingApi = useContext(LoggingContext);
   const countersApi = useContext(CountersContext);
 
   useEffect(() => {
@@ -50,8 +49,8 @@ export default function MainContent() {
     } else if (type === EventType.Mutate) {
       return 'Mutation';
     } else {
-      loggingApi.error('type has an unknown EventType')
-      return 'Unknown Event Type';
+      // EventType.Uncategorized
+      return 'Uncategorized';
     }
   }
 

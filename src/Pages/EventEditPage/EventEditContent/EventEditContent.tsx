@@ -2,11 +2,11 @@ import React, { useEffect, useContext, useState } from 'react';
 import styles from './EventEditContent.module.scss';
 import { useParams, useHistory } from 'react-router';
 import { Table, TextArea, Button, Icon } from 'semantic-ui-react';
-import { CountersContext, LoggingContext } from '../../../App';
+import { CountersContext } from '../../../App';
 import { EventType, IEvent } from '../../../CounterDatabase';
 
 export default function EventEditContent() {
-  const [eventType, setEventType] = useState<EventType>();
+  const [eventType, setEventType] = useState<EventType>(EventType.Uncategorized);
   const [timestamp, setTimestamp] = useState<string>('');
   const [annotation, setAnnotation] = useState<string>('');
 
@@ -14,22 +14,17 @@ export default function EventEditContent() {
   const params = useParams<any>();
 
   const countersApi = useContext(CountersContext);
-  const loggingApi = useContext(LoggingContext);
 
   let counterId = parseInt(params['counterId'], 10);
   let eventId = parseInt(params['eventId'], 10);
 
   useEffect(() => {
     countersApi.getEventById(eventId).then(event => {
-      if (event === undefined) {
-        loggingApi.error('event is undefined');
-      } else {
-        setEventType(event.type);
-        setTimestamp(event.timestamp);
-        setAnnotation(event.annotation);
-      }
+      setEventType(event.type);
+      setTimestamp(event.timestamp);
+      setAnnotation(event.annotation);
     });
-  }, [countersApi, eventId, loggingApi])
+  }, [countersApi, eventId])
 
   function displayTimestamp(timestampX: string): string {
     let date = new Date(parseInt(timestampX, 10));
@@ -49,21 +44,17 @@ export default function EventEditContent() {
   }
 
   function onSaveCounterClicked() {
-    if (eventType === undefined) {
-      loggingApi.error('eventType is undefined');
-    } else {
-      let modifiedEvent: IEvent = {
-        id: eventId,
-        counterId: counterId,
-        type: eventType,
-        timestamp: timestamp,
-        annotation: annotation,
-      }
-
-      countersApi.putEvent(modifiedEvent);
-
-      history.goBack();
+    let modifiedEvent: IEvent = {
+      id: eventId,
+      counterId: counterId,
+      type: eventType,
+      timestamp: timestamp,
+      annotation: annotation,
     }
+
+    countersApi.putEvent(modifiedEvent);
+
+    history.goBack();
   }
 
   function handleTextAreaChanged(data: any) {

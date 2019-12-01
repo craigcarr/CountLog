@@ -14,8 +14,16 @@ class CountersAPI {
     return this.db.counters.toArray();
   }
 
-  public getCounterById(id: number) {
-    return this.db.counters.get(id);
+  public getCounterById(id: number): Promise<ICounter> {
+    return new Promise(resolve => {
+      this.db.counters.get(id).then(counter => {
+        if (counter === undefined) {
+          this.loggingApi.error("counter is undefined");
+        } else {
+          resolve(counter);
+        }
+      });
+    });
   }
 
   public putCounter(counter: ICounter) {
@@ -43,8 +51,16 @@ class CountersAPI {
     return this.db.events.put(event);
   }
 
-  public getEventById(eventId: number) {
-    return this.db.events.get(eventId);
+  public getEventById(eventId: number): Promise<IEvent> {
+    return new Promise(resolve => {
+      this.db.events.get(eventId).then(event => {
+        if (event === undefined) {
+          this.loggingApi.error('event is undefined');
+        } else {
+          resolve(event);
+        }
+      })
+    });
   }
 
   public getEventsForCounter(counterId: number, type: EventType | undefined) {

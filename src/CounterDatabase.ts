@@ -31,6 +31,7 @@ export enum EventType {
   Increment = "increment",
   Decrement = "decrement",
   Mutate = "mutate",
+  Uncategorized = "uncategorized", // For null-handling cases.
 }
 
 class CounterDatabase extends Dexie {
