@@ -3,6 +3,7 @@ import { Table, Checkbox } from 'semantic-ui-react';
 import styles from './SettingsContent.module.scss';
 import { SettingsContext } from '../../../App';
 import TooltipButton from '../../../Components/TooltipButton/TooltipButton';
+import { ISettings } from '../../../CounterDatabase';
 
 export default function SettingsContent() {
   const [isVibrationEnabled, setVibrationEnabled] = useState<boolean>(false);
@@ -12,17 +13,16 @@ export default function SettingsContent() {
   const settingsApi = useContext(SettingsContext);
 
   useEffect(() => {
-    settingsApi.getAllSettings().then((settings) => {
-      // TODO Kind of unsafe from TypeScript's perspective.
-      function array2dict(array: any): any {
-        return array.reduce(
-          (map: any, setting: any) => {
-            map[setting.name] = setting.value;
-            return map;
-          },
-          {});
-      }
+    function array2dict(array: ISettings[]): any {
+      return array.reduce(
+        (map: any, setting: ISettings) => {
+          map[setting.name] = setting.value;
+          return map;
+        },
+        {});
+    }
 
+    settingsApi.getAllSettings().then((settings) => {
       let result = array2dict(settings);
 
       setVibrationEnabled(result['isVibrationEnabled']);
