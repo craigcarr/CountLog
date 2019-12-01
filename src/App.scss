@@ -11,6 +11,12 @@ $bodyTextSize: 2vmax;
   border-width: 1px;
 }
 
+// Hack to make the "Dropdown" component have reasonable padding between options.
+div.ui.selection.dropdown > div.menu.transition > div.selected.item,
+div.ui.selection.dropdown > div.menu.transition > div.item {
+  padding: 1vmax !important;
+}
+
 .button:active {
   opacity: 50%;
 }
