@@ -36,17 +36,19 @@ export default function MainContent() {
     })
   }, [params, countersApi]);
 
-  function displayTimestamp(timestamp: string): string {
-    let date = new Date(parseInt(timestamp, 10));
+  // TODO Duplicated in EventEditContext
+  function displayTimestamp(rawTimestamp: string): string {
+    let date = new Date(parseInt(rawTimestamp, 10));
     return date.toLocaleString();
   }
 
-  function getDisplayNameForType(type: EventType): string {
-    if (type === EventType.Increment) {
+  // TODO Duplicated in EventEditContext
+  function displayEventType(rawEventType: EventType): string {
+    if (rawEventType === EventType.Increment) {
       return 'Increment';
-    } else if (type === EventType.Decrement) {
+    } else if (rawEventType === EventType.Decrement) {
       return 'Decrement';
-    } else if (type === EventType.Mutate) {
+    } else if (rawEventType === EventType.Mutate) {
       return 'Mutation';
     } else {
       // EventType.Uncategorized
@@ -68,7 +70,7 @@ export default function MainContent() {
     setActivePage(1);
   }
 
-  function editEventClicked(eventId: number) {
+  function handleEditEventClicked(eventId: number) {
     let counterId = parseInt(params['counterId'], 10);
     history.push('/counterhistory/' + counterId + '/editevent/' + eventId);
   }
@@ -103,13 +105,13 @@ export default function MainContent() {
           return (
             <Table.Row key={id}>
               <Table.Cell className={styles.eventTableCell}>
-                <p>{getDisplayNameForType(type)}</p>
+                <p>{displayEventType(type)}</p>
               </Table.Cell>
               <Table.Cell>
                 <p>{displayTimestamp(timestamp)}</p>
               </Table.Cell>
               <Table.Cell>
-                <Button id={styles.myButton} onClick={() => { editEventClicked(id) }} circular icon>
+                <Button id={styles.myButton} onClick={() => { handleEditEventClicked(id) }} circular icon>
                   <Icon name="edit">
                   </Icon>
                 </Button>

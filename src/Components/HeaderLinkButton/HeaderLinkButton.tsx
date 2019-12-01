@@ -13,7 +13,7 @@ interface IProps {
 export default function HeaderLinkButton(props: IProps) {
   const history = useHistory();
 
-  function onLinkButtonClicked() {
+  function handleLinkButtonClicked() {
     history.push(props.route);
   }
 
@@ -22,7 +22,7 @@ export default function HeaderLinkButton(props: IProps) {
       className={`${styles.aboutBtn} ${props.className}`}
       circular
       icon
-      onClick={onLinkButtonClicked}>
+      onClick={handleLinkButtonClicked}>
       <Icon name={props.iconName}>
       </Icon>
     </Button>

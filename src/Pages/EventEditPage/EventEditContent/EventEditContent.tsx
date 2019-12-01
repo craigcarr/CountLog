@@ -26,24 +26,25 @@ export default function EventEditContent() {
     });
   }, [countersApi, eventId])
 
-  function displayTimestamp(timestampX: string): string {
-    let date = new Date(parseInt(timestampX, 10));
+  function displayTimestamp(rawTimestamp: string): string {
+    let date = new Date(parseInt(rawTimestamp, 10));
     return date.toLocaleString();
   }
 
-  function displayEventType(eventTypeX: EventType | undefined): string {
-    if (eventTypeX === EventType.Increment) {
+  function displayEventType(rawEventType: EventType): string {
+    if (rawEventType === EventType.Increment) {
       return 'Increment';
-    } else if (eventTypeX === EventType.Decrement) {
+    } else if (rawEventType === EventType.Decrement) {
       return 'Decrement';
-    } else if (eventTypeX === EventType.Mutate) {
+    } else if (rawEventType === EventType.Mutate) {
       return 'Mutation';
     } else {
-      return '';
+      // EventType.Uncategorized
+      return 'Uncategorized';
     }
   }
 
-  function onSaveCounterClicked() {
+  function handleSaveCounterClicked() {
     let modifiedEvent: IEvent = {
       id: eventId,
       counterId: counterId,
@@ -98,7 +99,7 @@ export default function EventEditContent() {
 
       <Button
         id={styles.saveCounterBtn}
-        onClick={onSaveCounterClicked}
+        onClick={handleSaveCounterClicked}
         icon
         circular>
         <Icon name="save">

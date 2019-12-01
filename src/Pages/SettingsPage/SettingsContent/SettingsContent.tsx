@@ -31,7 +31,7 @@ export default function SettingsContent() {
     });
   }, [settingsApi]);
 
-  function vibrationSettingChanged() {
+  function handleVibrationSettingChanged() {
     let newValue = !isVibrationEnabled;
 
     setVibrationEnabled(newValue);
@@ -46,7 +46,7 @@ export default function SettingsContent() {
     }
   }
 
-  function clickSoundSettingChanged() {
+  function handleClickSoundSettingChanged() {
     let newValue = !isClickSoundEnabled;
 
     setClickSoundEnabled(newValue);
@@ -61,7 +61,7 @@ export default function SettingsContent() {
     }
   }
 
-  function darkModeEnabledSettingChanged() {
+  function handleDarkModeEnabledSettingChanged() {
     // TODO Theme will change on settings screen
     setDarkModeEnabled(!isDarkModeEnabled);
   }
@@ -82,7 +82,7 @@ export default function SettingsContent() {
                 className={styles.checkBox}
                 toggle
                 checked={isDarkModeEnabled}
-                onChange={darkModeEnabledSettingChanged}>
+                onChange={handleDarkModeEnabledSettingChanged}>
               </Checkbox>
               <p>Not yet supported!</p>
             </Table.Cell>
@@ -99,7 +99,7 @@ export default function SettingsContent() {
                 className={styles.checkBox}
                 toggle
                 checked={isClickSoundEnabled}
-                onChange={clickSoundSettingChanged}>
+                onChange={handleClickSoundSettingChanged}>
               </Checkbox>
             </Table.Cell>
           </Table.Row>
@@ -115,7 +115,7 @@ export default function SettingsContent() {
                 className={styles.checkBox}
                 toggle
                 checked={isVibrationEnabled}
-                onChange={vibrationSettingChanged}>
+                onChange={handleVibrationSettingChanged}>
               </Checkbox>
             </Table.Cell>
           </Table.Row>

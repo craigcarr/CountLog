@@ -50,7 +50,7 @@ export default function CounterCreateContent(props: IProps) {
     }
   }
 
-  function onSaveCounterClicked() {
+  function handleSaveCounterClicked() {
     if (props.id === undefined) {
       countersApi.putCounter({
         name: name,
@@ -108,7 +108,7 @@ export default function CounterCreateContent(props: IProps) {
 
       <Button
         id={styles.saveCounterBtn}
-        onClick={onSaveCounterClicked}
+        onClick={handleSaveCounterClicked}
         disabled={isInputValid() === false}
         icon
         circular>

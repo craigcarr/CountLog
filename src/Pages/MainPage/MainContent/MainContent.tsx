@@ -53,11 +53,11 @@ export default function MainContent() {
     }
   }
 
-  function onCounterButtonClicked(id: number) {
+  function handleCounterButtonClicked(id: number) {
     history.push('/statistics/' + id)
   }
 
-  function onCreateButtonClicked() {
+  function handleCreateButtonClicked() {
     history.push('/create')
   }
 
@@ -77,7 +77,7 @@ export default function MainContent() {
             circular><Icon name="minus"></Icon>
           </Button>
           <Button
-            onClick={() => { onCounterButtonClicked(id) }}
+            onClick={() => { handleCounterButtonClicked(id) }}
             className={styles.counterDisplay}
             style={{ backgroundColor: color, color: 'white' }}>
             <p className={styles.counterText}>{name}</p>
@@ -108,7 +108,7 @@ export default function MainContent() {
       <br></br>
       <br></br>
 
-      <Button circular icon id={styles.createCounterBtn} onClick={onCreateButtonClicked}>
+      <Button circular icon id={styles.createCounterBtn} onClick={handleCreateButtonClicked}>
         <Icon name="plus">
         </Icon>
       </Button>

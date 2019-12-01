@@ -10,7 +10,7 @@ export default function CounterDeleteContent() {
 
   const countersApi = useContext(CountersContext);
 
-  function deleteButtonClicked() {
+  function handleDeleteButtonClicked() {
     let counterId = parseInt(params['counterId'], 10)
 
     countersApi.deleteCounter(counterId).then(() => {
@@ -29,7 +29,7 @@ export default function CounterDeleteContent() {
           </Table.Row>
           <Table.Row>
             <Table.Cell>
-              <Button id={styles.deleteButton} onClick={deleteButtonClicked}>
+              <Button id={styles.deleteButton} onClick={handleDeleteButtonClicked}>
                 Confirm Delete
                 </Button>
             </Table.Cell>

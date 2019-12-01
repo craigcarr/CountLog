@@ -56,15 +56,15 @@ export default function StatisticsContent() {
     });
   }, [params, countersApi]);
 
-  function editButtonClicked() {
+  function handleEditButtonClicked() {
     history.push('/editcounter/' + counterId)
   }
 
-  function deleteButtonClicked() {
+  function handleDeleteButtonClicked() {
     history.push('/deletecounter/' + counterId)
   }
 
-  function viewButtonClicked() {
+  function handleViewButtonClicked() {
     history.push('/counterhistory/' + counterId)
   }
 
@@ -103,7 +103,7 @@ export default function StatisticsContent() {
             <Table.Cell>
               <Button
                 className={styles.myButton}
-                onClick={editButtonClicked}>
+                onClick={handleEditButtonClicked}>
                 Edit
                 </Button>
             </Table.Cell>
@@ -115,7 +115,7 @@ export default function StatisticsContent() {
             <Table.Cell>
               <Button
                 className={styles.myButton}
-                onClick={deleteButtonClicked}>
+                onClick={handleDeleteButtonClicked}>
                 Delete
                 </Button>
             </Table.Cell>
@@ -127,7 +127,7 @@ export default function StatisticsContent() {
             <Table.Cell>
               <Button
                 className={styles.myButton}
-                onClick={viewButtonClicked}>
+                onClick={handleViewButtonClicked}>
                 View
                 </Button>
             </Table.Cell>

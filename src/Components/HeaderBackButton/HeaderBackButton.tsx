@@ -11,7 +11,7 @@ interface IProps {
 export default function HeaderBackButton(props: IProps) {
   const history = useHistory();
 
-  function onBackButtonClicked() {
+  function handleBackButtonClicked() {
     history.goBack();
   }
 
@@ -20,7 +20,7 @@ export default function HeaderBackButton(props: IProps) {
       className={`${styles.backBtn} ${props.className}`}
       circular
       icon
-      onClick={onBackButtonClicked}>
+      onClick={handleBackButtonClicked}>
       <Icon name={props.iconName}>
       </Icon>
     </Button>
