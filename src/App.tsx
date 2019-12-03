@@ -7,14 +7,18 @@ import CounterCreatePage from './Pages/CounterCreatePage/CounterCreatePage';
 import CounterDatabase from './CounterDatabase';
 import CounterEditPage from './Pages/CounterEditPage/CounterEditPage';
 import StatisticsPage from './Pages/StatisticsPage/StatisticsPage';
-import SettingsAPI from './Interfaces/SettingsAPI';
-import CountersAPI from './Interfaces/CountersAPI';
 import CounterDeletePage from './Pages/CounterDeletePage/CounterDeletePage';
 import CounterHistoryPage from './Pages/CounterHistoryPage/CounterHistoryPage';
 import EventEditPage from './Pages/EventEditPage/EventEditPage';
 import LoggingAPI from './Interfaces/LoggingAPI';
+import CountersAPI from './Interfaces/CountersAPI';
 import EventsAPI from './Interfaces/EventsAPI';
+import SettingsAPI from './Interfaces/SettingsAPI';
 import './App.scss';
+import ReceiverListPage from './Pages/ReceiverListPage/ReceiverListPage';
+import ReceiverEditPage from './Pages/ReceiverEditPage/ReceiverEditPage';
+import ReceiverCreatePage from './Pages/ReceiverCreatePage/ReceiverCreatePage';
+import ReceiverDeletePage from './Pages/ReceiverDeletePage/ReceiverDeletePage';
 
 const db = new CounterDatabase();
 const loggingApi = new LoggingAPI();
@@ -61,6 +65,18 @@ export default function App() {
               </Route>
               <Route path="/settings">
                 <SettingsPage></SettingsPage>
+              </Route>
+              <Route path="/receiverlist">
+                <ReceiverListPage></ReceiverListPage>
+              </Route>
+              <Route path="/receiveredit">
+                <ReceiverEditPage></ReceiverEditPage>
+              </Route>
+              <Route path="/receivercreate">
+                <ReceiverCreatePage></ReceiverCreatePage>
+              </Route>
+              <Route path="/receiverdelete">
+                <ReceiverDeletePage></ReceiverDeletePage>
               </Route>
               <Route path="/">
                 <MainPage></MainPage>

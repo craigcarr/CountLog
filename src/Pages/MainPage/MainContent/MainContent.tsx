@@ -96,7 +96,7 @@ export default function MainContent() {
   }
 
   return (
-    <div id={styles.mainContent} className={styles.content}>
+    <div className={styles.content}>
       <Table unstackable>
         <Table.Body>
           {tableContent}

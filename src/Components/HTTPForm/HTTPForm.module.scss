@@ -1,0 +1,10 @@
+@import '../../App.scss';
+
+#serverAddressInput {
+  max-width: 10em !important;
+}
+
+#verifyButton, #saveButton {
+  width: 20vmax;
+  font-size: $bodyTextSize;
+}

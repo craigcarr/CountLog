@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Table, Checkbox, Select } from 'semantic-ui-react';
+import { Table, Checkbox, Select, Button } from 'semantic-ui-react';
 import styles from './SettingsContent.module.scss';
 import { SettingsContext } from '../../../App';
 import TooltipButton from '../../../Components/TooltipButton/TooltipButton';
 import { ISettings } from '../../../CounterDatabase';
+import { useHistory } from 'react-router';
 
 export default function SettingsContent() {
   const [isVibrationEnabled, setVibrationEnabled] = useState<boolean>(false);
@@ -11,6 +12,8 @@ export default function SettingsContent() {
   const [isDarkModeEnabled, setDarkModeEnabled] = useState<boolean>(false);
 
   const settingsApi = useContext(SettingsContext);
+
+  const history = useHistory();
 
   useEffect(() => {
     function array2dict(array: ISettings[]): any {
@@ -64,6 +67,10 @@ export default function SettingsContent() {
   function handleDarkModeEnabledSettingChanged() {
     // TODO Theme will change on settings screen
     setDarkModeEnabled(!isDarkModeEnabled);
+  }
+
+  function handleConfigureButtonClicked() {
+    history.push('/receiverlist');
   }
 
   const languageOptions = [
@@ -158,6 +165,17 @@ export default function SettingsContent() {
                 checked={isVibrationEnabled}
                 onChange={handleVibrationSettingChanged}>
               </Checkbox>
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell className={styles.tableCell}>
+              <p>Event Receivers</p>
+            </Table.Cell>
+            <Table.Cell>
+              <TooltipButton text="Configure back-ends to receive events that have been fired by CountLog." />
+            </Table.Cell>
+            <Table.Cell>
+              <Button className={styles.button} onClick={handleConfigureButtonClicked}>Configure</Button>
             </Table.Cell>
           </Table.Row>
         </Table.Body>
