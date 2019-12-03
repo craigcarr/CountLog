@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Table, Dropdown, Icon, Button, Pagination } from 'semantic-ui-react';
+import { Table, Dropdown, Icon, Button, Pagination, Checkbox } from 'semantic-ui-react';
 import _ from 'lodash';
 import { EventType } from '../../../CounterDatabase';
 import styles from './CounterHistoryContent.module.scss';
@@ -8,7 +8,8 @@ import { CountersContext, EventsContext } from '../../../App';
 
 export default function MainContent() {
   const [tableData, setTableData] = useState<any[]>([]);
-  const [filter, setFilter] = useState<EventType | undefined>(undefined);
+  const [typeFilter, setTypeFilter] = useState<EventType | undefined>(undefined);
+  const [hasAnnotationFilter, setAnnotationFilter] = useState<boolean>(false);
   const [activePage, setActivePage] = useState<number>(1);
 
   const history = useHistory();
@@ -28,6 +29,7 @@ export default function MainContent() {
           id: event.id,
           type: event.type,
           timestamp: event.timestamp,
+          annotation: event.annotation,
         });
       }
 
@@ -59,13 +61,13 @@ export default function MainContent() {
 
   function handleFilterChanged(data: any) {
     if (data.value === EventType.Increment) {
-      setFilter(EventType.Increment);
+      setTypeFilter(EventType.Increment);
     } else if (data.value === EventType.Decrement) {
-      setFilter(EventType.Decrement);
+      setTypeFilter(EventType.Decrement);
     } else if (data.value === EventType.Mutate) {
-      setFilter(EventType.Mutate);
+      setTypeFilter(EventType.Mutate);
     } else {
-      setFilter(undefined);
+      setTypeFilter(undefined);
     }
 
     setActivePage(1);
@@ -82,11 +84,18 @@ export default function MainContent() {
 
   let itemsPerPage = 5;
 
+  // TODO This is total cancer.
   let totalPages = null;
-  if (filter === undefined) {
+  if (typeFilter === undefined && hasAnnotationFilter === false) {
     totalPages = Math.ceil(tableData.length / itemsPerPage);
+  } else if (typeFilter !== undefined && hasAnnotationFilter === false) {
+    totalPages = Math.ceil(tableData.filter(row => row['type'] === typeFilter).length / itemsPerPage);
+  } else if (typeFilter === undefined && hasAnnotationFilter === true) {
+    totalPages = Math.ceil(tableData.filter(row => row['annotation'] !== '').length / itemsPerPage);
   } else {
-    totalPages = Math.ceil(tableData.filter(row => row['type'] === filter).length / itemsPerPage);
+    totalPages = Math.ceil(
+      tableData.filter(row => row['type'] === typeFilter && row['annotation'] !== '').length / itemsPerPage
+    );
   }
 
   let itemLowerBound = itemsPerPage * (activePage - 1);
@@ -98,8 +107,11 @@ export default function MainContent() {
   if (tableData.length === 0) {
     tableContent = <Table.Row><Table.Cell>There are no events to display.</Table.Cell></Table.Row>
   } else {
-    tableContent = _.map(tableData, ({ id, type, timestamp }) => {
-      if (filter === undefined || type === filter) {
+    tableContent = _.map(tableData, ({ id, type, timestamp, annotation }) => {
+      let typeFilterCondition = (typeFilter === undefined || type === typeFilter);
+      let hasAnnotationCondition = (hasAnnotationFilter === false || annotation !== '');
+
+      if (typeFilterCondition && hasAnnotationCondition) {
         counter += 1;
 
         if (counter > itemLowerBound && counter <= itemUpperBound) {
@@ -130,20 +142,47 @@ export default function MainContent() {
     { key: 3, text: 'Mutate Events Only', value: EventType.Mutate },
   ];
 
+  function handleCheckboxClicked() {
+    setAnnotationFilter(!hasAnnotationFilter);
+  }
+
   return (
     <div id={styles.mainContent} className={styles.content}>
-      <br></br>
+      <Table unstackable id={styles.filterTable}>
+        <Table.Body>
+          <Table.Row className={styles.filterTableRow}>
+            <Table.Cell>
+              Event Type
+            </Table.Cell>
+            <Table.Cell>
+              <Dropdown
+                id={styles.dropdown}
+                onChange={(e, data) => { handleFilterChanged(data); }}
+                placeholder='Filter'
+                options={options}
+                clearable
+                selection>
+              </Dropdown>
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row className={styles.filterTableRow}>
+            <Table.Cell>
+              Has Annotation
+            </Table.Cell>
+            <Table.Cell>
+              <div id={styles.checkbox}>
+                <Checkbox
+                  checked={hasAnnotationFilter}
+                  onClick={handleCheckboxClicked}>
+                </Checkbox>
+              </div>
 
-      <Dropdown
-        id={styles.dropdown}
-        onChange={(e, data) => { handleFilterChanged(data); }}
-        placeholder='Filter'
-        options={options}
-        clearable
-        selection>
-      </Dropdown>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
 
-      <Table striped unstackable>
+      <Table striped unstackable id={styles.mainTable}>
         <Table.Body>
           {tableContent}
         </Table.Body>
