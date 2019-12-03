@@ -5,8 +5,25 @@
 }
 
 #dropdown {
-  width: 90%;
-  left: 5%;
+  width: 10%;
+}
+
+#filterTable {
+  border-bottom: 0.5vmax solid gray;
+  margin-bottom: 0px;
+}
+
+.filterTableRow {
+  height: 8vmax !important;
+}
+
+#checkbox {
+  transform-origin: left;
+  transform: scale(1.5);
+}
+
+#mainTable {
+  margin-top: 0px;
 }
 
 span[class="text"] {
