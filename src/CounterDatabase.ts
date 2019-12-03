@@ -34,7 +34,7 @@ export enum EventType {
   Uncategorized = "uncategorized", // For null-handling cases.
 }
 
-class CounterDatabase extends Dexie {
+export default class CounterDatabase extends Dexie {
   counters: Dexie.Table<ICounter, number>;
   events: Dexie.Table<IEvent, number>;
   settings: Dexie.Table<ISettings, number>;
@@ -56,5 +56,3 @@ class CounterDatabase extends Dexie {
     this.displayValues = this.table("displayValues");
   }
 }
-
-export default CounterDatabase;
