@@ -3,6 +3,9 @@
 .tooltip {
   position: relative;
   display: inline-block;
+  border-style: solid !important;
+  border-color: black !important;
+  border-width: 0.1vmax !important;
 }
 
 .tooltip:active {
