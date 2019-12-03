@@ -2,7 +2,7 @@ import log from "loglevel";
 
 // TODO Possibly use https://github.com/kutuluk/loglevel-plugin-remote
 
-class LoggingAPI {
+export default class LoggingAPI {
   constructor() {
     log.enableAll();
   }
@@ -11,5 +11,3 @@ class LoggingAPI {
     log.error(data);
   }
 }
-
-export default LoggingAPI;

@@ -1,7 +1,7 @@
 import CounterDatabase, { ICounter, IEvent, EventType, IDisplayValue } from "../CounterDatabase";
 import LoggingAPI from "./LoggingAPI";
 
-class CountersAPI {
+export default class CountersAPI {
   private db: CounterDatabase;
   private loggingApi: LoggingAPI;
 
@@ -45,40 +45,6 @@ class CountersAPI {
 
       this.db.displayValues.put(displayValue);
     });
-  }
-
-  public putEvent(event: IEvent) {
-    return this.db.events.put(event);
-  }
-
-  public getEventById(eventId: number): Promise<IEvent> {
-    return new Promise(resolve => {
-      this.db.events.get(eventId).then(event => {
-        if (event === undefined) {
-          this.loggingApi.error('event is undefined');
-        } else {
-          resolve(event);
-        }
-      })
-    });
-  }
-
-  public getEventsForCounter(counterId: number, type: EventType | undefined) {
-    if (type === undefined) {
-      return this.db.events
-        .where('counterId')
-        .equals(counterId)
-        .toArray();
-    } else {
-      return this.db.events
-        .where(['counterId', 'type'])
-        .equals([counterId, type])
-        .toArray();
-    }
-  }
-
-  public getDisplayValuesForCounter(counterId: number) {
-    return this.db.displayValues.where('counterId').equals(counterId).toArray();
   }
 
   public deleteCounter(counterId: number) {
@@ -162,6 +128,9 @@ class CountersAPI {
       }
     });
   }
-}
 
-export default CountersAPI;
+  // TODO Maybe this should get its own interface/context.
+  public getDisplayValuesForCounter(counterId: number) {
+    return this.db.displayValues.where('counterId').equals(counterId).toArray();
+  }
+}

@@ -13,15 +13,18 @@ import CounterDeletePage from './Pages/CounterDeletePage/CounterDeletePage';
 import CounterHistoryPage from './Pages/CounterHistoryPage/CounterHistoryPage';
 import EventEditPage from './Pages/EventEditPage/EventEditPage';
 import LoggingAPI from './Interfaces/LoggingAPI';
+import EventsAPI from './Interfaces/EventsAPI';
 import './App.scss';
 
 const db = new CounterDatabase();
 const loggingApi = new LoggingAPI();
 const countersApi = new CountersAPI(db, loggingApi);
+const eventsApi = new EventsAPI(db, loggingApi);
 const settingsApi = new SettingsAPI(db);
 
 export const LoggingContext = React.createContext(loggingApi);
 export const CountersContext = React.createContext(countersApi);
+export const EventsContext = React.createContext(eventsApi);
 export const SettingsContext = React.createContext(settingsApi);
 
 export default function App() {
@@ -29,6 +32,7 @@ export default function App() {
     <LoggingContext.Provider value={loggingApi}>
       <SettingsContext.Provider value={settingsApi}>
         <CountersContext.Provider value={countersApi}>
+          <EventsContext.Provider value={eventsApi}>
           <Router>
             <Switch>
               <Route path="/about">
@@ -63,6 +67,7 @@ export default function App() {
               </Route>
             </Switch>
           </Router>
+          </EventsContext.Provider>
         </CountersContext.Provider>
       </SettingsContext.Provider>
     </LoggingContext.Provider>

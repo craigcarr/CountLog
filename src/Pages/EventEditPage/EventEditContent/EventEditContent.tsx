@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import styles from './EventEditContent.module.scss';
 import { useParams, useHistory } from 'react-router';
 import { Table, TextArea, Button, Icon } from 'semantic-ui-react';
-import { CountersContext } from '../../../App';
+import { CountersContext, EventsContext } from '../../../App';
 import { EventType, IEvent } from '../../../CounterDatabase';
 
 export default function EventEditContent() {
@@ -14,17 +14,18 @@ export default function EventEditContent() {
   const params = useParams<any>();
 
   const countersApi = useContext(CountersContext);
+  const eventsApi = useContext(EventsContext);
 
   let counterId = parseInt(params['counterId'], 10);
   let eventId = parseInt(params['eventId'], 10);
 
   useEffect(() => {
-    countersApi.getEventById(eventId).then(event => {
+    eventsApi.getEventById(eventId).then(event => {
       setEventType(event.type);
       setTimestamp(event.timestamp);
       setAnnotation(event.annotation);
     });
-  }, [countersApi, eventId])
+  }, [countersApi, eventsApi, eventId])
 
   function displayTimestamp(rawTimestamp: string): string {
     let date = new Date(parseInt(rawTimestamp, 10));
@@ -53,7 +54,7 @@ export default function EventEditContent() {
       annotation: annotation,
     }
 
-    countersApi.putEvent(modifiedEvent);
+    eventsApi.putEvent(modifiedEvent);
 
     history.goBack();
   }

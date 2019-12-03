@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { EventType } from '../../../CounterDatabase';
 import styles from './CounterHistoryContent.module.scss';
 import { useParams, useHistory } from 'react-router';
-import { CountersContext } from '../../../App';
+import { CountersContext, EventsContext } from '../../../App';
 
 export default function MainContent() {
   const [tableData, setTableData] = useState<any[]>([]);
@@ -15,11 +15,12 @@ export default function MainContent() {
   const params = useParams<any>();
 
   const countersApi = useContext(CountersContext);
+  const eventsApi = useContext(EventsContext);
 
   useEffect(() => {
     let counterId = parseInt(params['counterId'], 10)
 
-    countersApi.getEventsForCounter(counterId, undefined).then(events => {
+    eventsApi.getEventsForCounter(counterId, undefined).then(events => {
       let list = [];
 
       for (let event of events) {
@@ -34,7 +35,7 @@ export default function MainContent() {
 
       setTableData(list);
     })
-  }, [params, countersApi]);
+  }, [params, countersApi, eventsApi]);
 
   // TODO Duplicated in EventEditContext
   function displayTimestamp(rawTimestamp: string): string {

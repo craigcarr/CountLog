@@ -1,6 +1,6 @@
 import CounterDatabase, { ISettings } from "../CounterDatabase";
 
-class SettingsAPI {
+export default class SettingsAPI {
   private db: CounterDatabase;
 
   constructor(db: CounterDatabase) {
@@ -19,5 +19,3 @@ class SettingsAPI {
     return this.db.settings.put(setting);
   }
 }
-
-export default SettingsAPI;
