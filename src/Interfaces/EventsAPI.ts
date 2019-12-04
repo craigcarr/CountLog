@@ -1,16 +1,20 @@
 import CounterDatabase, { IEvent, EventType } from "../CounterDatabase";
 import LoggingAPI from "./LoggingAPI";
+import ReceiversAPI from "./ReceiversAPI";
 
 export default class EventsAPI {
   private db: CounterDatabase;
+  private receiversApi: ReceiversAPI;
   private loggingApi: LoggingAPI;
 
-  constructor(db: CounterDatabase, loggingApi: LoggingAPI) {
+  constructor(db: CounterDatabase, receiversApi: ReceiversAPI, loggingApi: LoggingAPI) {
     this.db = db;
+    this.receiversApi = receiversApi;
     this.loggingApi = loggingApi;
   };
 
   public putEvent(event: IEvent) {
+    this.receiversApi.fireEvent(event);
     return this.db.events.put(event);
   }
 

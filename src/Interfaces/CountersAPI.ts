@@ -1,12 +1,16 @@
 import CounterDatabase, { ICounter, IEvent, EventType, IDisplayValue } from "../CounterDatabase";
 import LoggingAPI from "./LoggingAPI";
+import EventsAPI from "./EventsAPI";
 
+// TODO Make CountersAPI explicitly dependent on EventsAPI everywhere
 export default class CountersAPI {
   private db: CounterDatabase;
+  private eventsApi: EventsAPI;
   private loggingApi: LoggingAPI;
 
-  constructor(db: CounterDatabase, loggingApi: LoggingAPI) {
+  constructor(db: CounterDatabase, eventsApi: EventsAPI, loggingApi: LoggingAPI) {
     this.db = db;
+    this.eventsApi = eventsApi;
     this.loggingApi = loggingApi;
   };
 
@@ -35,7 +39,7 @@ export default class CountersAPI {
         annotation: '',
       }
 
-      this.db.events.put(mutateEvent);
+      this.eventsApi.putEvent(mutateEvent);
 
       let displayValue: IDisplayValue = {
         counterId: counterId,
@@ -83,7 +87,7 @@ export default class CountersAPI {
           annotation: '',
         };
 
-        this.db.events.put(incrementEvent).then(() => {
+        this.eventsApi.putEvent(incrementEvent).then(() => {
           let displayValue: IDisplayValue = {
             counterId: counterId,
             timestamp: Date.now().toString(),
@@ -112,7 +116,7 @@ export default class CountersAPI {
           annotation: '',
         }
 
-        this.db.events.put(decrementEvent).then(() => {
+        this.eventsApi.putEvent(decrementEvent).then(() => {
           let displayValue: IDisplayValue = {
             counterId: counterId,
             timestamp: Date.now().toString(),

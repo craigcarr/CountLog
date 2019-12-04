@@ -23,10 +23,10 @@ import ReceiversAPI from './Interfaces/ReceiversAPI';
 
 const db = new CounterDatabase();
 const loggingApi = new LoggingAPI();
-const countersApi = new CountersAPI(db, loggingApi);
-const eventsApi = new EventsAPI(db, loggingApi);
-const settingsApi = new SettingsAPI(db);
 const receiversApi = new ReceiversAPI(db, loggingApi);
+const eventsApi = new EventsAPI(db, receiversApi, loggingApi);
+const countersApi = new CountersAPI(db, eventsApi, loggingApi);
+const settingsApi = new SettingsAPI(db);
 
 export const LoggingContext = React.createContext(loggingApi);
 export const CountersContext = React.createContext(countersApi);

@@ -1,4 +1,4 @@
-import CounterDatabase, { IReceiver } from "../CounterDatabase";
+import CounterDatabase, { IReceiver, IEvent } from "../CounterDatabase";
 import LoggingAPI from "./LoggingAPI";
 
 export default class ReceiversAPI {
@@ -9,6 +9,22 @@ export default class ReceiversAPI {
     this.db = db;
     this.loggingApi = loggingApi;
   };
+
+  public fireEvent(event: IEvent) {
+    this.getAllReceivers().then(receivers => {
+      for (let receiver of receivers) {
+        if (receiver.options['type'] === 'http') {
+          // TODO
+        }
+      }
+    });
+  }
+
+  public testReceiver(receiver: IReceiver) {
+    if (receiver.options['type'] === 'http') {
+      // TODO
+    }
+  }
 
   public getAllReceivers() {
     return this.db.receivers.toArray();
