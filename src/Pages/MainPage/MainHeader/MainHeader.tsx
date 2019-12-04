@@ -6,7 +6,7 @@ import HeaderLinkButton from "../../../Components/HeaderLinkButton/HeaderLinkBut
 export default function MainHeader() {
   return (
     <div className={styles.header}>
-      <HeaderText className={styles.headerText}>Active Counters</HeaderText>
+      <HeaderText className={styles.headerText}>Counters List</HeaderText>
       <HeaderLinkButton className={styles.settingsBtn} iconName="settings" route="/settings"></HeaderLinkButton>
     </div>
   );

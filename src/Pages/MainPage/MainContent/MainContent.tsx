@@ -36,7 +36,7 @@ export default function MainContent() {
 
     settingsApi.getSettingValue('isClickSoundEnabled').then(setting => {
       if (setting !== undefined && setting.value === true) {
-      new Audio("/click.mp3").play();
+        new Audio("/click.mp3").play();
       }
     });
 
@@ -96,7 +96,7 @@ export default function MainContent() {
   }
 
   return (
-    <div id={styles.mainContent} className={styles.content}>
+    <div className={styles.content}>
       <Table unstackable>
         <Table.Body>
           {tableContent}

@@ -27,6 +27,11 @@ export interface ISettings {
   value: any;
 }
 
+export interface IReceiver {
+  id?: number;
+  options: Record<string, any>;
+}
+
 export enum EventType {
   Increment = "increment",
   Decrement = "decrement",
@@ -39,6 +44,7 @@ export default class CounterDatabase extends Dexie {
   events: Dexie.Table<IEvent, number>;
   settings: Dexie.Table<ISettings, number>;
   displayValues: Dexie.Table<IDisplayValue, number>;
+  receivers: Dexie.Table<IReceiver, number>;
 
   constructor() {
     super("CounterDatabase");
@@ -50,9 +56,14 @@ export default class CounterDatabase extends Dexie {
       displayValues: "++id, counterId, timestamp, value",
     });
 
+    this.version(2).stores({
+      receivers: "++id, options",
+    })
+
     this.counters = this.table("counters");
     this.events = this.table("events")
     this.settings = this.table("settings")
     this.displayValues = this.table("displayValues");
+    this.receivers = this.table("receivers");
   }
 }
