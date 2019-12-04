@@ -36,7 +36,7 @@ export default function MainContent() {
 
     settingsApi.getSettingValue('isClickSoundEnabled').then(setting => {
       if (setting !== undefined && setting.value === true) {
-      new Audio("/click.mp3").play();
+        new Audio("/click.mp3").play();
       }
     });
 

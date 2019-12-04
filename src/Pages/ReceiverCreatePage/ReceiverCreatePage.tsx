@@ -6,9 +6,9 @@ import ReceiverCreateContent from './ReceiverCreateContent/ReceiverCreateContent
 export default function ReceiverCreatePage() {
   return (
     <React.Fragment>
-      <Helmet><title>Configure Receivers - CountLog</title></Helmet>
+      <Helmet><title>Create Receiver - CountLog</title></Helmet>
       <ReceiverCreateHeader></ReceiverCreateHeader>
-      <ReceiverCreateContent></ReceiverCreateContent>
+      <ReceiverCreateContent id={undefined}></ReceiverCreateContent>
     </React.Fragment>
   );
 }

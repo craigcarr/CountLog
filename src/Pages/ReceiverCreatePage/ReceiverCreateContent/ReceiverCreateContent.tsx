@@ -1,26 +1,63 @@
-import React, { useState } from "react";
-import { Table, Select } from "semantic-ui-react";
+import React, { useState, useEffect, useContext } from "react";
+import { Table, Select, Input, Button } from "semantic-ui-react";
 import styles from "./ReceiverCreateContent.module.scss";
-import MQTTForm from "../../../Components/MQTTForm/MQTTForm";
-import HTTPForm from "../../../Components/HTTPForm/HTTPForm";
+import { ReceiversContext } from "../../../App";
+import { useHistory } from "react-router";
 
-export default function ReceiverCreateContent() {
+interface IProps {
+  id: number | undefined;
+}
+
+export default function ReceiverCreateContent(props: IProps) {
   const [selectedReceiverType, setSelectedReceiverType] = useState<string>('http');
+  const [serverAddress, setServerAddress] = useState<string>('');
+
+  const history = useHistory();
+
+  const receiversApi = useContext(ReceiversContext);
+
+  useEffect(() => {
+    if (props.id !== undefined) {
+      console.log(props.id)
+
+      receiversApi.getReceiverById(props.id).then(receiver => {
+        setSelectedReceiverType(receiver.options['type']);
+        setServerAddress(receiver.options['url']);
+      });
+    }
+  }, [props.id, receiversApi]);
 
   const receiverTypes = [
     { key: 'http', value: 'http', text: 'HTTP' },
-    { key: 'mqtt', value: 'mqtt', text: 'MQTT' },
   ]
 
   function handleSelectedReceiverChange(data: any) {
-    setSelectedReceiverType(data.value)
+    setSelectedReceiverType(data.value);
   }
 
-  let receiverConfigurationForm = null;
-  if (selectedReceiverType === 'http') {
-    receiverConfigurationForm = <HTTPForm></HTTPForm>;
-  } else if (selectedReceiverType === 'mqtt') {
-    receiverConfigurationForm = <MQTTForm></MQTTForm>;
+  function handleServerAddressChanged(data: any) {
+    setServerAddress(data.value);
+  }
+
+  function handleSaveButtonClicked() {
+    if (props.id === undefined) {
+      receiversApi.putReceiver({
+        options: {
+          type: 'http',
+          url: serverAddress
+        }
+      });
+    } else {
+      receiversApi.putReceiver({
+        id: props.id,
+        options: {
+          type: 'http',
+          url: serverAddress
+        }
+      });
+    }
+
+    history.goBack();
   }
 
   return (
@@ -41,7 +78,36 @@ export default function ReceiverCreateContent() {
         </Table.Body>
       </Table>
 
-      {receiverConfigurationForm}
+      <div>
+      <Table unstackable columns={2}>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell className={styles.tableCell}>
+            Server Address
+        </Table.Cell>
+          <Table.Cell className={styles.tableCell}>
+            <Input
+              id={styles.serverAddressInput}
+              defaultValue={serverAddress}
+              onChange={(e, data) => { handleServerAddressChanged(data) }}>
+            </Input>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>
+            <Button disabled id={styles.verifyButton}>
+              Verify
+            </Button>
+          </Table.Cell>
+          <Table.Cell>
+            <Button id={styles.saveButton} onClick={handleSaveButtonClicked}>
+              Save
+            </Button>
+          </Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+      </div>
     </div>
   );
 }

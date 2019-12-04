@@ -6,7 +6,7 @@ import HeaderBackButton from "../../../Components/HeaderBackButton/HeaderBackBut
 export default function ReceiverListHeader() {
   return (
     <div className={styles.header}>
-      <HeaderText className={styles.headerText}>Configure Receivers</HeaderText>
+      <HeaderText className={styles.headerText}>Receivers List</HeaderText>
       <HeaderBackButton className={styles.backBtn} iconName="arrow left"></HeaderBackButton>
     </div>
   );

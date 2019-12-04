@@ -6,7 +6,7 @@ import HeaderBackButton from "../../../Components/HeaderBackButton/HeaderBackBut
 export default function ReceiverEditHeader() {
   return (
     <div className={styles.header}>
-      <HeaderText className={styles.headerText}>Configure Receivers</HeaderText>
+      <HeaderText className={styles.headerText}>Edit Receiver</HeaderText>
       <HeaderBackButton className={styles.backBtn} iconName="arrow left"></HeaderBackButton>
     </div>
   );

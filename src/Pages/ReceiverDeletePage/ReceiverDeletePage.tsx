@@ -6,7 +6,7 @@ import ReceiverDeleteContent from './ReceiverDeleteContent/ReceiverDeleteContent
 export default function ReceiverDeletePage() {
   return (
     <React.Fragment>
-      <Helmet><title>Configure Receivers - CountLog</title></Helmet>
+      <Helmet><title>Delete Receiver - CountLog</title></Helmet>
       <ReceiverDeleteHeader></ReceiverDeleteHeader>
       <ReceiverDeleteContent></ReceiverDeleteContent>
     </React.Fragment>

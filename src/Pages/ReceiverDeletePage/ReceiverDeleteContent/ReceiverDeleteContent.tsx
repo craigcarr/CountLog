@@ -1,18 +1,37 @@
-import React from "react";
-import { Table } from "semantic-ui-react";
+import React, { useContext } from "react";
+import { Table, Button } from "semantic-ui-react";
 import styles from "./ReceiverDeleteContent.module.scss";
+import { ReceiversContext } from "../../../App";
+import { useParams, useHistory } from "react-router";
 
 export default function ReceiverDeleteContent() {
+  const history = useHistory();
+  const params = useParams<any>();
+
+  const receiversApi = useContext(ReceiversContext);
+
+  function handleDeleteButtonClicked() {
+    let receiverId = parseInt(params['receiverId'], 10)
+
+    receiversApi.deleteReceiver(receiverId).then(() => {
+      history.goBack();
+    });
+  }
+
   return (
     <div className={styles.content}>
-      <Table unstackable columns={2}>
+      <Table unstackable columns={1}>
         <Table.Body>
           <Table.Row>
-            <Table.Cell className={styles.tableCell}>
-              TODO
+            <Table.Cell>
+              <p>Are you sure you want to delete this receiver? This receiver will not receive events anymore.</p>
             </Table.Cell>
-            <Table.Cell className={styles.tableCell}>
-              TODO
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>
+              <Button id={styles.deleteButton} onClick={handleDeleteButtonClicked}>
+                Confirm Delete
+              </Button>
             </Table.Cell>
           </Table.Row>
         </Table.Body>

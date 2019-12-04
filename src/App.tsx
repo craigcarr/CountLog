@@ -19,17 +19,20 @@ import ReceiverListPage from './Pages/ReceiverListPage/ReceiverListPage';
 import ReceiverEditPage from './Pages/ReceiverEditPage/ReceiverEditPage';
 import ReceiverCreatePage from './Pages/ReceiverCreatePage/ReceiverCreatePage';
 import ReceiverDeletePage from './Pages/ReceiverDeletePage/ReceiverDeletePage';
+import ReceiversAPI from './Interfaces/ReceiversAPI';
 
 const db = new CounterDatabase();
 const loggingApi = new LoggingAPI();
 const countersApi = new CountersAPI(db, loggingApi);
 const eventsApi = new EventsAPI(db, loggingApi);
 const settingsApi = new SettingsAPI(db);
+const receiversApi = new ReceiversAPI(db, loggingApi);
 
 export const LoggingContext = React.createContext(loggingApi);
 export const CountersContext = React.createContext(countersApi);
 export const EventsContext = React.createContext(eventsApi);
 export const SettingsContext = React.createContext(settingsApi);
+export const ReceiversContext = React.createContext(receiversApi);
 
 export default function App() {
   return (
@@ -37,52 +40,54 @@ export default function App() {
       <SettingsContext.Provider value={settingsApi}>
         <CountersContext.Provider value={countersApi}>
           <EventsContext.Provider value={eventsApi}>
-          <Router>
-            <Switch>
-              <Route path="/about">
-                <AboutPage></AboutPage>
-              </Route>
-              <Route path="/create">
-                <CounterCreatePage></CounterCreatePage>
-              </Route>
-              <Route path="/editcounter/:counterId">
-                <CounterEditPage></CounterEditPage>
-              </Route>
-              <Route path="/deletecounter/:counterId">
-                <CounterDeletePage></CounterDeletePage>
-              </Route>
-              <Route path="/counterhistory/:counterId/editevent/:eventId">
-                <EventEditPage></EventEditPage>
-              </Route>
-              <Route path="/counterhistory/:counterId">
-                <CounterHistoryPage></CounterHistoryPage>
-              </Route>
-              <Route path="/edit/:counterId">
-                <CounterEditPage></CounterEditPage>
-              </Route>
-              <Route path="/statistics/:counterId">
-                <StatisticsPage></StatisticsPage>
-              </Route>
-              <Route path="/settings">
-                <SettingsPage></SettingsPage>
-              </Route>
-              <Route path="/receiverlist">
-                <ReceiverListPage></ReceiverListPage>
-              </Route>
-              <Route path="/receiveredit">
-                <ReceiverEditPage></ReceiverEditPage>
-              </Route>
-              <Route path="/receivercreate">
-                <ReceiverCreatePage></ReceiverCreatePage>
-              </Route>
-              <Route path="/receiverdelete">
-                <ReceiverDeletePage></ReceiverDeletePage>
-              </Route>
-              <Route path="/">
-                <MainPage></MainPage>
-              </Route>
-            </Switch>
-          </Router>
+            <ReceiversContext.Provider value={receiversApi}>
+              <Router>
+                <Switch>
+                  <Route path="/about">
+                    <AboutPage></AboutPage>
+                  </Route>
+                  <Route path="/create">
+                    <CounterCreatePage></CounterCreatePage>
+                  </Route>
+                  <Route path="/editcounter/:counterId">
+                    <CounterEditPage></CounterEditPage>
+                  </Route>
+                  <Route path="/deletecounter/:counterId">
+                    <CounterDeletePage></CounterDeletePage>
+                  </Route>
+                  <Route path="/counterhistory/:counterId/editevent/:eventId">
+                    <EventEditPage></EventEditPage>
+                  </Route>
+                  <Route path="/counterhistory/:counterId">
+                    <CounterHistoryPage></CounterHistoryPage>
+                  </Route>
+                  <Route path="/edit/:counterId">
+                    <CounterEditPage></CounterEditPage>
+                  </Route>
+                  <Route path="/statistics/:counterId">
+                    <StatisticsPage></StatisticsPage>
+                  </Route>
+                  <Route path="/settings">
+                    <SettingsPage></SettingsPage>
+                  </Route>
+                  <Route path="/receiverlist">
+                    <ReceiverListPage></ReceiverListPage>
+                  </Route>
+                  <Route path="/receivercreate">
+                    <ReceiverCreatePage></ReceiverCreatePage>
+                  </Route>
+                  <Route path="/receiveredit/:receiverId">
+                    <ReceiverEditPage></ReceiverEditPage>
+                  </Route>
+                  <Route path="/receiverdelete/:receiverId">
+                    <ReceiverDeletePage></ReceiverDeletePage>
+                  </Route>
+                  <Route path="/">
+                    <MainPage></MainPage>
+                  </Route>
+                </Switch>
+              </Router>
+            </ReceiversContext.Provider>
           </EventsContext.Provider>
         </CountersContext.Provider>
       </SettingsContext.Provider>

@@ -2,4 +2,14 @@
 
 #receiverSelectorTable {
   background-color: #dddddd;
+  margin-bottom: 0px;
+}
+
+#serverAddressInput {
+  width: 50%;
+}
+
+#verifyButton, #saveButton {
+  width: 20vmax;
+  font-size: $bodyTextSize;
 }

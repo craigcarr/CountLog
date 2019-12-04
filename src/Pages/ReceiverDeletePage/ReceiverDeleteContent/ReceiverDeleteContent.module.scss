@@ -1,1 +1,7 @@
 @import '../../../App.scss';
+
+#deleteButton {
+  width: 100%;
+  background-color: lightcoral;
+  font-size: $bodyTextSize;
+}

@@ -6,7 +6,7 @@ import ReceiverEditContent from './ReceiverEditContent/ReceiverEditContent';
 export default function ReceiverEditPage() {
   return (
     <React.Fragment>
-      <Helmet><title>Configure Receivers - CountLog</title></Helmet>
+      <Helmet><title>Edit Receiver - CountLog</title></Helmet>
       <ReceiverEditHeader></ReceiverEditHeader>
       <ReceiverEditContent></ReceiverEditContent>
     </React.Fragment>
