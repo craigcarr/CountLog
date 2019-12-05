@@ -3,6 +3,7 @@ import { Table, Select, Input, Button } from "semantic-ui-react";
 import styles from "./ReceiverCreateContent.module.scss";
 import { ReceiversContext } from "../../../App";
 import { useHistory } from "react-router";
+import { IReceiver } from "../../../CounterDatabase";
 
 interface IProps {
   id: number | undefined;
@@ -11,6 +12,7 @@ interface IProps {
 export default function ReceiverCreateContent(props: IProps) {
   const [selectedReceiverType, setSelectedReceiverType] = useState<string>('http');
   const [serverAddress, setServerAddress] = useState<string>('');
+  const [verificationColor, setVerificationColor] = useState<string>('');
 
   const history = useHistory();
 
@@ -18,8 +20,6 @@ export default function ReceiverCreateContent(props: IProps) {
 
   useEffect(() => {
     if (props.id !== undefined) {
-      console.log(props.id)
-
       receiversApi.getReceiverById(props.id).then(receiver => {
         setSelectedReceiverType(receiver.options['type']);
         setServerAddress(receiver.options['url']);
@@ -37,6 +37,27 @@ export default function ReceiverCreateContent(props: IProps) {
 
   function handleServerAddressChanged(data: any) {
     setServerAddress(data.value);
+  }
+
+  function handleVerifyButtonClicked() {
+    let testOptions = {
+      type: 'http',
+      url: serverAddress,
+    }
+
+    let testReceiver: IReceiver = {
+      options: testOptions,
+    }
+
+    receiversApi.testReceiver(testReceiver).then(isVerified => {
+      if (isVerified) {
+        setVerificationColor('#99ff99')
+        console.log('valid')
+      } else {
+        setVerificationColor('lightcoral')
+        console.log('not so valid')
+      }
+    });
   }
 
   function handleSaveButtonClicked() {
@@ -78,36 +99,37 @@ export default function ReceiverCreateContent(props: IProps) {
         </Table.Body>
       </Table>
 
-      <div>
-      <Table unstackable columns={2}>
-      <Table.Body>
-        <Table.Row>
-          <Table.Cell className={styles.tableCell}>
-            Server Address
-        </Table.Cell>
-          <Table.Cell className={styles.tableCell}>
-            <Input
-              id={styles.serverAddressInput}
-              defaultValue={serverAddress}
-              onChange={(e, data) => { handleServerAddressChanged(data) }}>
-            </Input>
+      <Table id={styles.buttonsTable} unstackable columns={2}>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell className={styles.tableCell}>
+              Server URL
           </Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>
-            <Button disabled id={styles.verifyButton}>
-              Verify
+            <Table.Cell className={styles.tableCell}>
+              <Input
+                id={styles.serverAddressInput}
+                defaultValue={serverAddress}
+                onChange={(e, data) => { handleServerAddressChanged(data) }}>
+              </Input>
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>
+              <Button
+                style={{ backgroundColor: verificationColor }}
+                id={styles.verifyButton}
+                onClick={handleVerifyButtonClicked}>
+                Verify
             </Button>
-          </Table.Cell>
-          <Table.Cell>
-            <Button id={styles.saveButton} onClick={handleSaveButtonClicked}>
-              Save
+            </Table.Cell>
+            <Table.Cell>
+              <Button id={styles.saveButton} onClick={handleSaveButtonClicked}>
+                Save
             </Button>
-          </Table.Cell>
-        </Table.Row>
-      </Table.Body>
-    </Table>
-      </div>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
     </div>
   );
 }

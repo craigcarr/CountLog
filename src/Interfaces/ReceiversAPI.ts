@@ -1,5 +1,6 @@
 import CounterDatabase, { IReceiver, IEvent } from "../CounterDatabase";
 import LoggingAPI from "./LoggingAPI";
+import axios from 'axios';
 
 export default class ReceiversAPI {
   private db: CounterDatabase;
@@ -14,16 +15,48 @@ export default class ReceiversAPI {
     this.getAllReceivers().then(receivers => {
       for (let receiver of receivers) {
         if (receiver.options['type'] === 'http') {
-          // TODO
+          const body = JSON.stringify({
+            type: event.type,
+            timestamp: event.timestamp,
+            annotation: event.annotation,
+          });
+
+          const instance = axios.create();
+          instance.defaults.timeout = 1000;
+
+          instance.post(receiver.options['url'], body).then(response => {
+            // We don't care about any 200-level response we will get.
+          }).catch(error => {
+            this.loggingApi.error(error);
+          });
         }
       }
     });
   }
 
-  public testReceiver(receiver: IReceiver) {
+  public testReceiver(receiver: IReceiver): Promise<boolean> {
     if (receiver.options['type'] === 'http') {
-      // TODO
+      const body = JSON.stringify({
+        type: 'test',
+        timestamp: 0,
+        annotation: 'test',
+      });
+
+      return new Promise(resolve => {
+        const instance = axios.create();
+        instance.defaults.timeout = 1000;
+
+        instance.post(receiver.options['url'], body).then(response => {
+          resolve(true);
+        }).catch(error => {
+          resolve(false);
+        });
+      });
     }
+
+    return new Promise(resolve => {
+      resolve(false);
+    });
   }
 
   public getAllReceivers() {
