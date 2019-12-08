@@ -4,14 +4,18 @@ import styles from './CounterDeleteContent.module.scss';
 import { useHistory, useParams } from 'react-router';
 import { CountersContext } from '../../../App';
 
+interface IParams {
+  counterId: string;
+}
+
 export default function CounterDeleteContent() {
   const history = useHistory();
-  const params = useParams<any>();
+  const params = useParams<IParams>();
 
   const countersApi = useContext(CountersContext);
 
   function handleDeleteButtonClicked() {
-    const counterId = parseInt(params['counterId'], 10);
+    const counterId = parseInt(params.counterId, 10);
 
     countersApi.deleteCounter(counterId).then(() => {
       history.push('/');

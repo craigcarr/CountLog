@@ -4,14 +4,18 @@ import styles from "./ReceiverDeleteContent.module.scss";
 import { ReceiversContext } from "../../../App";
 import { useParams, useHistory } from "react-router";
 
+interface IParams {
+  receiverId: string;
+}
+
 export default function ReceiverDeleteContent() {
   const history = useHistory();
-  const params = useParams<any>();
+  const params = useParams<IParams>();
 
   const receiversApi = useContext(ReceiversContext);
 
   function handleDeleteButtonClicked() {
-    const receiverId = parseInt(params['receiverId'], 10);
+    const receiverId = parseInt(params.receiverId, 10);
 
     receiversApi.deleteReceiver(receiverId).then(() => {
       history.goBack();

@@ -1,4 +1,4 @@
-import CounterDatabase, { ISettings } from "../CounterDatabase";
+import CounterDatabase, { ISetting } from "../CounterDatabase";
 
 export default class SettingsAPI {
   private db: CounterDatabase;
@@ -15,7 +15,7 @@ export default class SettingsAPI {
     return this.db.settings.get({ name: name });
   }
 
-  public putSetting(setting: ISettings) {
+  public putSetting(setting: ISetting) {
     return this.db.settings.put(setting);
   }
 }

@@ -22,7 +22,7 @@ export interface IDisplayValue {
   value: number;
 }
 
-export interface ISettings {
+export interface ISetting {
   name: string;
   value: any;
 }
@@ -42,7 +42,7 @@ export enum EventType {
 export default class CounterDatabase extends Dexie {
   public counters: Dexie.Table<ICounter, number>;
   public events: Dexie.Table<IEvent, number>;
-  public settings: Dexie.Table<ISettings, number>;
+  public settings: Dexie.Table<ISetting, number>;
   public displayValues: Dexie.Table<IDisplayValue, number>;
   public receivers: Dexie.Table<IReceiver, number>;
 

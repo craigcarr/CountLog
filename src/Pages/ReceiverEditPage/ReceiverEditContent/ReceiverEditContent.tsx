@@ -2,12 +2,16 @@ import React from "react";
 import ReceiverCreateContent from "../../ReceiverCreatePage/ReceiverCreateContent/ReceiverCreateContent";
 import { useParams } from "react-router";
 
-export default function ReceiverEditContent() {
-  const params = useParams<any>();
+interface IParams {
+  receiverId: string;
+}
 
-  const counterId = parseInt(params['receiverId'], 10);
+export default function ReceiverEditContent() {
+  const params = useParams<IParams>();
+
+  const receiverId = parseInt(params.receiverId, 10);
 
   return (
-    <ReceiverCreateContent id={counterId}></ReceiverCreateContent>
+    <ReceiverCreateContent id={receiverId}></ReceiverCreateContent>
   )
 }

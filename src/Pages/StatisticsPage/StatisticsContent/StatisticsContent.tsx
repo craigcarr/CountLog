@@ -5,6 +5,10 @@ import { VictoryChart, VictoryLine, VictoryLabel, VictoryAxis } from "victory";
 import { useHistory, useParams } from 'react-router';
 import { CountersContext } from '../../../App';
 
+interface IParams {
+  counterId: string;
+}
+
 export default function StatisticsContent() {
   const [counterName, setCounterName] = useState<string>('');
   const [counterColor, setCounterColor] = useState<string>('');
@@ -12,7 +16,7 @@ export default function StatisticsContent() {
   const [chartData, setChartData] = useState<any[]>([]);
 
   const history = useHistory();
-  const params = useParams<any>();
+  const params = useParams<IParams>();
 
   const countersApi = useContext(CountersContext);
 
@@ -22,7 +26,7 @@ export default function StatisticsContent() {
     let trueVMin = 0.8 * Math.min(window.innerHeight, window.innerWidth);
     document.documentElement.style.setProperty("--trueVMin", trueVMin.toString() + 'px');
 
-    const counterId = parseInt(params['counterId'], 10);
+    const counterId = parseInt(params.counterId, 10);
 
     countersApi.getCounterById(counterId).then(counter => {
       setCounterName(counter.name);
@@ -55,17 +59,17 @@ export default function StatisticsContent() {
   }, [params, countersApi]);
 
   function handleEditButtonClicked() {
-    const counterId = parseInt(params['counterId'], 10);
+    const counterId = parseInt(params.counterId, 10);
     history.push('/editcounter/' + counterId);
   }
 
   function handleDeleteButtonClicked() {
-    const counterId = parseInt(params['counterId'], 10);
+    const counterId = parseInt(params.counterId, 10);
     history.push('/deletecounter/' + counterId);
   }
 
   function handleViewButtonClicked() {
-    const counterId = parseInt(params['counterId'], 10);
+    const counterId = parseInt(params.counterId, 10);
     history.push('/counterhistory/' + counterId);
   }
 

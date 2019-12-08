@@ -6,6 +6,11 @@ import styles from './CounterHistoryContent.module.scss';
 import { useParams, useHistory } from 'react-router';
 import { CountersContext, EventsContext } from '../../../App';
 
+interface IParams {
+  counterId: string;
+  eventId: string;
+}
+
 export default function MainContent() {
   const [tableData, setTableData] = useState<any[]>([]);
   const [typeFilter, setTypeFilter] = useState<EventType | undefined>(undefined);
@@ -13,13 +18,13 @@ export default function MainContent() {
   const [activePage, setActivePage] = useState<number>(1);
 
   const history = useHistory();
-  const params = useParams<any>();
+  const params = useParams<IParams>();
 
   const countersApi = useContext(CountersContext);
   const eventsApi = useContext(EventsContext);
 
   useEffect(() => {
-    const counterId = parseInt(params['counterId'], 10);
+    const counterId = parseInt(params.counterId, 10);
 
     eventsApi.getEventsForCounter(counterId, undefined).then(events => {
       let list = [];
@@ -74,7 +79,7 @@ export default function MainContent() {
   }
 
   function handleEditEventClicked(eventId: number) {
-    const counterId = parseInt(params['counterId'], 10);
+    const counterId = parseInt(params.counterId, 10);
     history.push('/counterhistory/' + counterId + '/editevent/' + eventId);
   }
 

@@ -3,7 +3,7 @@ import { Table, Checkbox, Select, Button } from 'semantic-ui-react';
 import styles from './SettingsContent.module.scss';
 import { SettingsContext } from '../../../App';
 import TooltipButton from '../../../Components/TooltipButton/TooltipButton';
-import { ISettings } from '../../../CounterDatabase';
+import { ISetting } from '../../../CounterDatabase';
 import { useHistory } from 'react-router';
 
 export default function SettingsContent() {
@@ -16,9 +16,9 @@ export default function SettingsContent() {
   const history = useHistory();
 
   useEffect(() => {
-    function array2dict(array: ISettings[]): any {
+    function array2dict(array: ISetting[]): any {
       return array.reduce(
-        (map: any, setting: ISettings) => {
+        (map: any, setting: ISetting) => {
           map[setting.name] = setting.value;
           return map;
         },

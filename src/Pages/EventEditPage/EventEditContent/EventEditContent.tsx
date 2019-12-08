@@ -5,19 +5,24 @@ import { Table, TextArea, Button, Icon } from 'semantic-ui-react';
 import { CountersContext, EventsContext } from '../../../App';
 import { EventType, IEvent } from '../../../CounterDatabase';
 
+interface IParams {
+  counterId: string;
+  eventId: string;
+}
+
 export default function EventEditContent() {
   const [eventType, setEventType] = useState<EventType>(EventType.Uncategorized);
   const [timestamp, setTimestamp] = useState<string>('');
   const [annotation, setAnnotation] = useState<string>('');
 
   const history = useHistory();
-  const params = useParams<any>();
+  const params = useParams<IParams>();
 
   const countersApi = useContext(CountersContext);
   const eventsApi = useContext(EventsContext);
 
-  const counterId = parseInt(params['counterId'], 10);
-  const eventId = parseInt(params['eventId'], 10);
+  const counterId = parseInt(params.counterId, 10);
+  const eventId = parseInt(params.eventId, 10);
 
   useEffect(() => {
     eventsApi.getEventById(eventId).then(event => {
