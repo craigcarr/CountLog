@@ -1,5 +1,8 @@
 # CountLog
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6d015783ddaf48a895e7b9e8ec9128ed)](https://www.codacy.com/manual/chaoxys/CountLog?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=craigcarr/CountLog&amp;utm_campaign=Badge_Grade)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e03115bc-b982-4421-9094-fe43ab6e0607/deploy-status)](https://app.netlify.com/sites/countlog/deploys)
+
 ## Introduction
 
 CountLog allows you to manually record, visualize, and analyze events to improve workflows in everyday life.
@@ -26,14 +29,17 @@ If you would like to contribute to CountLog, you can do one of the following.
 - Send out a pull request with a bug fix or new feature.
 
 ### Running the App
+
 - Use `npm start` to run the app.
 - Use `npm run build` to create a production build.
 
 ### Linting
+
 - Use `eclint check 'src/**/*'` to check for EditorConfig linting errors.
 - Use `tslint src/**/*.ts*` to check for TSLint linting errors.
 
 ### MkDocs Installation
+
 - Use `pip install mkdocs` to install MkDocs.
 - Use `pip install mkdocs-material` to install the Material UI theme for MkDocs.
 - Use `mkdocs serve` to run the docs server.
