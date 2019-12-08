@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Table, Dropdown, Icon, Button, Pagination, Checkbox, DropdownProps } from 'semantic-ui-react';
 import _ from 'lodash';
-import { EventType } from '../../../CounterDatabase';
+import { EventType, IEvent } from '../../../CounterDatabase';
 import styles from './CounterHistoryContent.module.scss';
 import { useParams, useHistory } from 'react-router';
-import { CountersContext, EventsContext } from '../../../App';
+import { EventsContext } from '../../../App';
 
 interface IParams {
   counterId: string;
@@ -12,7 +12,7 @@ interface IParams {
 }
 
 export default function MainContent() {
-  const [tableData, setTableData] = useState<any[]>([]);
+  const [tableData, setTableData] = useState<IEvent[]>([]);
   const [typeFilter, setTypeFilter] = useState<EventType | undefined>(undefined);
   const [hasAnnotationFilter, setAnnotationFilter] = useState<boolean>(false);
   const [activePage, setActivePage] = useState<number>(1);
@@ -20,29 +20,16 @@ export default function MainContent() {
   const history = useHistory();
   const params = useParams<IParams>();
 
-  const countersApi = useContext(CountersContext);
   const eventsApi = useContext(EventsContext);
 
   useEffect(() => {
     const counterId = parseInt(params.counterId, 10);
 
     eventsApi.getEventsForCounter(counterId, undefined).then(events => {
-      let list = [];
-
-      for (let event of events) {
-        list.push({
-          id: event.id,
-          type: event.type,
-          timestamp: event.timestamp,
-          annotation: event.annotation,
-        });
-      }
-
-      list.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1);
-
-      setTableData(list);
+      events.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1);
+      setTableData(events);
     });
-  }, [params, countersApi, eventsApi]);
+  }, [params, eventsApi]);
 
   // TODO Duplicated in EventEditContext
   function displayTimestamp(rawTimestamp: string): string {
@@ -78,7 +65,7 @@ export default function MainContent() {
     setActivePage(1);
   }
 
-  function handleEditEventClicked(eventId: number) {
+  function handleEditEventClicked(eventId: number | undefined) {
     const counterId = parseInt(params.counterId, 10);
     history.push('/counterhistory/' + counterId + '/editevent/' + eventId);
   }
@@ -91,16 +78,16 @@ export default function MainContent() {
 
   let filter1 = null;
   if (typeFilter === undefined) {
-    filter1 = ((row: any) => true);
+    filter1 = ((row: IEvent) => true);
   } else {
-    filter1 = ((row: any) => row['type'] === typeFilter);
+    filter1 = ((row: IEvent) => row.type === typeFilter);
   }
 
   let filter2 = null;
   if (hasAnnotationFilter === false) {
-    filter2 = ((row: any) => true);
+    filter2 = ((row: IEvent) => true);
   } else {
-    filter2 = ((row: any) => row['annotation'] !== '');
+    filter2 = ((row: IEvent) => row.annotation !== '');
   }
 
   let totalPages = Math.ceil(
@@ -116,24 +103,24 @@ export default function MainContent() {
   if (tableData.length === 0) {
     tableContent = <Table.Row><Table.Cell>There are no events to display.</Table.Cell></Table.Row>;
   } else {
-    tableContent = _.map(tableData, ({ id, type, timestamp, annotation }) => {
-      let typeFilterCondition = (typeFilter === undefined || type === typeFilter);
-      let hasAnnotationCondition = (hasAnnotationFilter === false || annotation !== '');
+    tableContent = _.map(tableData, setting => {
+      let typeFilterCondition = (typeFilter === undefined || setting.type === typeFilter);
+      let hasAnnotationCondition = (hasAnnotationFilter === false || setting.annotation !== '');
 
       if (typeFilterCondition && hasAnnotationCondition) {
         counter += 1;
 
         if (counter > itemLowerBound && counter <= itemUpperBound) {
           return (
-            <Table.Row key={id}>
+            <Table.Row key={setting.id}>
               <Table.Cell className={styles.eventTableCell}>
-                <p>{displayEventType(type)}</p>
+                <p>{displayEventType(setting.type)}</p>
               </Table.Cell>
               <Table.Cell>
-                <p>{displayTimestamp(timestamp)}</p>
+                <p>{displayTimestamp(setting.timestamp)}</p>
               </Table.Cell>
               <Table.Cell>
-                <Button id={styles.myButton} onClick={() => { handleEditEventClicked(id); }} circular icon>
+                <Button id={styles.myButton} onClick={() => { handleEditEventClicked(setting.id); }} circular icon>
                   <Icon name="edit">
                   </Icon>
                 </Button>
@@ -185,7 +172,6 @@ export default function MainContent() {
                   onClick={handleCheckboxClicked}>
                 </Checkbox>
               </div>
-
             </Table.Cell>
           </Table.Row>
         </Table.Body>
