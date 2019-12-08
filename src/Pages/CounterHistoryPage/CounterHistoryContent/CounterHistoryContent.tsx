@@ -89,19 +89,23 @@ export default function MainContent() {
 
   let itemsPerPage = 5;
 
-  // TODO This is total cancer.
-  let totalPages = null;
-  if (typeFilter === undefined && hasAnnotationFilter === false) {
-    totalPages = Math.ceil(tableData.length / itemsPerPage);
-  } else if (typeFilter !== undefined && hasAnnotationFilter === false) {
-    totalPages = Math.ceil(tableData.filter(row => row['type'] === typeFilter).length / itemsPerPage);
-  } else if (typeFilter === undefined && hasAnnotationFilter === true) {
-    totalPages = Math.ceil(tableData.filter(row => row['annotation'] !== '').length / itemsPerPage);
+  let filter1 = null;
+  if (typeFilter === undefined) {
+    filter1 = ((row: any) => true);
   } else {
-    totalPages = Math.ceil(
-      tableData.filter(row => row['type'] === typeFilter && row['annotation'] !== '').length / itemsPerPage
-    );
+    filter1 = ((row: any) => row['type'] === typeFilter);
   }
+
+  let filter2 = null;
+  if (hasAnnotationFilter === false) {
+    filter2 = ((row: any) => true);
+  } else {
+    filter2 = ((row: any) => row['annotation'] !== '');
+  }
+
+  let totalPages = Math.ceil(
+    tableData.filter(filter1).filter(filter2).length / itemsPerPage
+  );
 
   let itemLowerBound = itemsPerPage * (activePage - 1);
   let itemUpperBound = itemsPerPage * activePage;
