@@ -26,7 +26,6 @@ CountLog allows you to manually record, visualize, and analyze events to improve
 To install CountLog, simply visit <https://countlog.xyz>.
 
 - On mobile, you must find an "Add to Home Screen" option in your browser's menu.
-
 - On desktop (only works with Chrome), open the menu and click "Install CountLog".
 
 ## Contributing
