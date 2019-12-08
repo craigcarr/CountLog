@@ -40,11 +40,11 @@ export enum EventType {
 }
 
 export default class CounterDatabase extends Dexie {
-  counters: Dexie.Table<ICounter, number>;
-  events: Dexie.Table<IEvent, number>;
-  settings: Dexie.Table<ISettings, number>;
-  displayValues: Dexie.Table<IDisplayValue, number>;
-  receivers: Dexie.Table<IReceiver, number>;
+  public counters: Dexie.Table<ICounter, number>;
+  public events: Dexie.Table<IEvent, number>;
+  public settings: Dexie.Table<ISettings, number>;
+  public displayValues: Dexie.Table<IDisplayValue, number>;
+  public receivers: Dexie.Table<IReceiver, number>;
 
   constructor() {
     super("CounterDatabase");

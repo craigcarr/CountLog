@@ -16,7 +16,10 @@ export default function AboutContent() {
                 and analyze events to improve workflows in everyday life.
               </p>
 
-              <a href="https://craigcarr.github.io/CountLog/" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://craigcarr.github.io/CountLog/"
+                target="_blank"
+                rel="noopener noreferrer">
                 <Button className={styles.myButton}>
                   Read Docs
                 </Button>
@@ -32,7 +35,10 @@ export default function AboutContent() {
                 a new feature, feel free to file an issue at GitHub.
               </p>
 
-              <a href="https://github.com/craigcarr/CountLog/issues" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://github.com/craigcarr/CountLog/issues"
+                target="_blank"
+                rel="noopener noreferrer">
                 <Button className={styles.myButton}>
                   File Issue
                 </Button>
@@ -47,7 +53,10 @@ export default function AboutContent() {
                 Copyright © Craig Carr 2019
               </p>
 
-              <a href="https://github.com/craigcarr/CountLog/blob/master/LICENSE.txt" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://github.com/craigcarr/CountLog/blob/master/LICENSE.txt"
+                target="_blank"
+                rel="noopener noreferrer">
                 <Button className={styles.myButton}>
                   View License
                 </Button>

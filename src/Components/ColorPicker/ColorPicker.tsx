@@ -15,7 +15,7 @@ export default function ColorPicker(props: IProps) {
     setSelectedColor(props.color);
   }, [props.color]);
 
-  let colors = [
+  const colors = [
     '#ff0000', // red
     '#ff9900', // orange
     '#bbbb00', // yellow
