@@ -5,9 +5,9 @@ import { useHistory } from "react-router-dom";
 import { SemanticICONS } from "semantic-ui-react/dist/commonjs/generic";
 
 interface IProps {
-  className: string,
-  iconName: SemanticICONS,
-  route: string,
+  className: string;
+  iconName: SemanticICONS;
+  route: string;
 }
 
 export default function HeaderLinkButton(props: IProps) {

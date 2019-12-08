@@ -11,7 +11,7 @@ export default class EventsAPI {
     this.db = db;
     this.receiversApi = receiversApi;
     this.loggingApi = loggingApi;
-  };
+  }
 
   public putEvent(event: IEvent) {
     this.receiversApi.fireEvent(event);
@@ -26,7 +26,7 @@ export default class EventsAPI {
         } else {
           resolve(event);
         }
-      })
+      });
     });
   }
 

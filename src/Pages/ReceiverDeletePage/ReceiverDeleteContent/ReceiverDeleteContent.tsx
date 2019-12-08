@@ -11,7 +11,7 @@ export default function ReceiverDeleteContent() {
   const receiversApi = useContext(ReceiversContext);
 
   function handleDeleteButtonClicked() {
-    let receiverId = parseInt(params['receiverId'], 10)
+    const receiverId = parseInt(params['receiverId'], 10);
 
     receiversApi.deleteReceiver(receiverId).then(() => {
       history.goBack();

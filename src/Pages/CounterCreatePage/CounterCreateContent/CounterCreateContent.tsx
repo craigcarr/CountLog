@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 import { CountersContext } from '../../../App';
 
 interface IProps {
-  id: number | undefined,
+  id: number | undefined;
 }
 
 export default function CounterCreateContent(props: IProps) {

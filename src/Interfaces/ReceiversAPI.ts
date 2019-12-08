@@ -9,7 +9,7 @@ export default class ReceiversAPI {
   constructor(db: CounterDatabase, loggingApi: LoggingAPI) {
     this.db = db;
     this.loggingApi = loggingApi;
-  };
+  }
 
   public fireEvent(event: IEvent) {
     this.getAllReceivers().then(receivers => {

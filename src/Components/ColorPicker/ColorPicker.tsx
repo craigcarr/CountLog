@@ -4,8 +4,8 @@ import styles from './ColorPicker.module.scss';
 import _ from "lodash";
 
 interface IProps {
-  color: string,
-  onColorChange: any,
+  color: string;
+  onColorChange: any;
 }
 
 export default function ColorPicker(props: IProps) {

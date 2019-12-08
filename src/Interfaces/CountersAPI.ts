@@ -12,7 +12,7 @@ export default class CountersAPI {
     this.db = db;
     this.eventsApi = eventsApi;
     this.loggingApi = loggingApi;
-  };
+  }
 
   public getAllCounters() {
     return this.db.counters.toArray();

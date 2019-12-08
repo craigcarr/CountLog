@@ -3,7 +3,7 @@ import styles from "./TooltipButton.module.scss";
 import { Button, Icon } from "semantic-ui-react";
 
 interface IProps {
-  text: string,
+  text: string;
 }
 
 export default function TooltipButton(props: IProps) {

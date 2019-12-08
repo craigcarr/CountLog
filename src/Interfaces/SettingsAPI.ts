@@ -5,7 +5,7 @@ export default class SettingsAPI {
 
   constructor(db: CounterDatabase) {
       this.db = db;
-  };
+  }
 
   public getAllSettings() {
     return this.db.settings.toArray();

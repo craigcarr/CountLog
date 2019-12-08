@@ -4,8 +4,8 @@ import { Button, Icon, SemanticICONS } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
 interface IProps {
-  className: string,
-  iconName: SemanticICONS,
+  className: string;
+  iconName: SemanticICONS;
 }
 
 export default function HeaderBackButton(props: IProps) {

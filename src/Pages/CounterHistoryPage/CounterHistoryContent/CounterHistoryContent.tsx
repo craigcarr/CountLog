@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Table, Dropdown, Icon, Button, Pagination, Checkbox } from 'semantic-ui-react';
+import { Table, Dropdown, Icon, Button, Pagination, Checkbox, DropdownProps } from 'semantic-ui-react';
 import _ from 'lodash';
 import { EventType } from '../../../CounterDatabase';
 import styles from './CounterHistoryContent.module.scss';
@@ -33,10 +33,10 @@ export default function MainContent() {
         });
       }
 
-      list.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1)
+      list.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1);
 
       setTableData(list);
-    })
+    });
   }, [params, countersApi, eventsApi]);
 
   // TODO Duplicated in EventEditContext
@@ -59,7 +59,7 @@ export default function MainContent() {
     }
   }
 
-  function handleFilterChanged(data: any) {
+  function handleFilterChanged(data: DropdownProps) {
     if (data.value === EventType.Increment) {
       setTypeFilter(EventType.Increment);
     } else if (data.value === EventType.Decrement) {
@@ -105,7 +105,7 @@ export default function MainContent() {
   let tableContent = null;
 
   if (tableData.length === 0) {
-    tableContent = <Table.Row><Table.Cell>There are no events to display.</Table.Cell></Table.Row>
+    tableContent = <Table.Row><Table.Cell>There are no events to display.</Table.Cell></Table.Row>;
   } else {
     tableContent = _.map(tableData, ({ id, type, timestamp, annotation }) => {
       let typeFilterCondition = (typeFilter === undefined || type === typeFilter);
@@ -124,13 +124,13 @@ export default function MainContent() {
                 <p>{displayTimestamp(timestamp)}</p>
               </Table.Cell>
               <Table.Cell>
-                <Button id={styles.myButton} onClick={() => { handleEditEventClicked(id) }} circular icon>
+                <Button id={styles.myButton} onClick={() => { handleEditEventClicked(id); }} circular icon>
                   <Icon name="edit">
                   </Icon>
                 </Button>
               </Table.Cell>
             </Table.Row>
-          )
+          );
         }
       }
     });
