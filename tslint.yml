@@ -10,8 +10,9 @@ rules:
   "arrow-parens": false                   # Unnecessary and annoying
   "trailing-comma": false                 # Unnecessary and annoying
   "ordered-imports": false                # Need to fight with VSCode-added imports
-  "member-access": false                  # Worthless for React-specific methods
   "member-ordering": [false]              # Doesn't always make sense
   "object-literal-shorthand": false       # Makes things more confusing
-  "no-string-literal": false              # Needed for getting values passed through routes
   "interface-over-type-literal": false    # An auto-generated file doesn't do this (serviceWorker.ts)
+
+  # TODO Re-enable this rule.
+  "no-string-literal": false

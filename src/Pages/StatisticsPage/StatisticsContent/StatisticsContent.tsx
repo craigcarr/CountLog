@@ -6,7 +6,6 @@ import { useHistory, useParams } from 'react-router';
 import { CountersContext } from '../../../App';
 
 export default function StatisticsContent() {
-  const [counterId, setCounterId] = useState<number>(-1);
   const [counterName, setCounterName] = useState<string>('');
   const [counterColor, setCounterColor] = useState<string>('');
   const [counterValue, setCounterValue] = useState<number>(0);
@@ -23,17 +22,15 @@ export default function StatisticsContent() {
     let trueVMin = 0.8 * Math.min(window.innerHeight, window.innerWidth);
     document.documentElement.style.setProperty("--trueVMin", trueVMin.toString() + 'px');
 
-    // TODO Rename this.
-    let counterIdXXX = parseInt(params['counterId'], 10);
-    setCounterId(counterIdXXX);
+    const counterId = parseInt(params['counterId'], 10);
 
-    countersApi.getCounterById(counterIdXXX).then(counter => {
+    countersApi.getCounterById(counterId).then(counter => {
       setCounterName(counter.name);
       setCounterColor(counter.color);
       setCounterValue(counter.value);
     });
 
-    countersApi.getDisplayValuesForCounter(counterIdXXX).then(displayValues => {
+    countersApi.getDisplayValuesForCounter(counterId).then(displayValues => {
       let list = [];
 
       for (let displayValue of displayValues) {
@@ -43,30 +40,33 @@ export default function StatisticsContent() {
         });
       }
 
-      list.sort((a, b) => (a.timestamp > b.timestamp) ? 1 : -1)
+      list.sort((a, b) => (a.timestamp > b.timestamp) ? 1 : -1);
 
-      let chartDataXXX = [];
+      let newChartData = [];
 
       for (let displayValue of list) {
-        chartDataXXX.push(
+        newChartData.push(
           { x: new Date(parseInt(displayValue.timestamp, 10)), y: displayValue.value },
         );
       }
 
-      setChartData(chartDataXXX);
+      setChartData(newChartData);
     });
   }, [params, countersApi]);
 
   function handleEditButtonClicked() {
-    history.push('/editcounter/' + counterId)
+    const counterId = parseInt(params['counterId'], 10);
+    history.push('/editcounter/' + counterId);
   }
 
   function handleDeleteButtonClicked() {
-    history.push('/deletecounter/' + counterId)
+    const counterId = parseInt(params['counterId'], 10);
+    history.push('/deletecounter/' + counterId);
   }
 
   function handleViewButtonClicked() {
-    history.push('/counterhistory/' + counterId)
+    const counterId = parseInt(params['counterId'], 10);
+    history.push('/counterhistory/' + counterId);
   }
 
   return (
