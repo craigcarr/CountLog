@@ -4,7 +4,7 @@ import { Button, Icon, SemanticICONS } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
 interface IProps {
-  className: any,
+  className: string,
   iconName: SemanticICONS,
 }
 

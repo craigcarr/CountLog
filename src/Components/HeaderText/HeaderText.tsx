@@ -2,7 +2,7 @@ import React from "react";
 import styles from './HeaderText.module.scss';
 
 interface IProps {
-  className: any,
+  className: string,
   children: any,
 }
 
