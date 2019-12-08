@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Table, Checkbox, Select, Button } from 'semantic-ui-react';
+import { Table, Checkbox, Button } from 'semantic-ui-react';
 import styles from './SettingsContent.module.scss';
 import { SettingsContext } from '../../../App';
 import TooltipButton from '../../../Components/TooltipButton/TooltipButton';
@@ -73,11 +73,6 @@ export default function SettingsContent() {
     history.push('/receiverlist');
   }
 
-  const languageOptions = [
-    { key: 'en', value: 'en', text: 'English' },
-    { key: 'de', value: 'de', text: 'German' },
-  ]
-
   let isInstalledText = null;
   let isInstalledColor = null;
   if (window.matchMedia('(display-mode: standalone)').matches) {
@@ -101,21 +96,6 @@ export default function SettingsContent() {
             </Table.Cell>
             <Table.Cell>
               {isInstalledText}
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell className={styles.tableCell}>
-              <p>Language</p>
-            </Table.Cell>
-            <Table.Cell>
-              <TooltipButton text="Change the language for all text in the app." />
-            </Table.Cell>
-            <Table.Cell>
-              <Select
-                className={styles.select}
-                defaultValue="en"
-                options={languageOptions} />
-              <p>Not yet supported!</p>
             </Table.Cell>
           </Table.Row>
           <Table.Row>
