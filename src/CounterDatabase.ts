@@ -22,8 +22,14 @@ export interface IDisplayValue {
   value: number;
 }
 
+export enum SettingName {
+  isClickSoundEnabled = "isClickSoundEnabled",
+  isDarkModeEnabled = "isDarkModeEnabled",
+  isVibrationEnabled = "isVibrationEnabled",
+}
+
 export interface ISetting {
-  name: string;
+  name: SettingName;
   value: any;
 }
 

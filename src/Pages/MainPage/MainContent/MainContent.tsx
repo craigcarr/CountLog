@@ -4,6 +4,7 @@ import { Icon, Button, Table } from 'semantic-ui-react';
 import _ from 'lodash';
 import styles from './MainContent.module.scss';
 import { CountersContext, SettingsContext } from '../../../App';
+import { SettingName } from '../../../CounterDatabase';
 
 export default function MainContent() {
   const [tableData, setTableData] = useState<any[]>([]);
@@ -28,14 +29,14 @@ export default function MainContent() {
   }
 
   function handleChange(id: number, isIncrement: boolean) {
-    settingsApi.getSettingValue('isVibrationEnabled').then(setting => {
-      if (setting !== undefined && setting.value === true) {
+    settingsApi.getSettingByName(SettingName.isVibrationEnabled).then(setting => {
+      if (setting.value === true) {
         window.navigator.vibrate(200);
       }
     });
 
-    settingsApi.getSettingValue('isClickSoundEnabled').then(setting => {
-      if (setting !== undefined && setting.value === true) {
+    settingsApi.getSettingByName(SettingName.isClickSoundEnabled).then(setting => {
+      if (setting.value === true) {
         new Audio("/click.mp3").play();
       }
     });
@@ -80,8 +81,8 @@ export default function MainContent() {
             onClick={() => { handleCounterButtonClicked(id) }}
             className={styles.counterDisplay}
             style={{ backgroundColor: color, color: 'white' }}>
-            <p className={styles.counterText}>{name}</p>
-            <p className={styles.counterText}>{value}</p>
+            <h4 className={styles.counterText}>{name}</h4>
+            <h4 className={styles.counterText}>{value}</h4>
           </Button>
           <Button
             onClick={e => { handleIncrement(id) }}

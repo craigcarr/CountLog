@@ -3,7 +3,7 @@ import { Table, Checkbox, Button } from 'semantic-ui-react';
 import styles from './SettingsContent.module.scss';
 import { SettingsContext } from '../../../App';
 import TooltipButton from '../../../Components/TooltipButton/TooltipButton';
-import { ISetting } from '../../../CounterDatabase';
+import { ISetting, SettingName } from '../../../CounterDatabase';
 import { useHistory } from 'react-router';
 
 export default function SettingsContent() {
@@ -28,9 +28,9 @@ export default function SettingsContent() {
     settingsApi.getAllSettings().then((settings) => {
       let result = array2dict(settings);
 
-      setVibrationEnabled(result['isVibrationEnabled']);
-      setClickSoundEnabled(result['isClickSoundEnabled']);
-      setDarkModeEnabled(result['isDarkModeEnabled']);
+      setClickSoundEnabled(result[SettingName.isClickSoundEnabled]);
+      setDarkModeEnabled(result[SettingName.isDarkModeEnabled]);
+      setVibrationEnabled(result[SettingName.isVibrationEnabled]);
     });
   }, [settingsApi]);
 
@@ -40,7 +40,7 @@ export default function SettingsContent() {
     setVibrationEnabled(newValue);
 
     settingsApi.putSetting({
-      name: 'isVibrationEnabled',
+      name: SettingName.isVibrationEnabled,
       value: newValue,
     });
 
@@ -55,7 +55,7 @@ export default function SettingsContent() {
     setClickSoundEnabled(newValue);
 
     settingsApi.putSetting({
-      name: 'isClickSoundEnabled',
+      name: SettingName.isClickSoundEnabled,
       value: newValue,
     });
 
@@ -70,7 +70,7 @@ export default function SettingsContent() {
     setDarkModeEnabled(newValue);
 
     settingsApi.putSetting({
-      name: 'isDarkModeEnabled',
+      name: SettingName.isDarkModeEnabled,
       value: newValue,
     });
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.scss';
 
-import CounterDatabase from './CounterDatabase';
+import CounterDatabase, { SettingName } from './CounterDatabase';
 import LoggingAPI from './Interfaces/LoggingAPI';
 import CountersAPI from './Interfaces/CountersAPI';
 import EventsAPI from './Interfaces/EventsAPI';
@@ -28,7 +28,7 @@ const loggingApi = new LoggingAPI();
 const receiversApi = new ReceiversAPI(db, loggingApi);
 const eventsApi = new EventsAPI(db, receiversApi, loggingApi);
 const countersApi = new CountersAPI(db, eventsApi, loggingApi);
-const settingsApi = new SettingsAPI(db);
+const settingsApi = new SettingsAPI(db, loggingApi);
 
 export const LoggingContext = React.createContext(loggingApi);
 export const CountersContext = React.createContext(countersApi);
@@ -37,10 +37,8 @@ export const SettingsContext = React.createContext(settingsApi);
 export const ReceiversContext = React.createContext(receiversApi);
 
 export default function App() {
-  settingsApi.getSettingValue("isDarkModeEnabled").then(setting => {
-    if (setting !== undefined) {
-      settingsApi.setDarkModeCssVariables(setting);
-    }
+  settingsApi.getSettingByName(SettingName.isDarkModeEnabled).then(setting => {
+    settingsApi.setDarkModeCssVariables(setting);
   });
 
   return (
