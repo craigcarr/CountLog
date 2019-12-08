@@ -37,7 +37,7 @@ export default function ReceiverListContent() {
   if (tableData.length === 0) {
     tableHeader = null;
 
-    tableContent = <Table.Row><Table.Cell>There are no receivers to display.</Table.Cell></Table.Row>
+    tableContent = <Table.Row><Table.Cell><p>There are no receivers to display.</p></Table.Cell></Table.Row>
   } else {
     tableHeader = (
       <Table.Row>
@@ -51,10 +51,10 @@ export default function ReceiverListContent() {
     tableContent = _.map(tableData, ({ id, options }) => (
       <Table.Row key={id}>
         <Table.Cell>
-          {options['type'].toUpperCase()}
+          <p>{options['type'].toUpperCase()}</p>
         </Table.Cell>
         <Table.Cell className={styles.urlCell}>
-          {options['url']}
+          <p>{options['url']}</p>
         </Table.Cell>
         <Table.Cell>
           <Button className={styles.myButton} onClick={() => { handleEditButtonClicked(id) }} circular icon>

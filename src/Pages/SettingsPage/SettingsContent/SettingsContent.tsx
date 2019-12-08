@@ -65,8 +65,14 @@ export default function SettingsContent() {
   }
 
   function handleDarkModeEnabledSettingChanged() {
-    // TODO Theme will change on settings screen
-    setDarkModeEnabled(!isDarkModeEnabled);
+    let newValue = !isDarkModeEnabled;
+
+    setDarkModeEnabled(newValue);
+
+    settingsApi.putSetting({
+      name: 'isDarkModeEnabled',
+      value: newValue,
+    });
   }
 
   function handleConfigureButtonClicked() {
@@ -112,7 +118,6 @@ export default function SettingsContent() {
                 checked={isDarkModeEnabled}
                 onChange={handleDarkModeEnabledSettingChanged}>
               </Checkbox>
-              <p>Not yet supported!</p>
             </Table.Cell>
           </Table.Row>
           <Table.Row>

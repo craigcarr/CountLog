@@ -32,3 +32,17 @@ div.ui.selection.dropdown > div.menu.transition > div.item {
 
   font-size: $bodyTextSize;
 }
+
+// Dark theme hacks.
+
+.content, .table {
+  background-color: var(--themeBackgroundColor) !important;
+}
+
+p, h2 {
+  color: var(--themeColor) !important;
+}
+
+h4 {
+  font-size: $bodyTextSize !important;
+}

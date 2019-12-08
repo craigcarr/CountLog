@@ -75,16 +75,16 @@ export default function CounterCreateContent(props: IProps) {
         <Table.Body>
           <Table.Row>
             <Table.Cell>
-              Name
-                </Table.Cell>
+              <p>Name</p>
+            </Table.Cell>
             <Table.Cell>
               <Input defaultValue={name} onChange={handleNameChange}></Input>
             </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>
-              Color
-                </Table.Cell>
+              <p>Color</p>
+            </Table.Cell>
             <Table.Cell>
               <ColorPicker
                 color={color}
@@ -93,8 +93,8 @@ export default function CounterCreateContent(props: IProps) {
           </Table.Row>
           <Table.Row>
             <Table.Cell>
-              Initial Value
-                </Table.Cell>
+              <p>Initial Value</p>
+            </Table.Cell>
             <Table.Cell>
               <Input
                 onChange={handleValueChange}

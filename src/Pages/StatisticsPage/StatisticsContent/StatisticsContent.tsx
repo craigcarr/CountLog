@@ -90,7 +90,8 @@ export default function StatisticsContent() {
               <p>Current Color</p>
             </Table.Cell>
             <Table.Cell>
-              <p style={{ color: counterColor }}>{counterColor}</p>
+              {/* Use "h4" so that the dark theme will not override the color. */}
+              <h4 style={{ color: counterColor }}>{counterColor}</h4>
             </Table.Cell>
           </Table.Row>
           <Table.Row>

@@ -64,7 +64,7 @@ export default function MainContent() {
   let tableContent = null;
 
   if (tableData.length === 0) {
-    tableContent = <Table.Row><Table.Cell>There are no counters to display.</Table.Cell></Table.Row>
+    tableContent = <Table.Row><Table.Cell><p>There are no counters to display.</p></Table.Cell></Table.Row>
   } else {
     tableContent = _.map(tableData, ({ id, name, color, value }) => (
       <Table.Row key={id}>

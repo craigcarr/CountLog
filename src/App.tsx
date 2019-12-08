@@ -37,6 +37,12 @@ export const SettingsContext = React.createContext(settingsApi);
 export const ReceiversContext = React.createContext(receiversApi);
 
 export default function App() {
+  settingsApi.getSettingValue("isDarkModeEnabled").then(setting => {
+    if (setting !== undefined) {
+      settingsApi.setDarkModeCssVariables(setting);
+    }
+  });
+
   return (
     <LoggingContext.Provider value={loggingApi}>
       <SettingsContext.Provider value={settingsApi}>

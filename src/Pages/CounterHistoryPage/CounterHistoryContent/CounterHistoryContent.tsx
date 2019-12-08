@@ -148,7 +148,7 @@ export default function MainContent() {
         <Table.Body>
           <Table.Row className={styles.filterTableRow}>
             <Table.Cell>
-              Event Type
+              <p>Event Type</p>
             </Table.Cell>
             <Table.Cell>
               <Dropdown
@@ -163,7 +163,7 @@ export default function MainContent() {
           </Table.Row>
           <Table.Row className={styles.filterTableRow}>
             <Table.Cell>
-              Has Annotation
+              <p>Has Annotation</p>
             </Table.Cell>
             <Table.Cell>
               <div id={styles.checkbox}>

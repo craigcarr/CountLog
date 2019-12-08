@@ -7,5 +7,5 @@ interface IProps {
 }
 
 export default function HeaderText(props: IProps) {
-  return <p className={`${styles.text} ${props.className}`}>{props.children}</p>;
+  return <h1 className={`${styles.text} ${props.className}`}>{props.children}</h1>;
 }

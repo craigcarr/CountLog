@@ -87,7 +87,7 @@ export default function ReceiverCreateContent(props: IProps) {
         <Table.Body>
           <Table.Row>
             <Table.Cell className={styles.tableCell}>
-              Receiver Type
+              <p>Receiver Type</p>
             </Table.Cell>
             <Table.Cell className={styles.tableCell}>
               <Select
@@ -103,8 +103,8 @@ export default function ReceiverCreateContent(props: IProps) {
         <Table.Body>
           <Table.Row>
             <Table.Cell className={styles.tableCell}>
-              Server URL
-          </Table.Cell>
+              <p>Server URL</p>
+            </Table.Cell>
             <Table.Cell className={styles.tableCell}>
               <Input
                 id={styles.serverAddressInput}
@@ -125,7 +125,7 @@ export default function ReceiverCreateContent(props: IProps) {
             <Table.Cell>
               <Button id={styles.saveButton} onClick={handleSaveButtonClicked}>
                 Save
-            </Button>
+              </Button>
             </Table.Cell>
           </Table.Row>
         </Table.Body>
