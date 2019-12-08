@@ -23,7 +23,7 @@ export default function StatisticsContent() {
     let trueVMin = 0.8 * Math.min(window.innerHeight, window.innerWidth);
     document.documentElement.style.setProperty("--trueVMin", trueVMin.toString() + 'px');
 
-    let counterIdXXX = parseInt(params['counterId'], 10)
+    let counterIdXXX = parseInt(params['counterId'], 10);
     setCounterId(counterIdXXX);
 
     countersApi.getCounterById(counterIdXXX).then(counter => {
