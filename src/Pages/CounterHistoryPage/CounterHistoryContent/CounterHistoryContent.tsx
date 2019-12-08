@@ -19,7 +19,7 @@ export default function MainContent() {
   const eventsApi = useContext(EventsContext);
 
   useEffect(() => {
-    let counterId = parseInt(params['counterId'], 10)
+    const counterId = parseInt(params['counterId'], 10);
 
     eventsApi.getEventsForCounter(counterId, undefined).then(events => {
       let list = [];
@@ -74,7 +74,7 @@ export default function MainContent() {
   }
 
   function handleEditEventClicked(eventId: number) {
-    let counterId = parseInt(params['counterId'], 10);
+    const counterId = parseInt(params['counterId'], 10);
     history.push('/counterhistory/' + counterId + '/editevent/' + eventId);
   }
 

@@ -16,8 +16,8 @@ export default function EventEditContent() {
   const countersApi = useContext(CountersContext);
   const eventsApi = useContext(EventsContext);
 
-  let counterId = parseInt(params['counterId'], 10);
-  let eventId = parseInt(params['eventId'], 10);
+  const counterId = parseInt(params['counterId'], 10);
+  const eventId = parseInt(params['eventId'], 10);
 
   useEffect(() => {
     eventsApi.getEventById(eventId).then(event => {

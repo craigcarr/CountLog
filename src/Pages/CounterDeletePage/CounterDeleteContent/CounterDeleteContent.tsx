@@ -11,7 +11,7 @@ export default function CounterDeleteContent() {
   const countersApi = useContext(CountersContext);
 
   function handleDeleteButtonClicked() {
-    let counterId = parseInt(params['counterId'], 10);
+    const counterId = parseInt(params['counterId'], 10);
 
     countersApi.deleteCounter(counterId).then(() => {
       history.push('/');
