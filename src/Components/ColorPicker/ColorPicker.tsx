@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "semantic-ui-react";
 import styles from './ColorPicker.module.scss';
-import _ from "lodash";
 
 interface IProps {
   color: string;
@@ -27,7 +26,7 @@ export default function ColorPicker(props: IProps) {
 
   return (
     <div>
-      {_.map(colors, (color) => {
+      {colors.map(color => {
         let myStyle = null;
 
         if (color === selectedColor) {

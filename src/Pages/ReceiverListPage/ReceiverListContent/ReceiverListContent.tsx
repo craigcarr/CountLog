@@ -3,10 +3,9 @@ import { Button, Table, Icon } from "semantic-ui-react";
 import styles from "./ReceiverListContent.module.scss";
 import { useHistory } from "react-router";
 import { ReceiversContext } from "../../../App";
-import _ from "lodash";
 
 export default function ReceiverListContent() {
-  const [tableData, setHttpTableData] = useState<any>({});
+  const [tableData, setHttpTableData] = useState<any[]>([]);
 
   const history = useHistory();
 
@@ -37,7 +36,12 @@ export default function ReceiverListContent() {
   if (tableData.length === 0) {
     tableHeader = null;
 
-    tableContent = <Table.Row><Table.Cell><p>There are no receivers to display.</p></Table.Cell></Table.Row>
+    tableContent = (
+      <Table.Row>
+        <Table.Cell>
+          <p>There are no receivers to display.</p>
+        </Table.Cell>
+      </Table.Row>);
   } else {
     tableHeader = (
       <Table.Row>
@@ -48,7 +52,7 @@ export default function ReceiverListContent() {
       </Table.Row>
     );
 
-    tableContent = _.map(tableData, ({ id, options }) => (
+    tableContent = tableData.map(({ id, options }: any) => (
       <Table.Row key={id}>
         <Table.Cell>
           <p>{options['type'].toUpperCase()}</p>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Table, Dropdown, Icon, Button, Pagination, Checkbox, DropdownProps } from 'semantic-ui-react';
-import _ from 'lodash';
 import { EventType, IEvent } from '../../../CounterDatabase';
 import styles from './CounterHistoryContent.module.scss';
 import { useParams, useHistory } from 'react-router';
@@ -101,9 +100,16 @@ export default function MainContent() {
   let tableContent = null;
 
   if (tableData.length === 0) {
-    tableContent = <Table.Row><Table.Cell>There are no events to display.</Table.Cell></Table.Row>;
+    tableContent =
+      <Table.Row>
+        <Table.Cell>
+          <p>There are no events to display.</p>
+        </Table.Cell>
+      </Table.Row>;
   } else {
-    tableContent = _.map(tableData, setting => {
+    tableContent = tableData.map(setting => {
+      let rv = [];
+
       let typeFilterCondition = (typeFilter === undefined || setting.type === typeFilter);
       let hasAnnotationCondition = (hasAnnotationFilter === false || setting.annotation !== '');
 
@@ -111,7 +117,7 @@ export default function MainContent() {
         counter += 1;
 
         if (counter > itemLowerBound && counter <= itemUpperBound) {
-          return (
+          rv.push(
             <Table.Row key={setting.id}>
               <Table.Cell className={styles.eventTableCell}>
                 <p>{displayEventType(setting.type)}</p>
@@ -129,6 +135,8 @@ export default function MainContent() {
           );
         }
       }
+
+      return rv;
     });
   }
 

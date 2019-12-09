@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import { Icon, Button, Table } from 'semantic-ui-react';
-import _ from 'lodash';
 import styles from './MainContent.module.scss';
 import { CountersContext, SettingsContext } from '../../../App';
 import { SettingName } from '../../../CounterDatabase';
@@ -67,7 +66,7 @@ export default function MainContent() {
   if (tableData.length === 0) {
     tableContent = <Table.Row><Table.Cell><p>There are no counters to display.</p></Table.Cell></Table.Row>
   } else {
-    tableContent = _.map(tableData, ({ id, name, color, value }) => (
+    tableContent = tableData.map(({ id, name, color, value }) => (
       <Table.Row key={id}>
         <Table.Cell className={styles.tableCell}>
           <Button
@@ -93,7 +92,7 @@ export default function MainContent() {
           </Button>
         </Table.Cell>
       </Table.Row>
-    ))
+    ));
   }
 
   return (
