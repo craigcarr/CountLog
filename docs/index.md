@@ -1,5 +1,7 @@
 # Welcome to CountLog
 
+<img src="./logo192.png" width="128px" />
+
 CountLog allows you to manually record, visualize, and analyze events to improve workflows in everyday life.
 
 ## Relevant Links

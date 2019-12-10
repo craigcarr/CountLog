@@ -8,10 +8,9 @@ markdown_extensions:
 theme:
   name: material
   palette:
-    primary: 'blue'
-    accent: 'blue'
-  logo:
-    icon: 'send'
+    primary: 'brown'
+    accent: 'brown'
+  logo: 'logo192.png'
 
 nav:
   - Home: index.md
