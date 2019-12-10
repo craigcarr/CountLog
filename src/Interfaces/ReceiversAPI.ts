@@ -1,4 +1,4 @@
-import CounterDatabase, { IReceiver, IEvent } from "../CounterDatabase";
+import CounterDatabase, { IReceiver, IEvent, ReceiverType } from "../CounterDatabase";
 import LoggingAPI from "./LoggingAPI";
 import axios from 'axios';
 
@@ -14,7 +14,7 @@ export default class ReceiversAPI {
   public fireEvent(event: IEvent) {
     this.getAllReceivers().then(receivers => {
       for (let receiver of receivers) {
-        if (receiver.options['type'] === 'http') {
+        if (receiver.type === ReceiverType.http) {
           const body = JSON.stringify({
             type: event.type,
             timestamp: event.timestamp,
@@ -24,7 +24,7 @@ export default class ReceiversAPI {
           const instance = axios.create();
           instance.defaults.timeout = 1000;
 
-          instance.post(receiver.options['url'], body).then(response => {
+          instance.post(receiver.options.url, body).then(response => {
             // We don't care about any 200-level response we will get.
           }).catch(error => {
             this.loggingApi.error(error);
@@ -35,7 +35,7 @@ export default class ReceiversAPI {
   }
 
   public testReceiver(receiver: IReceiver): Promise<boolean> {
-    if (receiver.options['type'] === 'http') {
+    if (receiver.type === ReceiverType.http) {
       const body = JSON.stringify({
         type: 'test',
         timestamp: 0,
@@ -46,7 +46,7 @@ export default class ReceiversAPI {
         const instance = axios.create();
         instance.defaults.timeout = 1000;
 
-        instance.post(receiver.options['url'], body).then(response => {
+        instance.post(receiver.options.url, body).then(response => {
           resolve(true);
         }).catch(error => {
           resolve(false);

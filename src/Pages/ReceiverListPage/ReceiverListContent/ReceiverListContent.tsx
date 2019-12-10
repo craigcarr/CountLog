@@ -52,13 +52,13 @@ export default function ReceiverListContent() {
       </Table.Row>
     );
 
-    tableContent = tableData.map(({ id, options }: any) => (
+    tableContent = tableData.map(({ id, type, options }: any) => (
       <Table.Row key={id}>
         <Table.Cell>
-          <p>{options['type'].toUpperCase()}</p>
+          <p>{type.toUpperCase()}</p>
         </Table.Cell>
         <Table.Cell className={styles.urlCell}>
-          <p>{options['url']}</p>
+          <p>{options.url}</p>
         </Table.Cell>
         <Table.Cell>
           <Button className={styles.myButton} onClick={() => { handleEditButtonClicked(id) }} circular icon>

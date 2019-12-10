@@ -3,7 +3,7 @@ import { Table, Select, Input, Button } from "semantic-ui-react";
 import styles from "./ReceiverCreateContent.module.scss";
 import { ReceiversContext } from "../../../App";
 import { useHistory } from "react-router";
-import { IReceiver } from "../../../CounterDatabase";
+import { IReceiver, ReceiverType, IHttpReceiverOptions } from "../../../CounterDatabase";
 
 interface IProps {
   id: number | undefined;
@@ -21,8 +21,12 @@ export default function ReceiverCreateContent(props: IProps) {
   useEffect(() => {
     if (props.id !== undefined) {
       receiversApi.getReceiverById(props.id).then(receiver => {
-        setSelectedReceiverType(receiver.options['type']);
-        setServerAddress(receiver.options['url']);
+        if (receiver.type === ReceiverType.http) {
+          let options: IHttpReceiverOptions = receiver.options as IHttpReceiverOptions;
+
+          setSelectedReceiverType(receiver.type);
+          setServerAddress(options.url);
+        }
       });
     }
   }, [props.id, receiversApi]);
@@ -40,12 +44,12 @@ export default function ReceiverCreateContent(props: IProps) {
   }
 
   function handleVerifyButtonClicked() {
-    let testOptions = {
-      type: 'http',
+    let testOptions: IHttpReceiverOptions = {
       url: serverAddress,
     }
 
     let testReceiver: IReceiver = {
+      type: ReceiverType.http,
       options: testOptions,
     }
 
@@ -63,17 +67,17 @@ export default function ReceiverCreateContent(props: IProps) {
   function handleSaveButtonClicked() {
     if (props.id === undefined) {
       receiversApi.putReceiver({
+        type: ReceiverType.http,
         options: {
-          type: 'http',
-          url: serverAddress
+          url: serverAddress,
         }
       });
     } else {
       receiversApi.putReceiver({
         id: props.id,
+        type: ReceiverType.http,
         options: {
-          type: 'http',
-          url: serverAddress
+          url: serverAddress,
         }
       });
     }

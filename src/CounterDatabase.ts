@@ -34,9 +34,18 @@ export interface ISetting {
   value: any;
 }
 
+export enum ReceiverType {
+  http = "http",
+}
+
+export interface IHttpReceiverOptions {
+  url: string;
+}
+
 export interface IReceiver {
   id?: number;
-  options: Record<string, any>;
+  type: ReceiverType;
+  options: IHttpReceiverOptions;
 }
 
 export enum EventType {

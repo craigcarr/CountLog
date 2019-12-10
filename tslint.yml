@@ -13,6 +13,3 @@ rules:
   "member-ordering": [false]              # Doesn't always make sense
   "object-literal-shorthand": false       # Makes things more confusing
   "interface-over-type-literal": false    # An auto-generated file doesn't do this (serviceWorker.ts)
-
-  # TODO Re-enable this rule.
-  "no-string-literal": false
