@@ -1,12 +1,12 @@
 import React from 'react';
 import CounterDeleteHeader from './CounterDeleteHeader/CounterDeleteHeader';
 import CounterDeleteContent from './CounterDeleteContent/CounterDeleteContent';
-import Helmet from 'react-helmet';
 
 export default function CounterDeletePage() {
+  document.title = "Delete Counter - CountLog";
+
   return (
     <React.Fragment>
-      <Helmet><title>Delete Counter - CountLog</title></Helmet>
       <CounterDeleteHeader></CounterDeleteHeader>
       <CounterDeleteContent></CounterDeleteContent>
     </React.Fragment>

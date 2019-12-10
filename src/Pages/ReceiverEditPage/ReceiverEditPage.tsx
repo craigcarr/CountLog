@@ -1,12 +1,12 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import ReceiverEditHeader from './ReceiverEditHeader/ReceiverEditHeader';
 import ReceiverEditContent from './ReceiverEditContent/ReceiverEditContent';
 
 export default function ReceiverEditPage() {
+  document.title = "Edit Receiver - CountLog";
+
   return (
     <React.Fragment>
-      <Helmet><title>Edit Receiver - CountLog</title></Helmet>
       <ReceiverEditHeader></ReceiverEditHeader>
       <ReceiverEditContent></ReceiverEditContent>
     </React.Fragment>

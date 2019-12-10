@@ -7,7 +7,7 @@ purposes, this means that you do not need to go to your app store to download th
 
 To install CountLog, simply visit <https://countlog.xyz>.
 
-- On mobile, you must find an "Add to Home Screen" option in your browser's menu.
+- On mobile, find an "Add to Home Screen" option in your browser's menu.
 
 - On desktop (only works with Chrome), open the menu and click "Install CountLog".
 

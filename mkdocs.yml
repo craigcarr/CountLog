@@ -12,6 +12,10 @@ theme:
     accent: 'green'
   logo: 'logo192.png'
 
+google_analytics:
+  - 'UA-154365911-1'
+  - 'auto'
+
 nav:
   - Home: index.md
   - Use Cases: usecases.md

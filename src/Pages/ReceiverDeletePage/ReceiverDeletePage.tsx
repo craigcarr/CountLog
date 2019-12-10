@@ -1,12 +1,12 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import ReceiverDeleteHeader from './ReceiverDeleteHeader/ReceiverDeleteHeader';
 import ReceiverDeleteContent from './ReceiverDeleteContent/ReceiverDeleteContent';
 
 export default function ReceiverDeletePage() {
+  document.title = "Delete Receiver - CountLog";
+
   return (
     <React.Fragment>
-      <Helmet><title>Delete Receiver - CountLog</title></Helmet>
       <ReceiverDeleteHeader></ReceiverDeleteHeader>
       <ReceiverDeleteContent></ReceiverDeleteContent>
     </React.Fragment>
