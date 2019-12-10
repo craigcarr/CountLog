@@ -69,6 +69,12 @@ export default function CounterCreateContent(props: IProps) {
     history.push('/');
   }
 
+  function handleFormKeyPress(e: any) {
+    if (e.key === 'Enter' && isInputValid()) {
+      e.target.blur();
+    }
+  }
+
   return (
     <div id={styles.createContent} className={styles.content}>
       <Table unstackable columns={2}>
@@ -78,7 +84,11 @@ export default function CounterCreateContent(props: IProps) {
               <p>Name</p>
             </Table.Cell>
             <Table.Cell>
-              <Input defaultValue={name} onChange={handleNameChange}></Input>
+              <Input
+                defaultValue={name}
+                onKeyPress={(e: any) => { handleFormKeyPress(e); }}
+                onChange={handleNameChange}>
+              </Input>
             </Table.Cell>
           </Table.Row>
           <Table.Row>
@@ -97,6 +107,7 @@ export default function CounterCreateContent(props: IProps) {
             </Table.Cell>
             <Table.Cell>
               <Input
+                onKeyPress={(e: any) => { handleFormKeyPress(e); }}
                 onChange={handleValueChange}
                 type="number"
                 value={valueString}>

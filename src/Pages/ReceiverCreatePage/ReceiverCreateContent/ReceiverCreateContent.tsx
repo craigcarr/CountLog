@@ -81,6 +81,12 @@ export default function ReceiverCreateContent(props: IProps) {
     history.goBack();
   }
 
+  function handleFormKeyPress(e: any) {
+    if (e.key === 'Enter') {
+      e.target.blur();
+    }
+  }
+
   return (
     <div className={styles.content}>
       <Table id={styles.receiverSelectorTable} unstackable columns={2}>
@@ -108,6 +114,7 @@ export default function ReceiverCreateContent(props: IProps) {
             <Table.Cell className={styles.tableCell}>
               <Input
                 id={styles.serverAddressInput}
+                onKeyPress={(e: any) => { handleFormKeyPress(e); }}
                 defaultValue={serverAddress}
                 onChange={(e, data) => { handleServerAddressChanged(data) }}>
               </Input>
