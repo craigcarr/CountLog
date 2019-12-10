@@ -13,6 +13,7 @@ export default function CounterCreateContent(props: IProps) {
   const [name, setName] = useState<string>('');
   const [color, setColor] = useState<string>('#ff0000');
   const [valueString, setValueString] = useState<string>('0');
+  const [deltaString, setDeltaString] = useState<string>('1');
 
   const history = useHistory();
 
@@ -24,6 +25,7 @@ export default function CounterCreateContent(props: IProps) {
         setName(counter.name);
         setColor(counter.color);
         setValueString(counter.value.toString());
+        setDeltaString(counter.delta.toString());
       });
     }
   }, [props.id, countersApi]);
@@ -40,10 +42,16 @@ export default function CounterCreateContent(props: IProps) {
     setValueString(e.target.value);
   }
 
+  function handleDeltaChange(e: any) {
+    setDeltaString(e.target.value);
+  }
+
   function isInputValid() {
     if (!color || !name) {
       return false;
     } else if (isNaN(parseInt(valueString, 10)) || valueString.includes('.')) {
+      return false;
+    } else if (isNaN(parseInt(deltaString, 10)) || valueString.includes('.') || parseInt(deltaString, 10) <= 0) {
       return false;
     } else {
       return true;
@@ -56,6 +64,7 @@ export default function CounterCreateContent(props: IProps) {
         name: name,
         color: color,
         value: parseInt(valueString, 10),
+        delta: parseInt(deltaString, 10),
       });
     } else {
       countersApi.putCounter({
@@ -63,6 +72,7 @@ export default function CounterCreateContent(props: IProps) {
         name: name,
         color: color,
         value: parseInt(valueString, 10),
+        delta: parseInt(deltaString, 10),
       });
     }
 
@@ -111,6 +121,19 @@ export default function CounterCreateContent(props: IProps) {
                 onChange={handleValueChange}
                 type="number"
                 value={valueString}>
+              </Input>
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>
+              <p>Delta</p>
+            </Table.Cell>
+            <Table.Cell>
+              <Input
+                onKeyPress={(e: any) => { handleFormKeyPress(e); }}
+                onChange={handleDeltaChange}
+                type="number"
+                value={deltaString}>
               </Input>
             </Table.Cell>
           </Table.Row>

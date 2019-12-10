@@ -91,12 +91,12 @@ export default class CountersAPI {
           let displayValue: IDisplayValue = {
             counterId: counterId,
             timestamp: Date.now().toString(),
-            value: counter.value + 1,
+            value: counter.value + counter.delta,
           }
 
           this.db.displayValues.put(displayValue);
 
-          this.db.counters.update(counterId, { value: counter.value + 1 }).then(() => {
+          this.db.counters.update(counterId, { value: counter.value + counter.delta }).then(() => {
             callback()
           });
         });
@@ -120,12 +120,12 @@ export default class CountersAPI {
           let displayValue: IDisplayValue = {
             counterId: counterId,
             timestamp: Date.now().toString(),
-            value: counter.value - 1,
+            value: counter.value - counter.delta,
           }
 
           this.db.displayValues.put(displayValue);
 
-          this.db.counters.update(counterId, { value: counter.value - 1 }).then(() => {
+          this.db.counters.update(counterId, { value: counter.value - counter.delta }).then(() => {
             callback()
           });
         });

@@ -5,6 +5,7 @@ export interface ICounter {
   name: string;
   color: string;
   value: number;
+  delta: number;
 }
 
 export interface IEvent {
@@ -56,15 +57,12 @@ export default class CounterDatabase extends Dexie {
     super("CounterDatabase");
 
     this.version(1).stores({
-      counters: "++id, name, color, value",
+      counters: "++id, name, color, value, delta",
       events: "++id, counterId, type, timestamp, annotation, [counterId+type]",
       settings: "++name, value",
       displayValues: "++id, counterId, timestamp, value",
+      receivers: "++id, type, options",
     });
-
-    this.version(2).stores({
-      receivers: "++id, options",
-    })
 
     this.counters = this.table("counters");
     this.events = this.table("events")
