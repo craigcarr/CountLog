@@ -8,8 +8,8 @@ markdown_extensions:
 theme:
   name: material
   palette:
-    primary: 'brown'
-    accent: 'brown'
+    primary: 'green'
+    accent: 'green'
   logo: 'logo192.png'
 
 nav:

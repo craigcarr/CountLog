@@ -2,7 +2,6 @@ import CounterDatabase, { ICounter, IEvent, EventType, IDisplayValue } from "../
 import LoggingAPI from "./LoggingAPI";
 import EventsAPI from "./EventsAPI";
 
-// TODO Make CountersAPI explicitly dependent on EventsAPI everywhere
 export default class CountersAPI {
   private db: CounterDatabase;
   private eventsApi: EventsAPI;
