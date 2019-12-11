@@ -31,7 +31,13 @@ export default class SettingsAPI {
       return new Promise(resolve => {
         this.db.settings.get({ name: name }).then(setting => {
           if (setting === undefined) {
-            this.loggingApi.error("setting is undefined");
+            // If the setting does not yet exist, then assume light mode.
+            let rv: ISetting = {
+              name: SettingName.isDarkModeEnabled,
+              value: false,
+            }
+
+            resolve(rv)
           } else {
             resolve(setting);
           }

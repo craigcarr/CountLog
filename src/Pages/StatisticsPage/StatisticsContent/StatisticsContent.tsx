@@ -1,19 +1,30 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import styles from './StatisticsContent.module.scss';
-import { VictoryChart, VictoryLine, VictoryLabel, VictoryAxis } from "victory";
+// import { VictoryChart, VictoryLine, VictoryLabel, VictoryAxis } from "victory";
 import { useHistory, useParams } from 'react-router';
 import { CountersContext } from '../../../App';
+import { Line } from 'react-chartjs-2';
 
 interface IParams {
   counterId: string;
 }
 
 export default function StatisticsContent() {
+  let initialData = {
+    labels: [],
+    datasets: [
+      {
+        label: 'Display Value over Time',
+        data: [],
+      }
+    ]
+  };
+
   const [counterName, setCounterName] = useState<string>('');
   const [counterColor, setCounterColor] = useState<string>('');
   const [counterValue, setCounterValue] = useState<number>(0);
-  const [chartData, setChartData] = useState<any[]>([]);
+  const [chartData, setChartData] = useState<any>(initialData);
 
   const history = useHistory();
   const params = useParams<IParams>();
@@ -21,11 +32,6 @@ export default function StatisticsContent() {
   const countersApi = useContext(CountersContext);
 
   useEffect(() => {
-    // Ghetto hack to handle the specific situation where the user rotates his/her
-    // screen from vertical to horizontal in order to get a better view of the chart.
-    let trueVMin = 0.8 * Math.min(window.innerHeight, window.innerWidth);
-    document.documentElement.style.setProperty("--trueVMin", trueVMin.toString() + 'px');
-
     const counterId = parseInt(params.counterId, 10);
 
     countersApi.getCounterById(counterId).then(counter => {
@@ -46,17 +52,36 @@ export default function StatisticsContent() {
 
       list.sort((a, b) => (a.timestamp > b.timestamp) ? 1 : -1);
 
-      let newChartData = [];
+      let labels = []
+      let data = []
 
       for (let displayValue of list) {
-        newChartData.push(
-          { x: new Date(parseInt(displayValue.timestamp, 10)), y: displayValue.value },
-        );
+        labels.push(new Date(parseInt(displayValue.timestamp, 10)).toLocaleString());
+        data.push(displayValue.value);
       }
+
+      let newChartData = {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Display Value over Time',
+            fill: false,
+            borderColor: counterColor,
+            backgroundColor: 'white',
+            pointBorderColor: 'black',
+            pointHoverBorderColor: 'black',
+            pointHoverColor: 'white',
+            pointHoverBackgroundColor: 'white',
+            pointRadius: 3,
+            pointHitRadius: 10,
+            data: data,
+          }
+        ]
+      };
 
       setChartData(newChartData);
     });
-  }, [params, countersApi]);
+  }, [params, countersApi, counterColor]);
 
   function handleEditButtonClicked() {
     const counterId = parseInt(params.counterId, 10);
@@ -142,18 +167,32 @@ export default function StatisticsContent() {
       </Table>
 
       <div className={styles.chartDiv}>
-        {/* TODO Use `width={window.innerWidth}` to fix the chart's width. */}
-        <VictoryChart scale={{ x: "time" }} padding={{ left: 65, right: 15, top: 40, bottom: 40 }}>
-          <VictoryLabel text="Display Value versus Time" x={225} y={20} textAnchor="middle" />
-          <VictoryAxis fixLabelOverlap={true}></VictoryAxis>
-          <VictoryAxis dependentAxis fixLabelOverlap={true}></VictoryAxis>
-          <VictoryLine
-            style={{
-              data: { stroke: counterColor },
-            }}
-            data={chartData}
-          />
-        </VictoryChart>
+        <Line
+          data={chartData}
+          width={100}
+          height={100}
+          options={{
+            scales: {
+              xAxes: [{
+                gridLines: {
+                  display: false,
+                },
+                ticks: {
+                  autoSkip: true,
+                  maxRotation: 90,
+                  minRotation: 90,
+                }
+              }],
+              yAxes: [{
+                gridLines: {
+                  display: true,
+                }
+              }]
+            }
+          }}
+        />
+
+        <p>Note: x-axis is transformed to be uniformly scaled.</p>
       </div>
     </div>
   );

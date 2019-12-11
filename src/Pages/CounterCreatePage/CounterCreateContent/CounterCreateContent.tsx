@@ -85,6 +85,13 @@ export default function CounterCreateContent(props: IProps) {
     }
   }
 
+  let valueDisplayString = null;
+  if (props.id !== undefined) {
+    valueDisplayString = 'Current Value';
+  } else {
+    valueDisplayString = 'Initial Value';
+  }
+
   return (
     <div id={styles.createContent} className={styles.content}>
       <Table unstackable columns={2}>
@@ -113,7 +120,7 @@ export default function CounterCreateContent(props: IProps) {
           </Table.Row>
           <Table.Row>
             <Table.Cell>
-              <p>Initial Value</p>
+              <p>{valueDisplayString}</p>
             </Table.Cell>
             <Table.Cell>
               <Input
