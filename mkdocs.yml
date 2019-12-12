@@ -11,6 +11,7 @@ theme:
     primary: 'green'
     accent: 'green'
   logo: 'logo192.png'
+  favicon: 'favicon.ico'
 
 google_analytics:
   - 'UA-154365911-1'
