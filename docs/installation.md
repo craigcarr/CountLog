@@ -5,7 +5,7 @@ website, but runs just like a native app. You can read more about the technical
 details from [Google](https://developers.google.com/web/progressive-web-apps). For installation
 purposes, this means that you do not need to go to your app store to download the app.
 
-To install CountLog, simply visit <https://countlog.xyz>.
+To install CountLog, simply visit <https://app.countlog.xyz>.
 
 - On mobile, find an "Add to Home Screen" option in your browser's menu.
 

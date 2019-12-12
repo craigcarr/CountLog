@@ -21,4 +21,4 @@ If you would like to contribute to CountLog, you can do one of the following.
 - Use `pip install mkdocs-material` to install the Material UI theme for MkDocs.
 - Use `mkdocs serve` to run the docs server.
 - Use `mkdocs build` to generate a static site.
-- Use `mkdocs gh-deploy` locally to push to the `gh-pages` branch.
+- Use `mkdocs gh-deploy -b netlify-pages` locally to push to the `netlify-pages` branch.

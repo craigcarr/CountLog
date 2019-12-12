@@ -9,9 +9,9 @@ CountLog allows you to manually record, visualize, and analyze events to improve
 
 ## Relevant Links
 
-- Demo Site: <https://countlog.xyz>
+- Demo/Install Site: <https://app.countlog.xyz>
+- Documentation: <https://countlog.xyz/>
 - GitHub Repo: <https://github.com/craigcarr/CountLog>
-- Documentation: <https://craigcarr.github.io/CountLog/>
 
 ## Features
 
@@ -23,7 +23,7 @@ CountLog allows you to manually record, visualize, and analyze events to improve
 
 ## Installation
 
-To install CountLog, simply visit <https://countlog.xyz>.
+To install CountLog, simply visit <https://app.countlog.xyz>.
 
 - On mobile, find an "Add to Home Screen" option in your browser's menu.
 - On desktop (only works with Chrome), open the menu and click "Install CountLog".
