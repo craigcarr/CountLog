@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Table, Button } from 'semantic-ui-react';
+import { Table, Button, Checkbox } from 'semantic-ui-react';
 import styles from './StatisticsContent.module.scss';
-// import { VictoryChart, VictoryLine, VictoryLabel, VictoryAxis } from "victory";
 import { useHistory, useParams } from 'react-router';
 import { CountersContext } from '../../../App';
 import { Line } from 'react-chartjs-2';
@@ -25,6 +24,7 @@ export default function StatisticsContent() {
   const [counterColor, setCounterColor] = useState<string>('');
   const [counterValue, setCounterValue] = useState<number>(0);
   const [chartData, setChartData] = useState<any>(initialData);
+  const [isUniformScale, setUniformScale] = useState<boolean>(false);
 
   const history = useHistory();
   const params = useParams<IParams>();
@@ -56,7 +56,7 @@ export default function StatisticsContent() {
       let data = []
 
       for (let displayValue of list) {
-        labels.push(new Date(parseInt(displayValue.timestamp, 10)).toLocaleString());
+        labels.push(new Date(parseInt(displayValue.timestamp, 10)).toISOString());
         data.push(displayValue.value);
       }
 
@@ -72,6 +72,7 @@ export default function StatisticsContent() {
             pointHoverBorderColor: 'black',
             pointHoverColor: 'white',
             pointHoverBackgroundColor: 'white',
+            lineTension: 0.2,
             pointRadius: 3,
             pointHitRadius: 10,
             data: data,
@@ -96,6 +97,17 @@ export default function StatisticsContent() {
   function handleViewButtonClicked() {
     const counterId = parseInt(params.counterId, 10);
     history.push('/counterhistory/' + counterId);
+  }
+
+  function handleUniformScaleClicked() {
+    setUniformScale(!isUniformScale);
+  }
+
+  let xAxesType = null;
+  if (isUniformScale) {
+    xAxesType = 'category';
+  } else {
+    xAxesType = 'time';
   }
 
   return (
@@ -166,6 +178,26 @@ export default function StatisticsContent() {
         </Table.Body>
       </Table>
 
+      <br></br>
+
+      <Table id={styles.chartOptionsTable} unstackable columns={2}>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell width={2}>
+              <p>Uniformly scale x-axis?</p>
+            </Table.Cell>
+            <Table.Cell width={1}>
+              <div id={styles.checkbox}>
+                <Checkbox
+                  checked={isUniformScale}
+                  onClick={handleUniformScaleClicked}>
+                </Checkbox>
+              </div>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+
       <div className={styles.chartDiv}>
         <Line
           data={chartData}
@@ -177,8 +209,10 @@ export default function StatisticsContent() {
                 gridLines: {
                   display: false,
                 },
+                type: xAxesType,
                 ticks: {
                   autoSkip: true,
+                  maxTicksLimit: 10,
                   maxRotation: 90,
                   minRotation: 90,
                 }
@@ -186,13 +220,11 @@ export default function StatisticsContent() {
               yAxes: [{
                 gridLines: {
                   display: true,
-                }
+                },
               }]
             }
           }}
         />
-
-        <p>Note: x-axis is transformed to be uniformly scaled.</p>
       </div>
     </div>
   );

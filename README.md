@@ -10,7 +10,7 @@ CountLog allows you to manually record, visualize, and analyze events to improve
 ## Relevant Links
 
 - Demo/Install Site: <https://app.countlog.xyz>
-- Documentation: <https://countlog.xyz/>
+- Documentation: <https://countlog.xyz>
 - GitHub Repo: <https://github.com/craigcarr/CountLog>
 
 ## Features
