@@ -14,10 +14,12 @@ export default class SettingsAPI {
   public setDarkModeCssVariables(setting: ISetting) {
     if (setting.name === SettingName.isDarkModeEnabled) {
       if (setting.value === true) {
-        document.documentElement.style.setProperty("--themeBackgroundColor", "#555555");
+        document.documentElement.style.setProperty("--themeBackgroundColor", "#333333");
+        document.documentElement.style.setProperty("--themeHeaderBackgroundColor", "#000000");
         document.documentElement.style.setProperty("--themeColor", "white");
       } else {
         document.documentElement.style.setProperty("--themeBackgroundColor", "white");
+        document.documentElement.style.setProperty("--themeHeaderBackgroundColor", "#333333");
         document.documentElement.style.setProperty("--themeColor", "black");
       }
     }

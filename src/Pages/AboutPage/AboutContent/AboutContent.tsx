@@ -1,8 +1,15 @@
 import React from 'react';
 import styles from './AboutContent.module.scss';
 import { Table, Button } from 'semantic-ui-react';
+import { useHistory } from 'react-router-dom';
 
 export default function AboutContent() {
+  const history = useHistory();
+
+  function handleDebugLogButtonClicked() {
+    history.push('/debug');
+  }
+
   return (
     <div className={styles.content}>
       <Table unstackable columns={1}>
@@ -17,7 +24,7 @@ export default function AboutContent() {
               </p>
 
               <a
-                href="https://craigcarr.github.io/CountLog/"
+                href="https://countlog.xyz/"
                 target="_blank"
                 rel="noopener noreferrer">
                 <Button className={styles.myButton}>
@@ -43,6 +50,10 @@ export default function AboutContent() {
                   File Issue
                 </Button>
               </a>
+
+              <Button className={styles.myButton} onClick={handleDebugLogButtonClicked}>
+                Debug Log
+              </Button>
             </Table.Cell>
           </Table.Row>
           <Table.Row>

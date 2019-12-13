@@ -56,10 +56,8 @@ export default function ReceiverCreateContent(props: IProps) {
     receiversApi.testReceiver(testReceiver).then(isVerified => {
       if (isVerified) {
         setVerificationColor('#99ff99')
-        console.log('valid')
       } else {
         setVerificationColor('lightcoral')
-        console.log('not so valid')
       }
     });
   }

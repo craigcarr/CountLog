@@ -1,13 +1,32 @@
-import log from "loglevel";
-
-// TODO Possibly use https://github.com/kutuluk/loglevel-plugin-remote
+export interface ILogMessage {
+  id: number;
+  message: string;
+  timestamp: string;
+}
 
 export default class LoggingAPI {
+  private logMessages: ILogMessage[];
+  private currentId: number;
+
   constructor() {
-    log.enableAll();
+    this.logMessages = [];
+    this.currentId = 0;
   }
 
   public error(data: any) {
-    log.error(data);
+    console.error(data)
+
+    let message: ILogMessage = {
+      id: this.currentId,
+      message: String(data),
+      timestamp: (new Date()).toLocaleString(),
+    }
+
+    this.currentId += 1;
+    this.logMessages.push(message);
+  }
+
+  public getLogMessages() {
+    return this.logMessages;
   }
 }

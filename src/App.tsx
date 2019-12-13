@@ -8,20 +8,21 @@ import CountersAPI from './Interfaces/CountersAPI';
 import EventsAPI from './Interfaces/EventsAPI';
 import SettingsAPI from './Interfaces/SettingsAPI';
 
-import MainPage from './Pages/MainPage/MainPage';
 import AboutPage from './Pages/AboutPage/AboutPage';
-import SettingsPage from './Pages/SettingsPage/SettingsPage';
 import CounterCreatePage from './Pages/CounterCreatePage/CounterCreatePage';
 import CounterEditPage from './Pages/CounterEditPage/CounterEditPage';
+import DebugPage from './Pages/DebugPage/DebugPage';
 import StatisticsPage from './Pages/StatisticsPage/StatisticsPage';
 import CounterDeletePage from './Pages/CounterDeletePage/CounterDeletePage';
 import CounterHistoryPage from './Pages/CounterHistoryPage/CounterHistoryPage';
 import EventEditPage from './Pages/EventEditPage/EventEditPage';
+import MainPage from './Pages/MainPage/MainPage';
 import ReceiverListPage from './Pages/ReceiverListPage/ReceiverListPage';
 import ReceiverEditPage from './Pages/ReceiverEditPage/ReceiverEditPage';
 import ReceiverCreatePage from './Pages/ReceiverCreatePage/ReceiverCreatePage';
 import ReceiverDeletePage from './Pages/ReceiverDeletePage/ReceiverDeletePage';
 import ReceiversAPI from './Interfaces/ReceiversAPI';
+import SettingsPage from './Pages/SettingsPage/SettingsPage';
 
 const db = new CounterDatabase();
 const loggingApi = new LoggingAPI();
@@ -51,6 +52,7 @@ export default function App() {
                 <Switch>
                   <Route path="/about" component={AboutPage} />
                   <Route path="/create" component={CounterCreatePage} />
+                  <Route path="/debug" component={DebugPage} />
                   <Route path="/editcounter/:counterId" component={CounterEditPage} />
                   <Route path="/deletecounter/:counterId" component={CounterDeletePage} />
                   <Route path="/counterhistory/:counterId/editevent/:eventId" component={EventEditPage} />
