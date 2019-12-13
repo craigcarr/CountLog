@@ -35,17 +35,17 @@ export interface ISetting {
 }
 
 export enum ReceiverType {
-  http = "http",
+  https = "https",
 }
 
-export interface IHttpReceiverOptions {
+export interface IHttpsReceiverOptions {
   url: string;
 }
 
 export interface IReceiver {
   id?: number;
   type: ReceiverType;
-  options: IHttpReceiverOptions;
+  options: IHttpsReceiverOptions;
 }
 
 export enum EventType {

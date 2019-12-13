@@ -12,8 +12,8 @@ export default class ReceiversAPI {
   }
 
   private transformHttpUrl(url: string) {
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      return 'http://' + url;
+    if (!url.startsWith('https://')) {
+      return 'https://' + url;
     } else {
       return url;
     }
@@ -22,7 +22,7 @@ export default class ReceiversAPI {
   public fireEvent(event: IEvent) {
     this.getAllReceivers().then(receivers => {
       for (let receiver of receivers) {
-        if (receiver.type === ReceiverType.http) {
+        if (receiver.type === ReceiverType.https) {
           const body = JSON.stringify({
             counterId: event.counterId,
             type: event.type,
@@ -44,7 +44,7 @@ export default class ReceiversAPI {
   }
 
   public testReceiver(receiver: IReceiver): Promise<boolean> {
-    if (receiver.type === ReceiverType.http) {
+    if (receiver.type === ReceiverType.https) {
       const body = JSON.stringify({
         counterId: -1,
         type: 'test',

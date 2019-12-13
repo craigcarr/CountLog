@@ -3,14 +3,14 @@ import { Table, Select, Input, Button } from "semantic-ui-react";
 import styles from "./ReceiverCreateContent.module.scss";
 import { ReceiversContext } from "../../../App";
 import { useHistory } from "react-router";
-import { IReceiver, ReceiverType, IHttpReceiverOptions } from "../../../CounterDatabase";
+import { IReceiver, ReceiverType, IHttpsReceiverOptions } from "../../../CounterDatabase";
 
 interface IProps {
   id: number | undefined;
 }
 
 export default function ReceiverCreateContent(props: IProps) {
-  const [selectedReceiverType, setSelectedReceiverType] = useState<string>('http');
+  const [selectedReceiverType, setSelectedReceiverType] = useState<string>(ReceiverType.https);
   const [serverAddress, setServerAddress] = useState<string>('');
   const [verificationColor, setVerificationColor] = useState<string>('');
 
@@ -21,8 +21,8 @@ export default function ReceiverCreateContent(props: IProps) {
   useEffect(() => {
     if (props.id !== undefined) {
       receiversApi.getReceiverById(props.id).then(receiver => {
-        if (receiver.type === ReceiverType.http) {
-          let options: IHttpReceiverOptions = receiver.options as IHttpReceiverOptions;
+        if (receiver.type === ReceiverType.https) {
+          let options: IHttpsReceiverOptions = receiver.options;
 
           setSelectedReceiverType(receiver.type);
           setServerAddress(options.url);
@@ -32,7 +32,7 @@ export default function ReceiverCreateContent(props: IProps) {
   }, [props.id, receiversApi]);
 
   const receiverTypes = [
-    { key: 'http', value: 'http', text: 'HTTP' },
+    { key: 'https', value: 'https', text: 'HTTPS' },
   ]
 
   function handleSelectedReceiverChange(data: any) {
@@ -44,12 +44,12 @@ export default function ReceiverCreateContent(props: IProps) {
   }
 
   function handleVerifyButtonClicked() {
-    let testOptions: IHttpReceiverOptions = {
+    let testOptions: IHttpsReceiverOptions = {
       url: serverAddress,
     }
 
     let testReceiver: IReceiver = {
-      type: ReceiverType.http,
+      type: ReceiverType.https,
       options: testOptions,
     }
 
@@ -65,7 +65,7 @@ export default function ReceiverCreateContent(props: IProps) {
   function handleSaveButtonClicked() {
     if (props.id === undefined) {
       receiversApi.putReceiver({
-        type: ReceiverType.http,
+        type: ReceiverType.https,
         options: {
           url: serverAddress,
         }
@@ -73,7 +73,7 @@ export default function ReceiverCreateContent(props: IProps) {
     } else {
       receiversApi.putReceiver({
         id: props.id,
-        type: ReceiverType.http,
+        type: ReceiverType.https,
         options: {
           url: serverAddress,
         }
@@ -139,6 +139,17 @@ export default function ReceiverCreateContent(props: IProps) {
               <Button id={styles.saveButton} onClick={handleSaveButtonClicked}>
                 Save
               </Button>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+
+      <Table columns={2} unstackable>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell>
+              <p>• Your phone must be on the same network as the HTTP server.</p>
+              <p>• Only HTTPS (encrypted) is supported. Regular HTTP will get blocked.</p>
             </Table.Cell>
           </Table.Row>
         </Table.Body>
