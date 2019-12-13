@@ -11,11 +11,20 @@ export default class ReceiversAPI {
     this.loggingApi = loggingApi;
   }
 
+  private transformHttpUrl(url: string) {
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      return 'http://' + url;
+    } else {
+      return url;
+    }
+  }
+
   public fireEvent(event: IEvent) {
     this.getAllReceivers().then(receivers => {
       for (let receiver of receivers) {
         if (receiver.type === ReceiverType.http) {
           const body = JSON.stringify({
+            counterId: event.counterId,
             type: event.type,
             timestamp: event.timestamp,
             annotation: event.annotation,
@@ -24,7 +33,7 @@ export default class ReceiversAPI {
           const instance = axios.create();
           instance.defaults.timeout = 1000;
 
-          instance.post(receiver.options.url, body).then(response => {
+          instance.post(this.transformHttpUrl(receiver.options.url), body).then(response => {
             // We don't care about any 200-level response we will get.
           }).catch(error => {
             this.loggingApi.error(error);
@@ -37,6 +46,7 @@ export default class ReceiversAPI {
   public testReceiver(receiver: IReceiver): Promise<boolean> {
     if (receiver.type === ReceiverType.http) {
       const body = JSON.stringify({
+        counterId: -1,
         type: 'test',
         timestamp: 0,
         annotation: 'test',
@@ -46,7 +56,7 @@ export default class ReceiversAPI {
         const instance = axios.create();
         instance.defaults.timeout = 1000;
 
-        instance.post(receiver.options.url, body).then(response => {
+        instance.post(this.transformHttpUrl(receiver.options.url), body).then(response => {
           resolve(true);
         }).catch(error => {
           resolve(false);

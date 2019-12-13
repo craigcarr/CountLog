@@ -94,10 +94,10 @@ export default function ReceiverCreateContent(props: IProps) {
       <Table id={styles.receiverSelectorTable} unstackable columns={2}>
         <Table.Body>
           <Table.Row>
-            <Table.Cell className={styles.tableCell}>
+            <Table.Cell>
               <p>Receiver Type</p>
             </Table.Cell>
-            <Table.Cell className={styles.tableCell}>
+            <Table.Cell>
               <Select
                 value={selectedReceiverType}
                 onChange={(e, data) => { handleSelectedReceiverChange(data) }}
@@ -107,21 +107,25 @@ export default function ReceiverCreateContent(props: IProps) {
         </Table.Body>
       </Table>
 
-      <Table id={styles.buttonsTable} unstackable columns={2}>
+      <Table id={styles.optionsTable} unstackable columns={2}>
         <Table.Body>
           <Table.Row>
-            <Table.Cell className={styles.tableCell}>
+            <Table.Cell>
               <p>Server URL</p>
             </Table.Cell>
-            <Table.Cell className={styles.tableCell}>
+            <Table.Cell>
               <Input
-                id={styles.serverAddressInput}
                 onKeyPress={(e: any) => { handleFormKeyPress(e); }}
                 defaultValue={serverAddress}
                 onChange={(e, data) => { handleServerAddressChanged(data) }}>
               </Input>
             </Table.Cell>
           </Table.Row>
+        </Table.Body>
+      </Table>
+
+      <Table id={styles.buttonsTable} columns={2} unstackable>
+        <Table.Body>
           <Table.Row>
             <Table.Cell>
               <Button
