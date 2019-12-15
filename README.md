@@ -28,6 +28,14 @@ To install CountLog, simply visit <https://app.countlog.xyz>.
 - On mobile, find an "Add to Home Screen" option in your browser's menu.
 - On desktop (only works with Chrome), open the menu and click "Install CountLog".
 
+## Screenshots
+
+|   |   |   |
+|---|---|---|
+| <img src="./docs/screenshots/main.png"/> | <img src="./docs/screenshots/statistics.png"/> | <img src="./docs/screenshots/settings.png"/> |
+| <img src="./docs/screenshots/history.png"/> | <img src="./docs/screenshots/receivers.png"/> | <img src="./docs/screenshots/dark.png"/>  |
+
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
