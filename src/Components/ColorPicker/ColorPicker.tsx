@@ -3,30 +3,30 @@ import { Button } from "semantic-ui-react";
 import styles from './ColorPicker.module.scss';
 
 interface IProps {
-  color: string;
+  color: string | undefined;
   onColorChange: any;
 }
 
+export enum Colors {
+  red = '#ff0000',
+  orange = '#ff9900',
+  yellow = '#bbbb00',
+  green = '#00aa00',
+  blue = '#0000ff',
+  purple = '#440088',
+  black = '#000000',
+}
+
 export default function ColorPicker(props: IProps) {
-  const [selectedColor, setSelectedColor] = useState<string>(props.color);
+  const [selectedColor, setSelectedColor] = useState<string | undefined>(props.color);
 
   useEffect(() => {
     setSelectedColor(props.color);
   }, [props.color]);
 
-  const colors = [
-    '#ff0000', // red
-    '#ff9900', // orange
-    '#bbbb00', // yellow
-    '#00aa00', // green
-    '#0000ff', // blue
-    '#440088', // purple
-    '#000000', // black
-  ];
-
   return (
     <div>
-      {colors.map(color => {
+      {Object.values(Colors).map(color => {
         let myStyle = null;
 
         if (color === selectedColor) {

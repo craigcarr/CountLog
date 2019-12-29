@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Table, Input, Button, Icon } from 'semantic-ui-react';
 import styles from './CounterCreateContent.module.scss';
-import ColorPicker from '../../../Components/ColorPicker/ColorPicker';
+import ColorPicker, { Colors } from '../../../Components/ColorPicker/ColorPicker';
 import { useHistory } from 'react-router';
 import { CountersContext } from '../../../App';
 
@@ -11,7 +11,7 @@ interface IProps {
 
 export default function CounterCreateContent(props: IProps) {
   const [name, setName] = useState<string>('');
-  const [color, setColor] = useState<string>('#ff0000');
+  const [color, setColor] = useState<string | undefined>(undefined);
   const [valueString, setValueString] = useState<string>('0');
   const [deltaString, setDeltaString] = useState<string>('1');
 
@@ -27,6 +27,9 @@ export default function CounterCreateContent(props: IProps) {
         setValueString(counter.value.toString());
         setDeltaString(counter.delta.toString());
       });
+    } else {
+      // Default color when creating a counter.
+      setColor(Colors.red);
     }
   }, [props.id, countersApi]);
 
@@ -47,7 +50,7 @@ export default function CounterCreateContent(props: IProps) {
   }
 
   function isInputValid() {
-    if (!color || !name) {
+    if (color === undefined || name === '') {
       return false;
     } else if (isNaN(parseInt(valueString, 10)) || valueString.includes('.')) {
       return false;
@@ -59,6 +62,11 @@ export default function CounterCreateContent(props: IProps) {
   }
 
   function handleSaveCounterClicked() {
+    // Fail-safe required to make TypeScript happy.
+    if (color === undefined) {
+      return;
+    }
+
     if (props.id === undefined) {
       countersApi.putCounter({
         name: name,

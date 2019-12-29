@@ -4,6 +4,7 @@ import styles from './StatisticsContent.module.scss';
 import { useHistory, useParams } from 'react-router';
 import { CountersContext } from '../../../App';
 import { Line } from 'react-chartjs-2';
+import { Colors } from '../../../Components/ColorPicker/ColorPicker';
 
 interface IParams {
   counterId: string;
@@ -103,6 +104,26 @@ export default function StatisticsContent() {
     setUniformScale(!isUniformScale);
   }
 
+  function displayCounterColor(color: string) {
+    if (color === Colors.red) {
+      return 'Red';
+    } else if (color === Colors.orange) {
+      return 'Orange';
+    } else if (color === Colors.yellow) {
+      return 'Yellow';
+    } else if (color === Colors.green) {
+      return 'Green';
+    } else if (color === Colors.blue) {
+      return 'Blue';
+    } else if (color === Colors.purple) {
+      return 'Purple';
+    } else if (color === Colors.black) {
+      return 'Black';
+    } else {
+      return '';
+    }
+  }
+
   let xAxesType = null;
   if (isUniformScale) {
     xAxesType = 'category';
@@ -128,7 +149,7 @@ export default function StatisticsContent() {
             </Table.Cell>
             <Table.Cell>
               {/* Use "h4" so that the dark theme will not override the color. */}
-              <h4 style={{ color: counterColor }}>{counterColor}</h4>
+              <h4 style={{ color: counterColor }}>{displayCounterColor(counterColor)}</h4>
             </Table.Cell>
           </Table.Row>
           <Table.Row>
