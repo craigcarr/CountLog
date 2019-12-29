@@ -10,8 +10,8 @@ If you would like to contribute to CountLog, you can do one of the following.
 - Run `npm install` to install all dependencies.
 - Run `npm start` to run the app.
 - Run `npm run build` to create a production build.
-- Run `eclint check 'src/**/*'` to check for EditorConfig linting errors.
-- Run `tslint src/**/*.ts*` to check for TSLint linting errors.
+- Run `npx eclint check 'src/**/*'` to check for EditorConfig linting errors.
+- Run `npx tslint src/**/*.ts*` to check for TSLint linting errors.
 
 ## MkDocs Installation
 
