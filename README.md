@@ -1,6 +1,6 @@
 # CountLog
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6d015783ddaf48a895e7b9e8ec9128ed)](https://www.codacy.com/manual/chaoxys/CountLog?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=craigcarr/CountLog&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.com/craigcarr/CountLog.svg?branch=travis-ci-test)](https://travis-ci.com/craigcarr/CountLog)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e03115bc-b982-4421-9094-fe43ab6e0607/deploy-status)](https://app.netlify.com/sites/countlogapp/deploys)
 
 <img src="./public/logo192.png" width="128px" />
