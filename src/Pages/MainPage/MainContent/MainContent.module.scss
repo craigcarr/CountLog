@@ -36,6 +36,28 @@
   padding: 0.5em !important;
 }
 
+.leftTable {
+  position: relative;
+}
+
+.rightTable {
+  position: relative;
+}
+
+.twoColumnCellLeft {
+  position: relative;
+  padding: 0px !important;
+}
+
+.twoColumnCellRight {
+  position: absolute; // Hack to force the right column to the top of its container.
+  padding: 0px !important;
+}
+
+#bottomPadding {
+  height: 15vmax !important;
+}
+
 .counterIncrement {
   position: absolute;
   width: 15%;

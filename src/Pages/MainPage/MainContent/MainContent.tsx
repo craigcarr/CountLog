@@ -6,7 +6,22 @@ import { CountersContext, SettingsContext } from '../../../App';
 import { SettingName } from '../../../CounterDatabase';
 
 export default function MainContent() {
+  let wideDisplayMediaQuery = window.matchMedia("(min-width: 700px)");
+
+  useEffect(() => {
+    const screenTest = (mql: any) => {
+      setUseTwoColumnLayout(mql.matches);
+    }
+
+    wideDisplayMediaQuery.addListener(screenTest);
+
+    return () => {
+      wideDisplayMediaQuery.removeListener(screenTest);
+    }
+  }, [wideDisplayMediaQuery]);
+
   const [tableData, setTableData] = useState<any[]>([]);
+  const [useTwoColumnLayout, setUseTwoColumnLayout] = useState<boolean>(wideDisplayMediaQuery.matches);
 
   const history = useHistory();
 
@@ -61,12 +76,8 @@ export default function MainContent() {
     history.push('/create')
   }
 
-  let tableContent = null;
-
-  if (tableData.length === 0) {
-    tableContent = <Table.Row><Table.Cell><p>There are no counters to display.</p></Table.Cell></Table.Row>
-  } else {
-    tableContent = tableData.map(({ id, name, color, value }) => (
+  function getTableCell(id: any, name: any, color: any, value: any) {
+    return (
       <Table.Row key={id}>
         <Table.Cell className={styles.tableCell}>
           <Button
@@ -92,21 +103,73 @@ export default function MainContent() {
           </Button>
         </Table.Cell>
       </Table.Row>
+    );
+  }
+
+  let tableContent = null;
+
+  if (tableData.length === 0) {
+    tableContent =
+      <Table unstackable>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell>
+              <p>There are no counters to display.</p>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>;
+  } else if (useTwoColumnLayout) {
+    let tableDataFirstHalf = tableData.slice(0, Math.ceil(tableData.length / 2));
+    let tableDataSecondHalf = tableData.slice(Math.ceil(tableData.length / 2), tableData.length);
+
+    let innerTableContentFirstHalf = tableDataFirstHalf.map(({ id, name, color, value }) => (
+      getTableCell(id, name, color, value)
     ));
+
+    let innerTableContentSecondHalf = tableDataSecondHalf.map(({ id, name, color, value }) => (
+      getTableCell(id, name, color, value)
+    ));
+
+    tableContent =
+      <Table unstackable columns={2}>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell className={styles.twoColumnCellLeft}>
+              <Table unstackable className={styles.leftTable}>
+                <Table.Body>
+                  {innerTableContentFirstHalf}
+                </Table.Body>
+              </Table>
+            </Table.Cell>
+            <Table.Cell className={styles.twoColumnCellRight}>
+              <Table unstackable className={styles.rightTable}>
+                <Table.Body>
+                  {innerTableContentSecondHalf}
+                </Table.Body>
+              </Table>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>;
+  } else {
+    let innerTableContent = tableData.map(({ id, name, color, value }) => (
+      getTableCell(id, name, color, value)
+    ));
+
+    tableContent =
+      <Table unstackable>
+        <Table.Body>
+          {innerTableContent}
+        </Table.Body>
+      </Table>;
   }
 
   return (
     <div className={styles.content}>
-      <Table unstackable>
-        <Table.Body>
-          {tableContent}
-        </Table.Body>
-      </Table>
+      {tableContent}
 
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+      <div id={styles.bottomPadding}></div>
 
       <Button circular icon id={styles.createCounterBtn} onClick={handleCreateButtonClicked}>
         <Icon name="plus">
