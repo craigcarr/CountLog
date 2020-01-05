@@ -89,6 +89,13 @@ export default function SettingsContent() {
     isInstalledColor = "#ffdddd";
   }
 
+  let isVibrationAvailable = 'vibrate' in window.navigator;
+  let vibrationNotAvailableErrorMessage = null;
+
+  if (!isVibrationAvailable) {
+    vibrationNotAvailableErrorMessage = <p>Vibration is not supported in this browser.</p>
+  }
+
   return (
     <div className={styles.content}>
       <Table unstackable columns={3}>
@@ -147,9 +154,11 @@ export default function SettingsContent() {
               <Checkbox
                 className={styles.checkBox}
                 toggle
+                disabled={!isVibrationAvailable}
                 checked={isVibrationEnabled}
                 onChange={handleVibrationSettingChanged}>
               </Checkbox>
+              {vibrationNotAvailableErrorMessage}
             </Table.Cell>
           </Table.Row>
           <Table.Row>
