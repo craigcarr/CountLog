@@ -18,6 +18,9 @@
 }
 
 #checkbox {
+  // Required to prevent the checkbox area extending to the right of the screen,
+  // which will cause a horizontal scroll bar to appear.
+  width: 25%;
   transform-origin: left;
   transform: scale(1.5);
 }

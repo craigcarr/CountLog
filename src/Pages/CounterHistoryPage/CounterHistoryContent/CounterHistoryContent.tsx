@@ -118,7 +118,8 @@ export default function MainContent() {
 
         if (counter > itemLowerBound && counter <= itemUpperBound) {
           rv.push(
-            <Table.Row key={setting.id}>
+            // Make the whole row clickable, but keep the "edit" button to indicate clickability.
+            <Table.Row key={setting.id} onClick={() => { handleEditEventClicked(setting.id); }}>
               <Table.Cell className={styles.eventTableCell}>
                 <p>{displayEventType(setting.type)}</p>
               </Table.Cell>
@@ -126,7 +127,7 @@ export default function MainContent() {
                 <p>{displayTimestamp(setting.timestamp)}</p>
               </Table.Cell>
               <Table.Cell>
-                <Button id={styles.myButton} onClick={() => { handleEditEventClicked(setting.id); }} circular icon>
+                <Button id={styles.myButton} circular icon>
                   <Icon name="edit">
                   </Icon>
                 </Button>
