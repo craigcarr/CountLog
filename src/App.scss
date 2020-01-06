@@ -30,6 +30,12 @@ div.ui.selection.dropdown > div.menu.transition > div.item {
   font-size: $bodyTextSize;
 }
 
+.input {
+  // Font size must be at least 16px to prevent iOS from zooming in on text fields.
+  // Adding 0.5vmin achieves larger font sizes for higher DPI devices.
+  font-size: calc(16px + 0.5vmin) !important;
+}
+
 // Dark theme hacks.
 
 .header {
