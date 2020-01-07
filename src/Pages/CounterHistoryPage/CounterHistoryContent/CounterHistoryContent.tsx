@@ -127,7 +127,7 @@ export default function MainContent() {
                 <p>{displayTimestamp(setting.timestamp)}</p>
               </Table.Cell>
               <Table.Cell>
-                <Button id={styles.myButton} circular icon>
+                <Button aria-label="Edit Button" id={styles.myButton} circular icon>
                   <Icon name="edit">
                   </Icon>
                 </Button>

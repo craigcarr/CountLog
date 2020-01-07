@@ -61,13 +61,23 @@ export default function ReceiverListContent() {
           <p>{options.url}</p>
         </Table.Cell>
         <Table.Cell>
-          <Button className={styles.myButton} onClick={() => { handleEditButtonClicked(id) }} circular icon>
+          <Button
+            aria-label="Edit"
+            className={styles.myButton}
+            onClick={() => { handleEditButtonClicked(id) }}
+            circular
+            icon>
             <Icon name="edit">
             </Icon>
           </Button>
         </Table.Cell>
         <Table.Cell>
-          <Button className={styles.myButton} onClick={() => { handleDeleteButtonClicked(id) }} circular icon>
+          <Button
+            aria-label="Cancel"
+            className={styles.myButton}
+            onClick={() => { handleDeleteButtonClicked(id) }}
+            circular
+            icon>
             <Icon name="cancel">
             </Icon>
           </Button>

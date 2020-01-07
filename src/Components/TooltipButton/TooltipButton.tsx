@@ -8,7 +8,7 @@ interface IProps {
 
 export default function TooltipButton(props: IProps) {
   return (
-    <Button icon circular className={styles.tooltip}>
+    <Button icon circular className={styles.tooltip} aria-label="Tooltip">
       <Icon name="question"></Icon>
       <span className={styles.tooltiptext}>{props.text}</span>
     </Button>

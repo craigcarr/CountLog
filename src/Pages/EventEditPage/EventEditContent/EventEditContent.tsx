@@ -104,6 +104,7 @@ export default function EventEditContent() {
       </Table>
 
       <Button
+        aria-label="Save Event"
         id={styles.saveCounterBtn}
         onClick={handleSaveCounterClicked}
         icon

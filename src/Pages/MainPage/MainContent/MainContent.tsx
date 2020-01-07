@@ -81,6 +81,7 @@ export default function MainContent() {
       <Table.Row key={id}>
         <Table.Cell className={styles.tableCell}>
           <Button
+            aria-label="Decrement Counter"
             onClick={e => { handleDecrement(id) }}
             className={styles.counterDecrement}
             style={{ backgroundColor: color, color: 'white' }}
@@ -88,6 +89,7 @@ export default function MainContent() {
             circular><Icon name="minus"></Icon>
           </Button>
           <Button
+            aria-label="Counter"
             onClick={() => { handleCounterButtonClicked(id) }}
             className={styles.counterDisplay}
             style={{ backgroundColor: color, color: 'white' }}>
@@ -95,6 +97,7 @@ export default function MainContent() {
             <h4 className={styles.counterText}>{value}</h4>
           </Button>
           <Button
+            aria-label="Increment Counter"
             onClick={e => { handleIncrement(id) }}
             className={styles.counterIncrement}
             style={{ backgroundColor: color, color: 'white' }}
@@ -171,7 +174,12 @@ export default function MainContent() {
 
       <div id={styles.bottomPadding}></div>
 
-      <Button circular icon id={styles.createCounterBtn} onClick={handleCreateButtonClicked}>
+      <Button
+            aria-label="Create Counter"
+            circular
+            icon
+            id={styles.createCounterBtn}
+            onClick={handleCreateButtonClicked}>
         <Icon name="plus">
         </Icon>
       </Button>

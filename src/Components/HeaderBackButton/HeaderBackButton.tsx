@@ -17,6 +17,7 @@ export default function HeaderBackButton(props: IProps) {
 
   return (
     <Button
+      aria-label="Back"
       className={`${styles.backBtn} ${props.className}`}
       circular
       icon

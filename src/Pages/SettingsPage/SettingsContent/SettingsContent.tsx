@@ -169,7 +169,9 @@ export default function SettingsContent() {
               <TooltipButton text="Configure back-ends to receive events that have been fired by CountLog." />
             </Table.Cell>
             <Table.Cell>
-              <Button className={styles.button} onClick={handleConfigureButtonClicked}>Configure</Button>
+              <Button className={styles.button} onClick={handleConfigureButtonClicked}>
+                Configure
+              </Button>
             </Table.Cell>
           </Table.Row>
         </Table.Body>

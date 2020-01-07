@@ -156,6 +156,7 @@ export default function CounterCreateContent(props: IProps) {
       </Table>
 
       <Button
+        aria-label="Save Counter"
         id={styles.saveCounterBtn}
         onClick={handleSaveCounterClicked}
         disabled={isInputValid() === false}

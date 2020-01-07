@@ -45,6 +45,7 @@ export default function ColorPicker(props: IProps) {
 
         return (
           <Button
+            aria-label="Color"
             key={color}
             style={myStyle}
             onClick={e => {setSelectedColor(color); props.onColorChange(color)}}

@@ -19,6 +19,7 @@ export default function HeaderLinkButton(props: IProps) {
 
   return (
     <Button
+      aria-label={props.route}
       className={`${styles.aboutBtn} ${props.className}`}
       circular
       icon

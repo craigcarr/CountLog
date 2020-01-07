@@ -136,7 +136,9 @@ export default function ReceiverCreateContent(props: IProps) {
             </Button>
             </Table.Cell>
             <Table.Cell>
-              <Button id={styles.saveButton} onClick={handleSaveButtonClicked}>
+              <Button
+                id={styles.saveButton}
+                onClick={handleSaveButtonClicked}>
                 Save
               </Button>
             </Table.Cell>
