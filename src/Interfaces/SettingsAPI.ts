@@ -7,8 +7,8 @@ export default class SettingsAPI {
   private loggingApi: LoggingAPI;
 
   constructor(db: CounterDatabase, loggingApi: LoggingAPI) {
-      this.db = db;
-      this.loggingApi = loggingApi;
+    this.db = db;
+    this.loggingApi = loggingApi;
   }
 
   public setDarkModeCssVariables(setting: ISetting) {
@@ -30,29 +30,44 @@ export default class SettingsAPI {
   }
 
   public getSettingByName(name: string): IPromise<ISetting> {
-      return new Promise(resolve => {
-        this.db.settings.get({ name: name }).then(setting => {
-          if (setting === undefined) {
-            let rv: ISetting;
+    return new Promise(resolve => {
+      this.db.settings.get({ name: name }).then(setting => {
+        if (setting === undefined) {
+          // Define default settings if they do not exist yet.
+          let newSetting: ISetting;
 
+          if (name === SettingName.isDarkModeEnabled) {
             if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-              rv = {
+              newSetting = {
                 name: SettingName.isDarkModeEnabled,
                 value: true,
-              }
+              };
             } else {
-              rv = {
+              newSetting = {
                 name: SettingName.isDarkModeEnabled,
                 value: false,
-              }
+              };
             }
-
-            resolve(rv)
-          } else {
-            resolve(setting);
+          } else if (name === SettingName.isClickSoundEnabled) {
+            newSetting = {
+              name: SettingName.isClickSoundEnabled,
+              value: false,
+            };
+          } else { // (name === SettingName.isVibrationEnabled) {
+            newSetting = {
+              name: SettingName.isVibrationEnabled,
+              value: false,
+            };
           }
-        });
+
+          this.putSetting(newSetting).then(x => {
+            resolve(newSetting);
+          });
+        } else {
+          resolve(setting);
+        }
       });
+    });
   }
 
   public putSetting(setting: ISetting) {
