@@ -33,10 +33,18 @@ export default class SettingsAPI {
       return new Promise(resolve => {
         this.db.settings.get({ name: name }).then(setting => {
           if (setting === undefined) {
-            // If the setting does not yet exist, then assume light mode.
-            let rv: ISetting = {
-              name: SettingName.isDarkModeEnabled,
-              value: false,
+            let rv: ISetting;
+
+            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+              rv = {
+                name: SettingName.isDarkModeEnabled,
+                value: true,
+              }
+            } else {
+              rv = {
+                name: SettingName.isDarkModeEnabled,
+                value: false,
+              }
             }
 
             resolve(rv)
