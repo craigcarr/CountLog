@@ -23,7 +23,7 @@
     "@types/react-dom": "16.9.4",
     "@types/react-router-dom": "^5.1.2",
     "eclint": "^2.8.1",
-    "source-map-explorer": "^2.1.2",
+    "source-map-explorer": "^2.2.1",
     "tslint": "^5.20.1"
   },
   "scripts": {
