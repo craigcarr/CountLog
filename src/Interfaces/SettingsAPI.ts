@@ -7,8 +7,8 @@ export default class SettingsAPI {
   private loggingApi: LoggingAPI;
 
   constructor(db: CounterDatabase, loggingApi: LoggingAPI) {
-      this.db = db;
-      this.loggingApi = loggingApi;
+    this.db = db;
+    this.loggingApi = loggingApi;
   }
 
   public setDarkModeCssVariables(setting: ISetting) {
@@ -30,21 +30,44 @@ export default class SettingsAPI {
   }
 
   public getSettingByName(name: string): IPromise<ISetting> {
-      return new Promise(resolve => {
-        this.db.settings.get({ name: name }).then(setting => {
-          if (setting === undefined) {
-            // If the setting does not yet exist, then assume light mode.
-            let rv: ISetting = {
-              name: SettingName.isDarkModeEnabled,
-              value: false,
-            }
+    return new Promise(resolve => {
+      this.db.settings.get({ name: name }).then(setting => {
+        if (setting === undefined) {
+          // Define default settings if they do not exist yet.
+          let newSetting: ISetting;
 
-            resolve(rv)
-          } else {
-            resolve(setting);
+          if (name === SettingName.isDarkModeEnabled) {
+            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+              newSetting = {
+                name: SettingName.isDarkModeEnabled,
+                value: true,
+              };
+            } else {
+              newSetting = {
+                name: SettingName.isDarkModeEnabled,
+                value: false,
+              };
+            }
+          } else if (name === SettingName.isClickSoundEnabled) {
+            newSetting = {
+              name: SettingName.isClickSoundEnabled,
+              value: false,
+            };
+          } else { // (name === SettingName.isVibrationEnabled) {
+            newSetting = {
+              name: SettingName.isVibrationEnabled,
+              value: false,
+            };
           }
-        });
+
+          this.putSetting(newSetting).then(x => {
+            resolve(newSetting);
+          });
+        } else {
+          resolve(setting);
+        }
       });
+    });
   }
 
   public putSetting(setting: ISetting) {
