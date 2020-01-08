@@ -4,8 +4,6 @@ import styles from './StatisticsContent.module.scss';
 import { useHistory, useParams } from 'react-router';
 import { CountersContext } from '../../../App';
 import { Colors } from '../../../Components/ColorPicker/ColorPicker';
-// import StatisticsChart from './StatisticsChart/StatisticsChart';
-
 const StatisticsChart = React.lazy(() => import('./StatisticsChart/StatisticsChart'));
 
 interface IParams {

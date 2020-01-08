@@ -10,8 +10,6 @@ interface IProps {
 }
 
 export default function StatisticsChart(props: IProps) {
-  console.log('HERE')
-
   let initialData = {
     labels: [],
     datasets: [

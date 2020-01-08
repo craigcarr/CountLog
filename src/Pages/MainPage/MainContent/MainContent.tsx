@@ -6,6 +6,8 @@ import { CountersContext, SettingsContext } from '../../../App';
 import { SettingName } from '../../../CounterDatabase';
 
 export default function MainContent() {
+  console.log('HERE')
+
   let wideDisplayMediaQuery = window.matchMedia("(min-width: 700px)");
 
   useEffect(() => {
