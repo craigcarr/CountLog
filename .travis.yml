@@ -13,3 +13,4 @@ script:
   - commitlint-travis
   - npm run eclint
   - npm run tslint
+  - npm run test
