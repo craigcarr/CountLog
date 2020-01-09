@@ -3,7 +3,7 @@ import { Button } from "semantic-ui-react";
 import styles from './ColorPicker.module.scss';
 
 interface IProps {
-  color: string | undefined;
+  color: string | undefined; // Probably should be `Colors | undefined`.
   onColorChange: any;
 }
 
