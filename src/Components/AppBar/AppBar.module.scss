@@ -1,0 +1,19 @@
+@import '../../App.scss';
+
+.leading {
+  display: inline-flex;
+  position: absolute;
+  top: 1vmax;
+  left: 1vmax;
+}
+
+.title {
+  padding-left: 1vmax;
+  padding-top: 1vmax;
+}
+
+.trailing {
+  position: absolute;
+  top: 1vmax;
+  right: 1vmax;
+}

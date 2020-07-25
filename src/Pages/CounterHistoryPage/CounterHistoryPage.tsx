@@ -1,13 +1,20 @@
 import React from 'react';
-import CounterHistoryHeader from './CounterHistoryHeader/CounterHistoryHeader';
 import CounterHistoryContent from './CounterHistoryContent/CounterHistoryContent';
+import AppBar from '../../Components/AppBar/AppBar';
+import HeaderBackButton from '../../Components/HeaderBackButton/HeaderBackButton';
 
 export default function CounterHistoryPage() {
   document.title = "Counter History - CountLog";
 
   return (
     <React.Fragment>
-      <CounterHistoryHeader></CounterHistoryHeader>
+      <AppBar
+        leading={[
+          <HeaderBackButton iconName="arrow left"></HeaderBackButton>
+        ]}
+        trailing={[]}
+        title={"Counter History"}
+      />
       <CounterHistoryContent></CounterHistoryContent>
     </React.Fragment >
   );

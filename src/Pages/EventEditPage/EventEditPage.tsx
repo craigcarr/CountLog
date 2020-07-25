@@ -1,5 +1,6 @@
 import React from 'react';
-import EventEditHeader from './EventEditHeader/EventEditHeader';
+import AppBar from '../../Components/AppBar/AppBar';
+import HeaderBackButton from '../../Components/HeaderBackButton/HeaderBackButton';
 import EventEditContent from './EventEditContent/EventEditContent';
 
 export default function EventEditPage() {
@@ -7,7 +8,13 @@ export default function EventEditPage() {
 
   return (
     <React.Fragment>
-      <EventEditHeader></EventEditHeader>
+      <AppBar
+        leading={[
+          <HeaderBackButton iconName="arrow left"></HeaderBackButton>
+        ]}
+        trailing={[]}
+        title={"Edit Event"}
+      />
       <EventEditContent></EventEditContent>
     </React.Fragment>
   );
