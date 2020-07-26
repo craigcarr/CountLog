@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { SemanticICONS } from "semantic-ui-react/dist/commonjs/generic";
 
 interface IProps {
-  className: string;
+  className?: string;
   iconName: SemanticICONS;
   route: string;
 }
